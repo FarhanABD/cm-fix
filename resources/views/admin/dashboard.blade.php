@@ -8,7 +8,11 @@
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
       <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
+<<<<<<< HEAD
           {{-- <span class="app-brand-logo demo">
+=======
+          <span class="app-brand-logo demo">
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
             <svg
               width="25"
               viewBox="0 0 25 42"
@@ -34,7 +38,10 @@
                   id="path-5"
                 ></path>
               </defs>
+<<<<<<< HEAD
               
+=======
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
               <g id="g-app-brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g id="Brand-Logo" transform="translate(-27.000000, -15.000000)">
                   <g id="Icon" transform="translate(27.000000, 15.000000)">
@@ -63,10 +70,15 @@
                 </g>
               </g>
             </svg>
+<<<<<<< HEAD
           </span> --}}
           </span>
           <span class="app-brand-text demo menu-text fw-bolder ms-2">Creative Media</span>
           
+=======
+          </span>
+          <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -76,7 +88,11 @@
 
       <div class="menu-inner-shadow"></div>
 
+<<<<<<< HEAD
       @include('admin.layouts.sidebar')
+=======
+   @include('admin.layouts.sidebar')
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
     </aside>
     <!-- / Menu -->
 
@@ -87,7 +103,11 @@
       @include('admin.layouts.navbar')
 
       <!-- / Navbar -->
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
       <!-- Content wrapper -->
       <div class="content-wrapper">
         <!-- Content -->
@@ -99,7 +119,11 @@
                 <div class="d-flex align-items-end row">
                   <div class="col-sm-7">
                     <div class="card-body">
+<<<<<<< HEAD
                       <h5 class="card-title text-primary">Selamat Datang Admin</h5>
+=======
+                      <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
                       <p class="mb-4">
                         You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
                         your profile.
@@ -652,4 +676,8 @@
   <!-- Overlay -->
   <div class="layout-overlay layout-menu-toggle"></div>
 </div>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
 @endsection

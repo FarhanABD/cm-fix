@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {{-- <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -46,6 +47,8 @@
     </form>
 </x-guest-layout> --}}
 
+=======
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
 <!DOCTYPE html>
 <!-- =========================================================
 * Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
@@ -74,7 +77,11 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
+<<<<<<< HEAD
     <title>Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+=======
+    <title>Halaman login</title>
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
 
     <meta name="description" content="" />
 
@@ -123,6 +130,7 @@
               <div class="app-brand justify-content-center">
                 <a href="index.html" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
+<<<<<<< HEAD
                     <svg
                       width="25"
                       viewBox="0 0 25 42"
@@ -183,6 +191,16 @@
               <!-- /Logo -->
               <h4 class="mb-2">Welcome to Sneat! 👋</h4>
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
+=======
+                    <img src="{{ asset('storage/img/logo.png') }}" alt="Logo" width="170px" height="70px">
+                    {{-- <img src="{{url :: to('img/logo.jpg')}}" alt="Logo Website Anda" width="auto" height="auto"> --}}
+                  </span>
+                </a>
+              </div>
+              <!-- /Logo -->
+              <h4 class="mb-2">Selamat Datang! 👋</h4>
+              <p class="mb-4">Harap login terlebih dahulu</p>
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
 
               <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
                 @csrf
@@ -193,7 +211,11 @@
                     class="form-control"
                     id="email"
                     name="email"
+<<<<<<< HEAD
                     placeholder="Enter your email"
+=======
+                    placeholder="Masukan email"
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
                     autofocus
                     value="{{ old('email') }}"
                   />
@@ -205,7 +227,11 @@
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
                     <label class="form-label" for="password">Password</label>
+<<<<<<< HEAD
                     <a href="{{ route('password.request') }}">
+=======
+                    <a href="auth-forgot-password-basic.html">
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
                       <small>Forgot Password?</small>
                     </a>
                   </div>
@@ -233,16 +259,28 @@
                 </div>
 
                 <div class="mb-3">
+<<<<<<< HEAD
                   <button class="btn btn-danger d-grid w-100" type="submit">Sign in</button>
                 </div>
               </form>
 
               <p class="text-center">
+=======
+                  <button class="btn btn-danger d-grid w-100" type="submit">Login</button>
+                </div>
+              </form>
+
+              {{-- <p class="text-center">
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
                 <span>New on our platform?</span>
                 <a href="auth-register-basic.html">
                   <span>Create an account</span>
                 </a>
+<<<<<<< HEAD
               </p>
+=======
+              </p> --}}
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
             </div>
           </div>
           <!-- /Register -->
@@ -273,4 +311,8 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47

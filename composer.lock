@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "09e39f588aec120fa32c775263dacd13",
+=======
+    "content-hash": "799fc5f3991509b91529d92592296c9b",
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
     "packages": [
         {
             "name": "brick/math",
@@ -5867,6 +5871,7 @@
             "time": "2022-06-03T18:03:27+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "yajra/laravel-datatables-oracle",
             "version": "v10.11.4",
             "source": {
@@ -5954,6 +5959,8 @@
             "time": "2024-02-28T05:00:23+00:00"
         },
         {
+=======
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
             "name": "yoeunes/toastr",
             "version": "v2.3.5",
             "source": {

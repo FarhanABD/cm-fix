@@ -10,7 +10,10 @@
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+<<<<<<< HEAD
         "yajra/laravel-datatables-oracle": "^10.11",
+=======
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
         "yoeunes/toastr": "^2.3"
     },
     "require-dev": {

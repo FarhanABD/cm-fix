@@ -5,14 +5,22 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
         <h4 class="fw-bold py-3 mb-4">
             <a href="{{ route('admin.dashboard') }}" class="text-muted me-2">
                 <i class="bx bx-arrow-back"></i>
             </a>
             <span class="text-muted fw-light">Profile Settings /</span> Account
         </h4>
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
 
       <div class="row">
         <div class="col-md-12">
@@ -27,7 +35,11 @@
             <form method="post" class="needs-validation" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data">
                 @csrf
             <div class="card-body">
+<<<<<<< HEAD
              
+=======
+
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
               <div class="d-flex align-items-start align-items-sm-center gap-4">
                 <div class="mb-3">
                   <img height="100" width="100" src="{{asset(Auth::user()->image)}}" alt="" class="d-block rounded">
@@ -39,7 +51,11 @@
             </div>
             <hr class="my-0" />
             <div class="card-body">
+<<<<<<< HEAD
              
+=======
+
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
                 <div class="row">
                   <div class="mb-3 col-md-6">
                     <label class="form-label">Name</label>
@@ -86,12 +102,31 @@
                       value="{{ Auth::user()->phone }}"
                     />
                   </div>
+<<<<<<< HEAD
                 
+=======
+                  {{-- <div class="mb-3 col-md-6">
+                    <label class="form-label">Phone Number</label>
+                    <div class="input-group input-group-merge">
+                      <input
+                        type="text"
+                        id="phone"
+                        name="phone"
+                        class="form-control"
+                        value="{{ Auth::user()->phone }}"
+                      />
+                    </div>
+                  </div> --}}
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
                   <div class="mb-3 col-md-6">
                     <label class="form-label">Status</label>
                     <input type="text" class="form-control" id="status" name="status" value="{{ Auth::user()->status }}" />
                   </div>
+<<<<<<< HEAD
                   
+=======
+
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
                 </div>
                 <div class="mt-2">
                   <button type="submit" class="btn btn-primary me-2">Save changes</button>
@@ -119,11 +154,19 @@
                     <label for="username" class="form-label">Confirm Password</label>
                     <input class="form-control" type="password" name="password_confirm" id="password_confirm" />
                   </div>
+<<<<<<< HEAD
                 
               </div>
               
                 <div class="form-check mb-3">
                  
+=======
+
+              </div>
+
+                <div class="form-check mb-3">
+
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
                 </div>
                 <button type="submit" class="btn btn-primary">Save Changes</button>
               </form>
@@ -134,8 +177,16 @@
     </div>
     <!-- / Content -->
 
+<<<<<<< HEAD
    
 
     <div class="content-backdrop fade"></div>
   </div>
 @endsection
+=======
+
+
+    <div class="content-backdrop fade"></div>
+  </div>
+@endsection
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47

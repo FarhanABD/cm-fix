@@ -15,6 +15,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
+<<<<<<< HEAD
+=======
+Route::get('super-admin/login', [SuperAdminController::class, 'login'])->name('super-admin.login');
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+>>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
