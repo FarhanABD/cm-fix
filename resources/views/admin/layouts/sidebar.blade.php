@@ -11,61 +11,27 @@
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>
-<<<<<<< HEAD
         <div data-i18n="Layouts">Master Data</div>
-=======
-        <div data-i18n="Layouts">Layouts</div>
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
       </a>
 
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="layouts-without-menu.html" class="menu-link">
-<<<<<<< HEAD
             <div data-i18n="Without menu">Perusahaan</div>
-=======
-            <div data-i18n="Without menu">Without menu</div>
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
           </a>
         </li>
         <li class="menu-item">
           <a href="layouts-without-navbar.html" class="menu-link">
-<<<<<<< HEAD
             <div data-i18n="Without navbar">Paket Jasa</div>
           </a>
         </li>
-        {{-- <li class="menu-item">
-=======
-            <div data-i18n="Without navbar">Without navbar</div>
-          </a>
-        </li>
-        <li class="menu-item">
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
-          <a href="layouts-container.html" class="menu-link">
-            <div data-i18n="Container">Container</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="layouts-fluid.html" class="menu-link">
-            <div data-i18n="Fluid">Fluid</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="layouts-blank.html" class="menu-link">
-            <div data-i18n="Blank">Blank</div>
-          </a>
-<<<<<<< HEAD
-        </li> --}}
-=======
-        </li>
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
+       
       </ul>
     </li>
 
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Pages</span>
     </li>
-<<<<<<< HEAD
 
     <li class="menu-item">
       <a href="cards-basic.html" class="menu-link">
@@ -74,40 +40,7 @@
       </a>
     </li>
 
-    {{-- <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-dock-top"></i>
-        <div data-i18n="Account Settings">Order</div>
-=======
-    <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-dock-top"></i>
-        <div data-i18n="Account Settings">Account Settings</div>
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="pages-account-settings-account.html" class="menu-link">
-            <div data-i18n="Account">Account</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="pages-account-settings-notifications.html" class="menu-link">
-            <div data-i18n="Notifications">Notifications</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="pages-account-settings-connections.html" class="menu-link">
-            <div data-i18n="Connections">Connections</div>
-          </a>
-        </li>
-      </ul>
-<<<<<<< HEAD
-    </li> --}}
-
-=======
-    </li>
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
+   
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>

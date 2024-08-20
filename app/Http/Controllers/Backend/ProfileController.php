@@ -22,19 +22,11 @@ class ProfileController extends Controller
         'phone' => ['max:100'],
         'username' => ['max:100'],
        ]);
-<<<<<<< HEAD
        //-------------------------------------// 
 
        //------ Kondisi menampilkan gambar default saat gambar kosong ----------//
        $user = Auth::user();
        
-=======
-       //-------------------------------------//
-
-       //------ Kondisi menampilkan gambar default saat gambar kosong ----------//
-       $user = Auth::user();
-
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
        if($request->hasFile('image')){
         if(File::exists(public_path($user->image))){
             File::delete(public_path($user->image));
@@ -50,11 +42,7 @@ class ProfileController extends Controller
         $user->image = $path;
        }
        //===================== NEDS OF FUNCTION =============================//
-<<<<<<< HEAD
        
-=======
-
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
        //--------- UPDATE USERNAME & EMAIL -------------//
        $user->name = $request->name;
        $user->email = $request->email;
@@ -77,8 +65,4 @@ class ProfileController extends Controller
         toastr()->success('Password updated succesfully');
         return redirect()->route('admin.dashboard');
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47

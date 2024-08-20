@@ -22,7 +22,7 @@
             </li>
           </ul>
           <div class="card mb-4">
-            <h5 class="card-header">Update Profile</h5>
+            <h5 class="card-header">Update Profile Super Admin</h5>
             <!-- Account -->
             <form method="post" class="needs-validation" action="{{ route('super-admin.profile.update') }}" enctype="multipart/form-data">
                 @csrf

@@ -1,67 +1,7 @@
-<<<<<<< HEAD
-{{-- <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout> --}}
-
-=======
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
 <!DOCTYPE html>
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
 
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
 <html
   lang="en"
   class="light-style customizer-hide"
@@ -77,11 +17,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-<<<<<<< HEAD
     <title>Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
-=======
-    <title>Halaman login</title>
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
 
     <meta name="description" content="" />
 
@@ -130,7 +66,6 @@
               <div class="app-brand justify-content-center">
                 <a href="index.html" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
-<<<<<<< HEAD
                     <svg
                       width="25"
                       viewBox="0 0 25 42"
@@ -191,16 +126,6 @@
               <!-- /Logo -->
               <h4 class="mb-2">Welcome to Sneat! 👋</h4>
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
-=======
-                    <img src="{{ asset('storage/img/logo.png') }}" alt="Logo" width="170px" height="70px">
-                    {{-- <img src="{{url :: to('img/logo.jpg')}}" alt="Logo Website Anda" width="auto" height="auto"> --}}
-                  </span>
-                </a>
-              </div>
-              <!-- /Logo -->
-              <h4 class="mb-2">Selamat Datang! 👋</h4>
-              <p class="mb-4">Harap login terlebih dahulu</p>
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
 
               <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
                 @csrf
@@ -211,11 +136,7 @@
                     class="form-control"
                     id="email"
                     name="email"
-<<<<<<< HEAD
                     placeholder="Enter your email"
-=======
-                    placeholder="Masukan email"
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
                     autofocus
                     value="{{ old('email') }}"
                   />
@@ -227,11 +148,7 @@
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
                     <label class="form-label" for="password">Password</label>
-<<<<<<< HEAD
                     <a href="{{ route('password.request') }}">
-=======
-                    <a href="auth-forgot-password-basic.html">
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
                       <small>Forgot Password?</small>
                     </a>
                   </div>
@@ -259,28 +176,16 @@
                 </div>
 
                 <div class="mb-3">
-<<<<<<< HEAD
                   <button class="btn btn-danger d-grid w-100" type="submit">Sign in</button>
                 </div>
               </form>
 
               <p class="text-center">
-=======
-                  <button class="btn btn-danger d-grid w-100" type="submit">Login</button>
-                </div>
-              </form>
-
-              {{-- <p class="text-center">
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
                 <span>New on our platform?</span>
                 <a href="auth-register-basic.html">
                   <span>Create an account</span>
                 </a>
-<<<<<<< HEAD
               </p>
-=======
-              </p> --}}
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
             </div>
           </div>
           <!-- /Register -->
@@ -311,8 +216,4 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 9be36c4706f2310512ce34069778e4bf6195eb47
