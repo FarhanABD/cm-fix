@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('super-admin.layouts.master')
 
 @section('content')
 <div class="content-wrapper">
@@ -7,7 +7,7 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         
         <h4 class="fw-bold py-3 mb-4">
-            <a href="{{ route('admin.dashboard') }}" class="text-muted me-2">
+            <a href="{{ route('super-admin.dashboard') }}" class="text-muted me-2">
                 <i class="bx bx-arrow-back"></i>
             </a>
             <span class="text-muted fw-light">Profile Settings /</span> Account
@@ -24,10 +24,9 @@
           <div class="card mb-4">
             <h5 class="card-header">Update Profile</h5>
             <!-- Account -->
-            <form method="post" class="needs-validation" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data">
+            <form method="post" class="needs-validation" action="{{ route('super-admin.profile.update') }}" enctype="multipart/form-data">
                 @csrf
             <div class="card-body">
-             
               <div class="d-flex align-items-start align-items-sm-center gap-4">
                 <div class="mb-3">
                   <img height="100" width="100" src="{{asset(Auth::user()->image)}}" alt="" class="d-block rounded">
@@ -86,7 +85,7 @@
                       value="{{ Auth::user()->phone }}"
                     />
                   </div>
-                
+                  
                   <div class="mb-3 col-md-6">
                     <label class="form-label">Status</label>
                     <input type="text" class="form-control" id="status" name="status" value="{{ Auth::user()->status }}" />
@@ -103,7 +102,7 @@
           </div>
           <div class="card">
             <h5 class="card-header">Update Password</h5>
-            <form method="post" class="needs-validation" novalidate="" action="{{route('admin.password.update')}}" enctype="multipart/form-data">
+            <form method="post" class="needs-validation" novalidate="" action="{{route('super-admin.password.update')}}" enctype="multipart/form-data">
                 @csrf
             <div class="card-body">
               <div class="mb-3 col-12">

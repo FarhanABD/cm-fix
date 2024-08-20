@@ -8,7 +8,6 @@
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
       <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
-          
           </span>
           <span class="app-brand-text demo menu-text fw-bolder ms-2">Creative Media</span>
           
@@ -44,7 +43,7 @@
                 <div class="d-flex align-items-end row">
                   <div class="col-sm-7">
                     <div class="card-body">
-                      <h5 class="card-title text-primary">Selamat Datang Super Admin</h5>
+                      <h5 class="card-title text-primary">Selamat Datang Admin</h5>
                       <p class="mb-4">
                         You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
                         your profile.

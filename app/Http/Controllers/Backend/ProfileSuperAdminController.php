@@ -7,13 +7,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
-class ProfileController extends Controller
+class ProfileSuperAdminController extends Controller
 {
     public function index(){
-        return view('admin.profile.index');
+        return view('super-admin.profile.index');
     }
 
-    public function updateProfile(Request $request){
+    public function updateProfileSuperAdmin(Request $request){
         //--------- VALIDASI DATA --------------//
        $request->validate([
         'name' => [ 'max:100'],
@@ -50,10 +50,10 @@ class ProfileController extends Controller
        $user->username = $request->username;
        $user->save();
        toastr()->success('Profile updated succesfully');
-       return redirect()->route('admin.dashboard');
+       return redirect()->route('super-admin.dashboard');
     }
 
-    public function updatePassword(Request $request){
+    public function updatePasswordSuperAdmin(Request $request){
         $request->validate([
             'current_password' => ['required','current_password'],
             'password' => ['required','confirmed', 'min:8'],
@@ -63,6 +63,6 @@ class ProfileController extends Controller
             'password' => bcrypt($request->password)
         ]);
         toastr()->success('Password updated succesfully');
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('super-admin.dashboard');
     }
 }
