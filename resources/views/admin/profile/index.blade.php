@@ -48,6 +48,7 @@
                       type="text"
                       name="name"
                       value="{{ Auth::user()->name }}"
+                      autofocus
                     />
                   </div>
                   <div class="mb-3 col-md-6">
@@ -62,6 +63,7 @@
                       id="email"
                       name="email"
                       value="{{ Auth::user()->email }}"
+                      placeholder="john.doe@example.com"
                     />
                   </div>
                   <div class="mb-3 col-md-6">
