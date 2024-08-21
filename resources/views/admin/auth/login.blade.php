@@ -76,7 +76,7 @@
                 <a href="index.html" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
                     <img src="{{ asset('storage/img/logo.png') }}" alt="Logo" width="170px" height="70px">
-                    {{-- <img src="{{url :: to('img/logo.jpg')}}" alt="Logo Website Anda" width="auto" height="auto"> --}}
+
                   </span>
                 </a>
               </div>
