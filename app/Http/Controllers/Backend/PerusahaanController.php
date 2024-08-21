@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Perusahaan;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PerusahaanController extends Controller
 {
@@ -12,7 +14,8 @@ class PerusahaanController extends Controller
      */
     public function index()
     {
-        
+        return view('admin.perusahaan.index');
+        return view('super-admin.perusahaan.index');
     }
 
     /**
@@ -20,7 +23,7 @@ class PerusahaanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.perusahaan.create');
     }
 
     /**
@@ -28,7 +31,21 @@ class PerusahaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'icon' => ['required','not_in:empty'],
+            'name' => ['required','max:200','unique:categories,name'],
+            'status' => ['required']
+        ]);
+
+        $category = new Perusahaan();
+        $category->icon = $request->icon;
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+        $category->status = $request->status;
+        $category->save();
+
+        toastr('created successfully', 'success');
+        return redirect()->route('admin.category.index');
     }
 
     /**

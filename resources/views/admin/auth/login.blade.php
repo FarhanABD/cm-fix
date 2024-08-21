@@ -66,6 +66,10 @@
               <div class="app-brand justify-content-center">
                 <a href="index.html" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
+<<<<<<< HEAD
+                    <img src="{{ asset('storage/img/logo.png') }}" alt="Logo" width="170px" height="70px">
+
+=======
                     <svg
                       width="25"
                       viewBox="0 0 25 42"
@@ -119,6 +123,7 @@
                         </g>
                       </g>
                     </svg>
+>>>>>>> 402d17c4b2874bc9d05273c1adbf02a9c22ce0c9
                   </span>
                   <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
                 </a>

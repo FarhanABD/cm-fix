@@ -22,7 +22,7 @@
             </li>
           </ul>
           <div class="card mb-4">
-            <h5 class="card-header">Update Profile</h5>
+            <h5 class="card-header">Update Profile Admin</h5>
             <!-- Account -->
             <form method="post" class="needs-validation" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data">
                 @csrf
@@ -48,6 +48,7 @@
                       type="text"
                       name="name"
                       value="{{ Auth::user()->name }}"
+                      autofocus
                     />
                   </div>
                   <div class="mb-3 col-md-6">
@@ -62,6 +63,7 @@
                       id="email"
                       name="email"
                       value="{{ Auth::user()->email }}"
+                      placeholder="john.doe@example.com"
                     />
                   </div>
                   <div class="mb-3 col-md-6">
@@ -129,8 +131,6 @@
       </div>
     </div>
     <!-- / Content -->
-
-   
 
     <div class="content-backdrop fade"></div>
   </div>
