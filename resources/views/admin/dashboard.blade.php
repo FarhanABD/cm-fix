@@ -36,7 +36,7 @@
             </svg>
           </span> 
           </span>
-          <span class="app-brand-text demo menu-text fw-bolder ms-2" style="font-size: 24px">Creative Media</span>
+          <img src="{{ asset('storage/img/logo.png') }}" alt="Logo" width="164px" height="64px">
           
         </a>
 
