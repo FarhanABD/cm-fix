@@ -43,7 +43,7 @@
   class="light-style customizer-hide"
   dir="ltr"
   data-theme="theme-default"
-  data-assets-path="../assets/"
+  data-assets-path=".{{ asset('backend/assets/') }}"
   data-template="vertical-menu-template-free"
 >
   <head>
@@ -53,7 +53,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Forgot Password Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Forgot Password Pages </title>
 
     <meta name="description" content="" />
 

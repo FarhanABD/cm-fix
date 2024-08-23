@@ -6,8 +6,8 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\SuperAdminController;
 
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function(){
+    return view('admin.auth.login');
 });
 
 Route::get('/dashboard', function () {
