@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\PerusahaanController;
+use App\Http\Controllers\Backend\PICController;
 use App\Http\Controllers\Backend\ProfileController;
 
 Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -14,3 +15,6 @@ Route::post('profile/update/password',[ProfileController::class, 'updatePassword
 
 //--------- PERUSAHAAN ROUTES -------------//
 Route::resource('perusahaan', PerusahaanController::class);
+
+//---------- PIC ROUTES -------------//
+Route::resource('pic', PICController::class);

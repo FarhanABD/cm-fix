@@ -20,6 +20,10 @@ return new class extends Migration
             $table->text('alamat');
             $table->text('keterangan');
             $table->text('nama_website');
+            $table->string('nama_pic');
+            $table->string('phone_pic');
+            $table->string('email_pic');
+            $table->string('keterangan_pic');
             $table->timestamps();
         });
     }

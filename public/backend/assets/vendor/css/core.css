@@ -1,7 +1,7 @@
 @charset "UTF-8";
 :root {
     --bs-blue: #007bff;
-    --bs-indigo: #6610f2;
+    --bs-indigo: #f26124;
     --bs-purple: #696cff;
     --bs-pink: #e83e8c;
     --bs-red: #ff3e1d;
@@ -2191,7 +2191,7 @@ progress {
     margin-bottom: 0.5rem;
     font-size: 0.75rem;
     font-weight: 500;
-    color: #3795bd;
+    color: #000000;
 }
 
 .col-form-label {
@@ -2201,7 +2201,7 @@ progress {
     font-size: inherit;
     font-weight: 500;
     line-height: 1.53;
-    color: #3795bd;
+    color: #566a7f;
 }
 
 .col-form-label-lg {
@@ -2229,10 +2229,10 @@ progress {
     font-size: 0.9375rem;
     font-weight: 400;
     line-height: 1.53;
-    color: #3795bd;
+    color: #697a8d;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #3795bd;
+    border: 1px solid #f26124;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -2471,7 +2471,7 @@ textarea.form-control-lg {
     padding-left: 1.7em;
     margin-bottom: 0.125rem;
 }
-.form-check . {
+.form-check {
     float: left;
     margin-left: -1.7em;
 }
@@ -3916,12 +3916,17 @@ fieldset:disabled .btn {
     color: #fff;
 }
 
+.word-wrap {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
 .card {
     position: relative;
     display: flex;
     flex-direction: column;
     min-width: 0;
-    word-wrap: break-word;
+   
     background-color: #fff;
     background-clip: border-box;
     border: 0 solid #d9dee3;
@@ -3951,8 +3956,8 @@ fieldset:disabled .btn {
 }
 
 .card-body {
-    flex: 1 1 auto;
-    padding: 1.5rem 1.5rem;
+    flex: 1 1;
+    padding: 1rem 1rem;
 }
 
 .card-title {
@@ -15947,7 +15952,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
 }
 
 @media (min-width: 1200px) {
-    .layout-footer-fixed:not(. -collapsed)
+    .layout-footer-fixed:not(.layout-menu-collapsed)
         .layout-wrapper:not(.layout-without-menu)
         .content-footer {
         left: 16.25rem;

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\pic;
+use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\PerusahaanDataTable;
-use App\Models\Perusahaan;
 
 class PerusahaanController extends Controller
 {
@@ -38,9 +39,13 @@ class PerusahaanController extends Controller
            'alamat' => ['required'],
            'nama_website' => ['required'],
            'keterangan' => ['required'],
+           'nama_pic' => ['required'],
+           'phone_pic' => ['required'],
+           'email_pic' => ['required'],
+           'keterangan_pic' => ['required'],
         ]);
 
-        $perusahaans = new Perusahaan();;
+        $perusahaans = new Perusahaan();
         $perusahaans->email = $request->email;
         $perusahaans->nama_perusahaan = $request->nama_perusahaan;
         $perusahaans->jenis_perusahaan = $request->jenis_perusahaan;
@@ -48,10 +53,18 @@ class PerusahaanController extends Controller
         $perusahaans->alamat = $request->alamat;
         $perusahaans->nama_website = $request->nama_website;
         $perusahaans->keterangan = $request->keterangan;
+        $perusahaans->nama_pic = $request->nama_pic;
+        $perusahaans->phone_pic = $request->phone_pic;
+        $perusahaans->email_pic = $request->email_pic;
+        $perusahaans->keterangan_pic = $request->keterangan_pic;
         $perusahaans->save();
+
+        
 
         toastr('created successfully', 'success');
         return redirect()->route('admin.perusahaan.index');
+
+        
         
     }
 
@@ -86,6 +99,13 @@ class PerusahaanController extends Controller
             'nama_website' => ['max:200'],
             'keterangan' => ['nullable'],
          ]);
+
+         $request->validate([
+            'nama_pic' => ['required', 'max:100'],
+            'phone' => ['required'],
+            'email' => ['required', 'email'],
+            'keterangan' => ['required'],
+        ]);
  
          $perusahaans = Perusahaan::findOrFail($id);
          $perusahaans->email = $request->email;
@@ -95,7 +115,14 @@ class PerusahaanController extends Controller
          $perusahaans->alamat = $request->alamat;
          $perusahaans->nama_website = $request->nama_website;
          $perusahaans->keterangan = $request->keterangan;
+         $perusahaans->nama_pic = $request->nama_pic;
+         $perusahaans->phone_pic = $request->phone_pic;
+         $perusahaans->email_pic = $request->email_pic;
+         $perusahaans->keterangan_pic = $request->keterangan_pic;
          $perusahaans->save();
+
+        // Simpan data PIC
+        
  
          toastr('updated successfully', 'success');
          return redirect()->route('admin.perusahaan.index');
@@ -106,6 +133,9 @@ class PerusahaanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $perusahaans = Perusahaan::findOrFail($id);
+        $perusahaans->delete();
+
+        return response(['status'=>'success','message'=> 'Deleted Successfully']);
     }
 }

@@ -24,10 +24,11 @@ class PerusahaanDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('action', function($query){
-            $editBtn = "<a href='".route('admin.perusahaan.edit', $query->id)."' class='btn btn-primary'> Edit </a> ";
-            // $deleteBtn = "<a href='".route('admin.category.destroy',$query->id)."' class='btn btn-danger ml-2 delete-item'> Delete </a>";
-
-            return $editBtn;
+            $editBtn = "<a href='".route('admin.perusahaan.edit',$query->id)."' class='btn btn-primary mb-2'>
+            <i class='fa-solid fa-pen-to-square'></i></a>";
+            $deleteBtn = "<a href='".route('admin.perusahaan.destroy',$query->id)."' class='btn btn-danger delete-item'><i class='fa-solid fa-trash'></i></a>";
+           
+            return $editBtn.$deleteBtn;
         })
             ->rawColumns(['action'])
             ->setRowId('id');
@@ -71,17 +72,16 @@ class PerusahaanDataTable extends DataTable
     {
         return [
             
-            Column::make('id'),
-            Column::make('email'),
-            Column::make('nama_perusahaan'),
-            Column::make('jenis_perusahaan'),
-            Column::make('phone'),
-            Column::make('alamat'),
-            Column::make('nama_website'),
+            Column::make('id')->width(10),
+            Column::make('email')->width(10)->addClass('word-wrap'),
+            Column::make('nama_perusahaan')->width(10)->addClass('word-wrap'),
+            Column::make('phone')->width(10),
+            Column::make('alamat')->width(10),
+            Column::make('nama_website')->width(10),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
+                  ->width(10)
                   ->addClass('text-center'),
         ];
     }
