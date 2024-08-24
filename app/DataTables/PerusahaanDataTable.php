@@ -18,16 +18,25 @@ class PerusahaanDataTable extends DataTable
      * Build the DataTable class.
      *
      * @param QueryBuilder $query Results from query() method.
+     * @return \Yajra\DataTables\EloquentDataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'perusahaan.action')
+        ->addColumn('action', function($query){
+            $editBtn = "<a href='".route('admin.perusahaan.edit',$query->id)."' class='btn btn-primary mb-2'>
+            <i class='fa-solid fa-pen-to-square'></i></a>";
+            $deleteBtn = "<a href='".route('admin.perusahaan.destroy',$query->id)."' class='btn btn-danger delete-item'><i class='fa-solid fa-trash'></i></a>";
+           
+            return $editBtn.$deleteBtn;
+        })
+            ->rawColumns(['action'])
             ->setRowId('id');
     }
 
     /**
-     * Get the query source of dataTable.
+     * @param \App\Models\Perusahaan $model
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Perusahaan $model): QueryBuilder
     {
@@ -44,7 +53,7 @@ class PerusahaanDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -62,15 +71,18 @@ class PerusahaanDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            
+            Column::make('id')->width(10),
+            Column::make('email')->width(10)->addClass('word-wrap'),
+            Column::make('nama_perusahaan')->width(10)->addClass('word-wrap'),
+            Column::make('phone')->width(10),
+            Column::make('alamat')->width(10),
+            Column::make('nama_website')->width(10),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
+                  ->width(10)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
         ];
     }
 

@@ -7,9 +7,9 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         
         <h4 class="fw-bold py-3 mb-4">
-            <a href="{{ route('admin.dashboard') }}" class="text-muted me-2">
+            {{-- <a href="{{ route('admin.dashboard') }}" class="text-muted me-2">
                 <i class="bx bx-arrow-back"></i>
-            </a>
+            </a> --}}
             <span class="text-muted fw-light">Profile Settings /</span> Account
         </h4>
         

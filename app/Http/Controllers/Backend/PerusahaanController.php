@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\pic;
 use App\Models\Perusahaan;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\DataTables\PerusahaanDataTable;
 
 class PerusahaanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PerusahaanDataTable $dataTable)
     {
-        return view('admin.perusahaan.index');
-        return view('super-admin.perusahaan.index');
+        return $dataTable->render('admin.perusahaan.index');
     }
 
     /**
@@ -32,20 +32,40 @@ class PerusahaanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'icon' => ['required','not_in:empty'],
-            'name' => ['required','max:200','unique:categories,name'],
-            'status' => ['required']
+           'email' => ['required'] ,
+           'nama_perusahaan' => ['required','max:200'],
+           'jenis_perusahaan' => ['required'],
+           'phone' => ['required'],
+           'alamat' => ['required'],
+           'nama_website' => ['required'],
+           'keterangan' => ['required'],
+           'nama_pic' => ['required'],
+           'phone_pic' => ['required'],
+           'email_pic' => ['required'],
+           'keterangan_pic' => ['required'],
         ]);
 
-        $category = new Perusahaan();
-        $category->icon = $request->icon;
-        $category->name = $request->name;
-        $category->slug = Str::slug($request->name);
-        $category->status = $request->status;
-        $category->save();
+        $perusahaans = new Perusahaan();
+        $perusahaans->email = $request->email;
+        $perusahaans->nama_perusahaan = $request->nama_perusahaan;
+        $perusahaans->jenis_perusahaan = $request->jenis_perusahaan;
+        $perusahaans->phone = $request->phone;
+        $perusahaans->alamat = $request->alamat;
+        $perusahaans->nama_website = $request->nama_website;
+        $perusahaans->keterangan = $request->keterangan;
+        $perusahaans->nama_pic = $request->nama_pic;
+        $perusahaans->phone_pic = $request->phone_pic;
+        $perusahaans->email_pic = $request->email_pic;
+        $perusahaans->keterangan_pic = $request->keterangan_pic;
+        $perusahaans->save();
+
+        
 
         toastr('created successfully', 'success');
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.perusahaan.index');
+
+        
+        
     }
 
     /**
@@ -61,7 +81,8 @@ class PerusahaanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $perusahaans = Perusahaan::findOrFail($id);
+        return view('admin.perusahaan.edit',compact('perusahaans'));
     }
 
     /**
@@ -69,7 +90,42 @@ class PerusahaanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'email' => ['nullable'] ,
+            'nama_perusahaan' => ['','max:200'],
+            'jenis_perusahaan' => [''],
+            'phone' => [''],
+            'alamat' => ['max:200'],
+            'nama_website' => ['max:200'],
+            'keterangan' => ['nullable'],
+         ]);
+
+         $request->validate([
+            'nama_pic' => ['required', 'max:100'],
+            'phone' => ['required'],
+            'email' => ['required', 'email'],
+            'keterangan' => ['required'],
+        ]);
+ 
+         $perusahaans = Perusahaan::findOrFail($id);
+         $perusahaans->email = $request->email;
+         $perusahaans->nama_perusahaan = $request->nama_perusahaan;
+         $perusahaans->jenis_perusahaan = $request->jenis_perusahaan;
+         $perusahaans->phone = $request->phone;
+         $perusahaans->alamat = $request->alamat;
+         $perusahaans->nama_website = $request->nama_website;
+         $perusahaans->keterangan = $request->keterangan;
+         $perusahaans->nama_pic = $request->nama_pic;
+         $perusahaans->phone_pic = $request->phone_pic;
+         $perusahaans->email_pic = $request->email_pic;
+         $perusahaans->keterangan_pic = $request->keterangan_pic;
+         $perusahaans->save();
+
+        // Simpan data PIC
+        
+ 
+         toastr('updated successfully', 'success');
+         return redirect()->route('admin.perusahaan.index');
     }
 
     /**
@@ -77,6 +133,9 @@ class PerusahaanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $perusahaans = Perusahaan::findOrFail($id);
+        $perusahaans->delete();
+
+        return response(['status'=>'success','message'=> 'Deleted Successfully']);
     }
 }
