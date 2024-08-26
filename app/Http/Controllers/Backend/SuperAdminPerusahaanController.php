@@ -2,39 +2,33 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\pic;
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\PerusahaanDataTable;
 
-class PerusahaanController extends Controller
+class SuperAdminPerusahaanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(PerusahaanDataTable $dataTable)
     {
-        return $dataTable->render('admin.perusahaan.index');
+        return $dataTable->render('super-admin.perusahaan.index');
     }
-    
-
-  
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('admin.perusahaan.create');
+        return view('super-admin.perusahaan.create');
     }
-   
-   
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store (Request $request)
     {
         $request->validate([
            'email' => ['required'] ,
@@ -64,15 +58,10 @@ class PerusahaanController extends Controller
         $perusahaans->keterangan_pic = $request->keterangan_pic;
         $perusahaans->save();
 
-        
-
         toastr('created successfully', 'success');
-        return redirect()->route('admin.perusahaan.index');
+        return redirect()->route('super-admin.perusahaan.index');
 
-        
-        
     }
-   
 
     /**
      * Display the specified resource.
@@ -88,10 +77,12 @@ class PerusahaanController extends Controller
     public function edit(string $id)
     {
         $perusahaans = Perusahaan::findOrFail($id);
-        return view('admin.perusahaan.edit',compact('perusahaans'));
+        return view('super-admin.perusahaan.edit',compact('perusahaans'));
     }
-   
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -127,9 +118,10 @@ class PerusahaanController extends Controller
 
  
          toastr('updated successfully', 'success');
-         return redirect()->route('admin.perusahaan.index');
+         return redirect()->route('super-admin.perusahaan.index');
     }
-   
+
+
     /**
      * Remove the specified resource from storage.
      */

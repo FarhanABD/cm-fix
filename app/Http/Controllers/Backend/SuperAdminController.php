@@ -11,4 +11,6 @@ class SuperAdminController extends Controller
     {
         return view('super-admin.dashboard'); 
     }
+
+    
 }

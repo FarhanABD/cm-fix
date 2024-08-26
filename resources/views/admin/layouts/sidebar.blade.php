@@ -84,7 +84,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="layouts-without-navbar.html" class="menu-link">
+          <a href="{{ route('admin.layanan.index') }}" class="menu-link">
             <div data-i18n="Without navbar">jenis layanan dan paket</div>
           </a>
         </li>

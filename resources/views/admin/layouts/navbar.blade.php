@@ -56,13 +56,6 @@
                 <span class="align-middle">Log Out</span>
               </a>
             </form>
-            {{-- <form method="POST" action="{{ route('logout') }}">
-              @csrf
-              <a href="#" onclick="event.preventDefault();
-              this.closest('form').submit();" class="dropdown-item has-icon text-danger">
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </a>
-          </form> --}}
           
           </li>
         </ul>

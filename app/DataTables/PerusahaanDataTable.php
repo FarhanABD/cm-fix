@@ -3,14 +3,15 @@
 namespace App\DataTables;
 
 use App\Models\Perusahaan;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class PerusahaanDataTable extends DataTable
 {
@@ -20,20 +21,36 @@ class PerusahaanDataTable extends DataTable
      * @param QueryBuilder $query Results from query() method.
      * @return \Yajra\DataTables\EloquentDataTable
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
-    {
-        return (new EloquentDataTable($query))
-        ->addColumn('action', function($query){
-            $editBtn = "<a href='".route('admin.perusahaan.edit',$query->id)."' class='btn btn-primary mb-2'>
-            <i class='fa-solid fa-pen-to-square'></i></a>";
-            $deleteBtn = "<a href='".route('admin.perusahaan.destroy',$query->id)."' class='btn btn-danger delete-item'><i class='fa-solid fa-trash'></i></a>";
-           
-            return $editBtn.$deleteBtn;
-        })
-            ->rawColumns(['action'])
-            ->setRowId('id');
-    }
 
+    public function dataTable(QueryBuilder $query): EloquentDataTable
+{
+    // Assuming you have a function to get the current user's role
+    // $userRole = $this->getUserRole();
+
+    return (new EloquentDataTable($query))
+        ->addColumn('action', function($query) {
+            $editBtn = '';
+            $editBtnSuperAdmin = '';
+            $deleteBtn = '';
+
+            // Check if the user has the required role for editing
+            if (Auth::user()->role == 'admin') { 
+                $editBtn = "<a href='".route('admin.perusahaan.edit',$query->id)."' class='btn btn-primary mb-2'>
+                    <i class='fa-solid fa-pen-to-square'></i></a>";
+            }
+
+            // Check if the user has the required role for deleting
+            if (Auth::user()->role === 'super-admin') { 
+                $deleteBtn = "<a href='".route('super-admin.perusahaan.destroy',$query->id)."' class='btn btn-danger delete-item mb-2'><i class='fa-solid fa-trash'></i></a>";
+                $editBtnSuperAdmin = "<a href='".route('super-admin.perusahaan.edit',$query->id)."' class='btn btn-primary mb-2'>
+                <i class='fa-solid fa-pen-to-square'></i></a>";
+            }
+
+            return $editBtn.$deleteBtn.$editBtnSuperAdmin;
+        })
+        ->rawColumns(['action'])
+        ->setRowId('id');
+}
     /**
      * @param \App\Models\Perusahaan $model
      * @return \Illuminate\Database\Eloquent\Builder

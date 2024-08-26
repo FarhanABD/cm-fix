@@ -130,6 +130,16 @@
           @endforeach
      @endif
     </script>
+  
+  <style>
+  .quota-field {
+      display: none; /* Initially hide the custom quota field */
+  }
+  
+  .quota-field.enabled { /* Target enabled state for styling if needed */
+      display: block;
+  }
+</style>
 
 <script>
   $(document).ready(function(){

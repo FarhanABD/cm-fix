@@ -13,7 +13,7 @@ class ProfileSuperAdminController extends Controller
         return view('super-admin.profile.index');
     }
 
-    public function updateProfileSuperAdmin(Request $request){
+    public function updateProfile(Request $request){
         //--------- VALIDASI DATA --------------//
        $request->validate([
         'name' => [ 'max:100'],
@@ -53,7 +53,7 @@ class ProfileSuperAdminController extends Controller
        return redirect()->route('super-admin.dashboard');
     }
 
-    public function updatePasswordSuperAdmin(Request $request){
+    public function updatePassword(Request $request){
         $request->validate([
             'current_password' => ['required','current_password'],
             'password' => ['required','confirmed', 'min:8'],
