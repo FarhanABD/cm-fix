@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('perusahaans', function (Blueprint $table) {
             $table->id();
+            $table->string('id_perusahaan');
             $table->string('email');
             $table->string('nama_perusahaan');
-            $table->string('jenis_perusahaan');
             $table->text('phone');
             $table->text('alamat');
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->text('nama_website');
             $table->string('nama_pic');
-            $table->string('phone_pic');
+            $table->text('phone_pic');
             $table->string('email_pic');
-            $table->string('keterangan_pic');
+            $table->text('keterangan_pic')->nullable();
             $table->timestamps();
         });
     }

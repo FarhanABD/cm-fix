@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\DataTables\LayananDataTable;
-use App\Http\Controllers\Controller;
+use App\Models\Paket;
 use App\Models\Layanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\DataTables\LayananDataTable;
+use App\Http\Controllers\Controller;
 use Yajra\DataTables\Services\DataTable;
 
 class LayananController extends Controller
@@ -17,13 +19,52 @@ class LayananController extends Controller
     {
         return $dataTable->render('admin.layanan.index');
     }
+    public function indexSuperAdmin(LayananDataTable $dataTable)
+    {
+        return $dataTable->render('super-admin.layanan.index');
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('admin.layanan.create');
+        // Konfigurasi
+        $idPrefix = 'LYN-';
+        $idLength = 4;
+
+        // Ambil nomor urut terakhir dari database (lebih efisien dengan query builder)
+        $lastNumber = DB::table('layanans')
+        ->latest('id')
+        ->value(DB::raw("SUBSTRING(id_layanan, LENGTH('$idPrefix') + 1)"));
+
+        // Jika tidak ada data, mulai dari 1
+        if ($lastNumber === null) {
+            $lastNumber = 0;
+        }
+
+        $newIdLayanan = $idPrefix . str_pad($lastNumber + 1, $idLength, '0', STR_PAD_LEFT);
+        return view('admin.layanan.create', compact('newIdLayanan'));
+    }
+
+    public function createSuperAdmin()
+    {
+        // Konfigurasi
+        $idPrefix = 'LYN-';
+        $idLength = 4;
+
+        // Ambil nomor urut terakhir dari database (lebih efisien dengan query builder)
+        $lastNumber = DB::table('layanans')
+        ->latest('id')
+        ->value(DB::raw("SUBSTRING(id_layanan, LENGTH('$idPrefix') + 1)"));
+
+        // Jika tidak ada data, mulai dari 1
+        if ($lastNumber === null) {
+            $lastNumber = 0;
+        }
+
+        $newIdLayanan = $idPrefix . str_pad($lastNumber + 1, $idLength, '0', STR_PAD_LEFT);
+        return view('super-admin.layanan.create', compact('newIdLayanan'));
     }
 
     /**
@@ -31,23 +72,39 @@ class LayananController extends Controller
      */
     public function store(Request $request)
     {
-        $request ->validate([
-            'jenis_paket' => ['required'],
-            'jenis_layanan' => ['required'],
-            'harga' => ['required'],
-            'kuota' => ['nullable'],
-         ]);
+        $request->validate([
+            'id_layanan' => 'required|unique:layanans,id_layanan',
+            'jenis_layanan' => 'required',
+        ], 
+        [
+            'jenis_layanan.required' => 'Jenis Layanan wajib diisi.',
+        ]
+    
+    );
+    
+        $layanan = new Layanan();
+        $layanan->id_layanan = $request->id_layanan;
+        $layanan->jenis_layanan = $request->jenis_layanan;
+        $layanan->save();
+    
+        toastr('Layanan created successfully', 'success');
+        return redirect()->route('admin.layanan.index');
+    }
 
-         $layanans = new Layanan();
-         $layanans->jenis_paket = $request->jenis_paket;
-        //  $layanans->nama_paket = $request->nama_paket;
-         $layanans->jenis_layanan = $request->jenis_layanan;
-         $layanans->harga = $request->harga;
-         $layanans->kuota = $request->kuota;
-         $layanans->save();
-         
-         toastr('Created Successfully','success');
-         return redirect()->route('admin.layanan.index');
+    public function storeSuperAdmin(Request $request)
+    {
+        $request->validate([
+            'id_layanan' => 'required|unique:layanans,id_layanan',
+            'jenis_layanan' => 'required',
+        ]);
+    
+        $layanan = new Layanan();
+        $layanan->id_layanan = $request->id_layanan;
+        $layanan->jenis_layanan = $request->jenis_layanan;
+        $layanan->save();
+    
+        toastr('Layanan created successfully', 'success');
+        return redirect()->route('super-admin.layanan.indexSuperAdmin');
     }
 
     /**
@@ -67,38 +124,52 @@ class LayananController extends Controller
         return view('admin.layanan.edit',compact('layanans'));
 
     }
+    public function editSuperAdmin(string $id)
+    {
+        $layanans = Layanan::findOrFail($id);
+        return view('super-admin.layanan.edit',compact('layanans'));
 
-    /**
-     * Update the specified resource in storage.
-     */
+    }
+
     public function update(Request $request, string $id)
     {
         $request ->validate([
-            'jenis_paket' => ['required'],
+            'id_layanan' => ['required'],
             'jenis_layanan' => ['required'],
-            'harga' => ['required'],
-            'kuota' => ['nullable'],
          ]);
 
          $layanans = Layanan::findOrFail($id);
-         $layanans->jenis_paket = $request->jenis_paket;
+         $layanans->id_layanan = $request->id_layanan;
          $layanans->jenis_layanan = $request->jenis_layanan;
-         $layanans->harga = $request->harga;
-         $layanans->kuota = $request->kuota;
          $layanans->save();
          
          toastr('Updated Successfully','success');
          return redirect()->route('admin.layanan.index');
     }
+    public function updateSuperAdmin(Request $request, string $id)
+    {
+        $request ->validate([
+            'id_layanan' => ['required'],
+            'jenis_layanan' => ['required'],
+         ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
+         $layanans = Layanan::findOrFail($id);
+         $layanans->id_layanan = $request->id_layanan;
+         $layanans->jenis_layanan = $request->jenis_layanan;
+         $layanans->save();
+         
+         toastr('Updated Successfully','success');
+         return redirect()->route('super-admin.layanan.indexSuperAdmin');
+    }
+
     public function destroy(string $id)
     {
         $layanans = Layanan::findOrFail($id);
+        $pakets = Paket::where('jenis_layanan',$layanans->jenis_layanan)->count();
+        if($pakets > 0){
+            return response(['status'=>'error','message'=> 'Item ini berelasi dengan paket']);  
+        }
         $layanans->delete();
-
         return response(['status'=>'success','message'=> 'Deleted Successfully']);
     }
 }

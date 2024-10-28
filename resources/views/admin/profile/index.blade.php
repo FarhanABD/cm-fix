@@ -74,6 +74,7 @@
                       id="role"
                       name="role"
                       value="{{ Auth::user()->role }}"
+                      readonly
                     />
                   </div>
                   <div class="mb-3 col-md-6">

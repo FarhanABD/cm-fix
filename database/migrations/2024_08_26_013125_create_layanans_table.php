@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('layanans', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->string('nama_paket');
-            $table->string('jenis_paket');
+            $table->string('id_layanan');
             $table->string('jenis_layanan');
-            $table->string('harga');
-            $table->string('kuota');
+            $table->timestamps();
         });
     }
 

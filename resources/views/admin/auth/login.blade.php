@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!-- =========================================================
 * Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
@@ -50,18 +49,61 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('backend/assets/css/demo.css') }}" />
 
-    <link rel="stylesheet" href="{{ asset('backend/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
+    <link rel="stylesheet" href="{{ asset('backend/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <!-- Page CSS -->
     <!-- Page -->
     <link rel="stylesheet" href="{{ asset('backend/assets/vendor/css/pages/page-auth.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/demo.css') }}">
+
     <!-- Helpers -->
     <script src="{{ asset('backend/assets/vendor/js/helpers.js') }}"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('backend/assets/js/config.js') }}"></script>
+
+    <style>
+        body {
+        position: relative;
+        background-image: url('/uploads/cmbaground.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        overflow: hidden; /* Pastikan tidak ada scroll jika transparansi diatur */
+        }
+
+        /* Overlay Transparan */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Warna hitam dengan transparansi 50% */
+            z-index: 1;
+        }
+
+        /* Supaya konten login tetap di atas overlay */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            z-index: 2; /* Pastikan elemen ini berada di atas overlay */
+        }
+
+        .login-form {
+            background-color: rgba(255, 255, 255, 0.8); /* Transparansi form */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+
   </head>
+
 
   <body>
     <!-- Content -->
@@ -76,7 +118,7 @@
               <div class="app-brand justify-content-center">
                 <a href="index.html" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
-                    <img src="{{ asset('storage/img/logo.png') }}" alt="Logo" width="170px" height="70px">
+                    <img src="{{ asset('storage/img/logo.png') }}" alt="Logo" width="150px" height="50px">
 
                   </span>
                 </a>
@@ -137,13 +179,6 @@
                   <button class="btn btn-danger d-grid w-100" type="submit">Login</button>
                 </div>
               </form>
-
-              {{-- <p class="text-center">
-                <span>New on our platform?</span>
-                <a href="auth-register-basic.html">
-                  <span>Create an account</span>
-                </a>
-              </p> --}}
             </div>
           </div>
           <!-- /Register -->
@@ -153,7 +188,7 @@
 
     <!-- / Content -->
 
-   
+
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="{{ asset('backend/assets/vendor/libs/jquery/jquery.js') }}"></script>

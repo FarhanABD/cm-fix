@@ -1,9 +1,9 @@
- <!-- Sidebar Menu -->
- <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+<!-- Sidebar Menu -->
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
   <div class="app-brand demo">
     <a href="index.html" class="app-brand-link">
       <span class="app-brand-logo demo">
-      
+
           <defs>
             <path
               d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
@@ -51,17 +51,17 @@
           </g>
         </svg>
       </span>
-      <img src="{{ asset('storage/img/logo.png') }}" alt="Logo" width="164px" height="64px">
+      <img src="{{ asset('storage/img/logo.png') }}" alt="Logo" width="150px" height="50px">
     </a>
 
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-      <i class="bx bx-chevron-left bx-sm align-middle"></i>
+      <i class="align-middle bx bx-chevron-left bx-sm"></i>
     </a>
   </div>
 
   <div class="menu-inner-shadow"></div>
 
-  <ul class="menu-inner py-1">
+  <ul class="py-1 menu-inner">
     <!-- Dashboard -->
     <li class="menu-item active">
       <a href="{{ route('admin.dashboard') }}" class="menu-link">
@@ -80,15 +80,20 @@
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="{{ route('admin.perusahaan.index') }}" class="menu-link">
-            <div data-i18n="Without menu">Perusahaan</div>
+            <div data-i18n="Without menu">Customer</div>
           </a>
         </li>
         <li class="menu-item">
           <a href="{{ route('admin.layanan.index') }}" class="menu-link">
-            <div data-i18n="Without navbar">jenis layanan dan paket</div>
+            <div data-i18n="Without navbar">Master layanan</div>
           </a>
         </li>
-     
+        <li class="menu-item">
+          <a href="{{ route('admin.paket.index') }}" class="menu-link">
+            <div data-i18n="Without navbar">Master Paket</div>
+          </a>
+        </li>
+
       </ul>
     </li>
 
@@ -96,26 +101,59 @@
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
     <!-- order -->
     <li class="menu-item">
-      <a href="cards-basic.html" class="menu-link">
+      <a href="{{ route('admin.order.index') }}" class="menu-link">
         <i class="menu-icon">
           <i class="menu-icon"><img src="{{ asset('storage/img/order.png') }}" alt="Logo" width="20px"></i>
         </i>
         <div data-i18n="Basic">Order</div>
       </a>
     </li>
+    <!-- maintanance -->
+    <li class="menu-item">
+      <a href="{{ route('admin.maintenance.index') }}" class="menu-link">
+        <i class="menu-icon">
+          <i class="menu-icon"><img src="{{ asset('storage/img/maintanance.png') }}" alt="Logo" width="20px"></i>
+        </i>
+        <div data-i18n="Basic">Maintanance</div>
+      </a>
+    </li>
     <!-- Invoice -->
     <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link">
+      <a href="{{ route('admin.invoice.index') }}" class="menu-link">
         <i class="menu-icon"><i class="menu-icon"><img src="{{ asset('storage/img/invoice.png') }}" alt="Logo" width="20px"></i></i>
         <div data-i18n="Form Elements">Invoice</div>
       </a>
     </li>
-{{-- Maintanance --}}
-    <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link">
-        <i class="menu-icon"><i class="menu-icon"><img src="{{ asset('storage/img/report.png') }}" alt="Logo" width="20px"></i></i>
-        <div data-i18n="Form Elements">Report</div>
+
+    {{-- Report --}}
+       <li class="menu-item">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon"> <i class="menu-icon"><img src="{{ asset('storage/img/report.png') }}" alt="Logo" width="20px"></i></i>
+        <div data-i18n="Layouts">Report Data</div>
       </a>
+
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="{{ route('admin.reportcustomer.index') }}" class="menu-link">
+            <div data-i18n="Without menu">Report Customer</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="{{ route('admin.reportorder.index') }}" class="menu-link">
+            <div data-i18n="Without navbar">Report Order</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href = "{{ route('admin.reportmaintenance.index') }}" class="menu-link">
+            <div data-i18n="Without navbar">Report Maintenance</div>
+          </a>
+        </li>
+       <li class="menu-item">
+          <a href="{{ route('admin.reportinvoice.index') }}" class="menu-link">
+            <div data-i18n="Without navbar">Report Invoice</div>
+          </a>
+        </li>
+      </ul>
     </li>
 
     <!-- Setting & Profile -->
@@ -141,10 +179,10 @@
         </li>
         <li class="menu-item">
           <a href="layouts-without-navbar.html" class="menu-link">
-            <div data-i18n="Without navbar">GM</div>
+            <div data-i18n="Without navbar">Group</div>
           </a>
         </li>
-       
+
       </ul>
     </li>
 {{-- Logout --}}
@@ -160,8 +198,8 @@
   </form>
   </li>
 
-   
-    
+
+
   </ul>
 </aside>
 <!-- / Menu -->

@@ -73,6 +73,7 @@
                       id="role"
                       name="role"
                       value="{{ Auth::user()->role }}"
+                      readonly
                     />
                   </div>
                   <div class="mb-3 col-md-6">
@@ -94,7 +95,6 @@
                 </div>
                 <div class="mt-2">
                   <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                  <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                 </div>
               </form>
             </div>

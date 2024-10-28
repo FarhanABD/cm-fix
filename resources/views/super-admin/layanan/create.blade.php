@@ -1,4 +1,4 @@
-@extends('super-admin.layouts.master')
+@extends('admin.layouts.master')
 
 @section('content')
 
@@ -10,7 +10,7 @@
                     <a href="{{ route('super-admin.layanan.index') }}" class="text-muted me-2">
                         <i class="bx bx-arrow-back"></i>
                     </a>
-                    <span class="text-muted fw-light">Form Create /</span> Data Layanan dan Paket
+                    <span class="text-muted fw-light">Form Create/</span> Data Layanan
                   </h4>
               <!-- Basic Layout -->
                
@@ -21,74 +21,54 @@
                         <h5 class="mb-0">Master Layanan</h5>
                       </div>
                       <div class="card-body">
-                        <form action="{{ route('super-admin.layanan.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.layanan.store') }}" method="POST" enctype="multipart/form-data">
                           @csrf
                           <div class="mb-3">
-                            <label for="jenisLayananSelect" class="form-label">Jenis Layanan</label>
-                            <select class="form-select" id="jenisLayananSelect" aria-label="Default select example" name="jenis_layanan">
-                              <option selected>Pilih jenis layanan</option>
-                              <option value="branding-design">Branding & Design</option>
-                              <option value="web-development">Website Development</option>
-                              <option value="web-based-&-mobile-app">Web based & Mobile App</option>
-                            </select>
+                            <label class="form-label" for="idLayananInput" >ID Layanan</label>
+                            <input type="text" class="form-control" id="idLayananInput" name="id_layanan" value="{{ $newIdLayanan }}" readonly />
                           </div>
                           <div class="mb-3">
-                            <label for="paketSelect" class="form-label">Nama Paket</label>
-                            <select class="form-select" id="paketSelect" aria-label="Default select example" name="jenis_paket">
-                              <option selected>Pilih jenis paket</option>
-                              <option value="silver">Silver-500MB</option>
-                              <option value="gold">Gold-1GB</option>
-                              <option value="platinum">Platinum-2,5GB</option>
-                              <option value="custom">Custom</option>
-                            </select>
+                            <label class="form-label" >Jenis Layanan</label>
+                            <input type="text" class="form-control" name="jenis_layanan" placeholder="Masukkan jenis layanan anda"/>
                           </div>
-                  
-                          <!-- Field Kuota Custom -->
-                          <div class="mb-3" id="kuotaCustomField" style="display: none;">
-                            <label class="form-label" for="kuotaInput">Kuota Custom</label>
-                            <input type="text" class="form-control" id="kuotaInput" placeholder="Masukkan kuota custom" name="kuota" value="">
-                          </div>
-                  
-                          <div class="mb-3">
-                            <label class="form-label" for="hargaInput">Harga</label>
-                            <input type="text" class="form-control" id="hargaInput" placeholder="Masukkan harga" name="harga" />
-                          </div>
-                          <button type="submit" class="btn btn-primary">Send</button>
+                          <button type="submit" class="btn btn-success">Simpan   <i class="fa-solid fa-floppy-disk" style="padding-left: 4px"></i></button>
                         </form>
                       </div>
                     </div>
                   </div>
-
-                  <script>
-                    document.getElementById('paketSelect').addEventListener('change', function() {
-                        var kuotaCustomField = document.getElementById('kuotaCustomField');
-                        var kuotaInput = document.getElementById('kuotaInput');
-                    
-                        if (this.value === 'custom') {
-                            kuotaCustomField.style.display = 'block';
-                            kuotaInput.value = ''; // Kosongkan nilai kuota jika custom
-                        } else {
-                            kuotaCustomField.style.display = 'none';
-                            switch (this.value) {
-                                case 'silver':
-                                    kuotaInput.value = '500MB';
-                                    break;
-                                case 'gold':
-                                    kuotaInput.value = '1GB';
-                                    break;
-                                case 'platinum':
-                                    kuotaInput.value = '2,5GB';
-                                    break;
-                            }
-                        }
-                    });
-                    </script>
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->
         
       </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    @if ($errors->any())
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: `
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            `,
+            confirmButtonText: 'OK'
+        });
+    @endif
+
+    @if (session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: "{{ session('success') }}",
+            confirmButtonText: 'OK'
+        });
+    @endif
+</script>
 @endsection
 
 

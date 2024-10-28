@@ -1,52 +1,59 @@
 @charset "UTF-8";
 :root {
-  --bs-blue: #007bff;
-  --bs-indigo: #6610f2;
-  --bs-purple: #696cff;
-  --bs-pink: #e83e8c;
-  --bs-red: #ff3e1d;
-  --bs-orange: #fd7e14;
-  --bs-yellow: #ffab00;
-  --bs-green: #71dd37;
-  --bs-teal: #20c997;
-  --bs-cyan: #03c3ec;
-  --bs-white: #fff;
-  --bs-gray: rgba(67, 89, 113, 0.6);
-  --bs-gray-dark: rgba(67, 89, 113, 0.8);
-  --bs-gray-25: rgba(67, 89, 113, 0.025);
-  --bs-gray-50: rgba(67, 89, 113, 0.05);
-  --bs-primary: #696cff;
-  --bs-secondary: #8592a3;
-  --bs-success: #71dd37;
-  --bs-info: #03c3ec;
-  --bs-warning: #ffab00;
-  --bs-danger: #ff3e1d;
-  --bs-light: #fcfdfd;
-  --bs-dark: #233446;
-  --bs-gray: rgba(67, 89, 113, 0.1);
-  --bs-primary-rgb: 105, 108, 255;
-  --bs-secondary-rgb: 133, 146, 163;
-  --bs-success-rgb: 113, 221, 55;
-  --bs-info-rgb: 3, 195, 236;
-  --bs-warning-rgb: 255, 171, 0;
-  --bs-danger-rgb: 255, 62, 29;
-  --bs-light-rgb: 252, 253, 253;
-  --bs-dark-rgb: 35, 52, 70;
-  --bs-gray-rgb: 67, 89, 113;
-  --bs-white-rgb: 255, 255, 255;
-  --bs-black-rgb: 67, 89, 113;
-  --bs-body-color-rgb: 105, 122, 141;
-  --bs-body-bg-rgb: 245, 245, 249;
-  --bs-font-sans-serif: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  --bs-font-monospace: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-root-font-size: 16px;
-  --bs-body-font-family: var(--bs-font-sans-serif);
-  --bs-body-font-size: 0.9375rem;
-  --bs-body-font-weight: 400;
-  --bs-body-line-height: 1.53;
-  --bs-body-color: #697a8d;
-  --bs-body-bg: #f5f5f9;
+    --bs-blue: #007bff;
+    --bs-indigo: #6610f2;
+    --bs-purple: #696cff;
+    --bs-pink: #e83e8c;
+    --bs-red: #ff3e1d;
+    --bs-orange: #fd7e14;
+    --bs-yellow: #ffab00;
+    --bs-green: #71dd37;
+    --bs-teal: #20c997;
+    --bs-cyan: #03c3ec;
+    --bs-white: #fff;
+    --bs-gray: rgba(67, 89, 113, 0.6);
+    --bs-gray-dark: rgba(67, 89, 113, 0.8);
+    --bs-gray-25: rgba(67, 89, 113, 0.025);
+    --bs-gray-50: rgba(67, 89, 113, 0.05);
+    --bs-primary: #696cff;
+    --bs-secondary: #8592a3;
+    --bs-success: #71dd37;
+    --bs-info: #03c3ec;
+    --bs-warning: #ffab00;
+    --bs-danger: #ff3e1d;
+    --bs-light: #fcfdfd;
+    --bs-dark: #233446;
+    --bs-gray: rgba(67, 89, 113, 0.1);
+    --bs-primary-rgb: 105, 108, 255;
+    --bs-secondary-rgb: 133, 146, 163;
+    --bs-success-rgb: 113, 221, 55;
+    --bs-info-rgb: 3, 195, 236;
+    --bs-warning-rgb: 255, 171, 0;
+    --bs-danger-rgb: 255, 62, 29;
+    --bs-light-rgb: 252, 253, 253;
+    --bs-dark-rgb: 35, 52, 70;
+    --bs-gray-rgb: 67, 89, 113;
+    --bs-white-rgb: 255, 255, 255;
+    --bs-black-rgb: 67, 89, 113;
+    --bs-body-color-rgb: 105, 122, 141;
+    --bs-body-bg-rgb: 245, 245, 249;
+    --bs-font-sans-serif: "Public Sans", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    --bs-font-monospace: "SFMono-Regular", Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+    --bs-gradient: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.15),
+        rgba(255, 255, 255, 0)
+    );
+    --bs-root-font-size: 16px;
+    --bs-body-font-family: var(--bs-font-sans-serif);
+    --bs-body-font-size: 0.9375rem;
+    --bs-body-font-weight: 400;
+    --bs-body-line-height: 1.53;
+    --bs-body-color: #697a8d;
+    --bs-body-bg: #f5f5f9;
 }
 
 *,
@@ -75,6 +82,11 @@ body {
     background-color: var(--bs-body-bg);
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(67, 89, 113, 0);
+}
+
+.section {
+    position: relative;
+    z-index: 1;
 }
 
 hr {
@@ -2465,8 +2477,8 @@ textarea.form-control-lg {
     margin-bottom: 0.125rem;
 }
 .form-check . {
-  float: left;
-  margin-left: -1.7em;
+    float: left;
+    margin-left: -1.7em;
 }
 
 .form-check-input {
@@ -3910,21 +3922,22 @@ fieldset:disabled .btn {
 }
 
 .word-wrap {
-  word-wrap: break-word;
-  white-space: pre-wrap;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #fff;
-  background-clip: border-box;
-  border: 0 solid #d9dee3;
-  border-radius: 0.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid #d9dee3;
+    border-radius: 0.5rem;
 }
+
 .card > hr {
     margin-right: 0;
     margin-left: 0;
@@ -3949,8 +3962,8 @@ fieldset:disabled .btn {
 }
 
 .card-body {
-  flex: 1 1 auto;
-  padding: 1.5rem 1.5rem;
+    flex: 1 1 auto;
+    padding: 1.5rem 1.5rem;
 }
 
 .card-title {
@@ -4070,6 +4083,367 @@ fieldset:disabled .btn {
         border-bottom-left-radius: 0;
     }
 }
+
+//---------- CSS CARD FORM DI HALAMAN CART ----------------//
+.cart {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+    background-color: #fff;
+    border-radius: 3px;
+    border: none;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.cart .cart-header,
+.cart .cart-body,
+.cart .cart-footer {
+    background-color: transparent;
+    padding: 20px 25px;
+}
+
+.cart .navbar {
+    position: relative;
+}
+.cart .cart-body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.cart .cart-body .section-title {
+    margin: 20px 0 8px 0;
+    font-size: 16px;
+}
+.cart .cart-body .section-title:before {
+    margin-top: 8px;
+}
+.cart .cart-body .section-title + .section-lead {
+    margin-top: -5px;
+}
+.cart .cart-body p {
+    font-weight: 500;
+}
+.cart .cart-header {
+    border-bottom-color: #f9f9f9;
+    line-height: 30px;
+    -ms-grid-row-align: center;
+    align-self: center;
+    width: 100%;
+    min-height: 70px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+}
+.cart .cart-header .btn {
+    margin-top: 1px;
+    padding: 2px 15px;
+}
+.cart .cart-header .btn:not(.note-btn) {
+    border-radius: 30px;
+}
+.cart .cart-header .btn:hover {
+    box-shadow: none;
+}
+.cart .cart-header .form-control {
+    height: 31px;
+    font-size: 13px;
+    border-radius: 30px;
+}
+.cart .cart-header .form-control + .input-group-btn .btn {
+    margin-top: -1px;
+}
+.cart .cart-header h4 {
+    font-size: 16px;
+    line-height: 28px;
+    color: #6777ef;
+    padding-right: 10px;
+    margin-bottom: 0;
+}
+.cart .cart-header h4 + .cart-header-action,
+.cart .cart-header h4 + .cart-header-form {
+    margin-left: auto;
+}
+.cart .cart-header h4 + .cart-header-action .btn,
+.cart .cart-header h4 + .cart-header-form .btn {
+    font-size: 12px;
+    border-radius: 30px !important;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+}
+.cart .cart-header h4 + .cart-header-action .btn.active,
+.cart .cart-header h4 + .cart-header-form .btn.active {
+    box-shadow: 0 2px 6px #acb5f6;
+    background-color: #6777ef;
+    color: #fff;
+}
+.cart .cart-header h4 + .cart-header-action .dropdown,
+.cart .cart-header h4 + .cart-header-form .dropdown {
+    display: inline;
+}
+.cart .cart-header h4 + .cart-header-action .btn-group .btn,
+.cart .cart-header h4 + .cart-header-form .btn-group .btn {
+    border-radius: 0 !important;
+}
+.cart .cart-header h4 + .cart-header-action .btn-group .btn:first-child,
+.cart .cart-header h4 + .cart-header-form .btn-group .btn:first-child {
+    border-radius: 30px 0 0 30px !important;
+}
+.cart .cart-header h4 + .cart-header-action .btn-group .btn:last-child,
+.cart .cart-header h4 + .cart-header-form .btn-group .btn:last-child {
+    border-radius: 0 30px 30px 0 !important;
+}
+.cart .cart-header h4 + .cart-header-action .input-group .form-control,
+.cart .cart-header h4 + .cart-header-form .input-group .form-control {
+    border-radius: 30px 0 0 30px !important;
+}
+.cart
+    .cart-header
+    h4
+    + .cart-header-action
+    .input-group
+    .form-control
+    + .input-group-btn
+    .btn,
+.cart
+    .cart-header
+    h4
+    + .cart-header-form
+    .input-group
+    .form-control
+    + .input-group-btn
+    .btn {
+    border-radius: 0 30px 30px 0 !important;
+}
+.cart
+    .cart-header
+    h4
+    + .cart-header-action
+    .input-group
+    .input-group-btn
+    + .form-control,
+.cart
+    .cart-header
+    h4
+    + .cart-header-form
+    .input-group
+    .input-group-btn
+    + .form-control {
+    border-radius: 0 30px 30px 0 !important;
+}
+.cart .cart-header h4 + .cart-header-action .input-group .input-group-btn .btn,
+.cart .cart-header h4 + .cart-header-form .input-group .input-group-btn .btn {
+    margin-top: -1px;
+    border-radius: 30px 0 0 30px !important;
+}
+.cart .cart-footer {
+    background-color: transparent;
+    border: none;
+}
+.cart.cart-mt {
+    margin-top: 30px;
+}
+.cart.cart-progress:after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 99;
+    z-index: 99;
+}
+.cart.cart-progress .cart-progress-dismiss {
+    position: absolute;
+    top: 66%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    color: #fff !important;
+    padding: 5px 13px;
+}
+.cart.cart-progress.remove-spinner .cart-progress-dismiss {
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+//-------------- ENDS OF CART CSS FORM ------------------//
+
+//-------------- SECTION CSS CART FORM -----------------//
+.section > *:first-child {
+    margin-top: -7px;
+}
+.section .section-header {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+    background-color: #fff;
+    border-radius: 3px;
+    border: none;
+    position: relative;
+    margin-bottom: 30px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+.section .section-header h1 {
+    margin-bottom: 0;
+    font-weight: 700;
+    display: inline-block;
+    font-size: 24px;
+    margin-top: 3px;
+    color: #34395e;
+}
+.breadcrumb-item {
+    float: left;
+    margin-right: 10px;
+  }
+.section .section-header .section-header-back {
+    margin-right: 15px;
+}
+.section .section-header .section-header-back .btn:hover {
+    background-color: #6777ef;
+    color: #fff;
+}
+.section .section-header .section-header-button {
+    margin-left: 20px;
+}
+.section .section-header .section-header-breadcrumb {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+.section .section-header .section-header-breadcrumb .breadcrumb-item {
+    font-size: 12px;
+}
+.section .section-header .btn {
+    font-size: 12px;
+}
+.section .section-title {
+    font-size: 18px;
+    color: #191d21;
+    font-weight: 600;
+    position: relative;
+    margin: 30px 0 25px 0;
+}
+.section .section-title:before {
+    content: " ";
+    border-radius: 5px;
+    height: 8px;
+    width: 30px;
+    background-color: #6777ef;
+    display: inline-block;
+    float: left;
+    margin-top: 6px;
+    margin-right: 15px;
+}
+.section .section-title + .section-lead {
+    margin-top: -20px;
+}
+.section .section-lead {
+    margin-left: 45px;
+}
+@media (max-width: 575.98px) {
+    .section .section-title {
+        font-size: 14px;
+    }
+    .section .section-header {
+        flex-wrap: wrap;
+        margin-bottom: 20px !important;
+    }
+    .section .section-header h1 {
+        font-size: 18px;
+    }
+    .section .section-header .float-right {
+        display: inline-block;
+        width: 100%;
+        margin-top: 15px;
+    }
+    .section .section-header .section-header-breadcrumb {
+        flex-basis: 100%;
+        margin-top: 10px;
+    }
+}
+
+bodys {
+    background-color: #f4f6f9;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Nunito", "Segoe UI", arial;
+    color: #6c757d;
+}
+
+.main-footer .footer-left {
+    float: left;
+}
+.main-footer .footer-right {
+    float: right;
+}
+
+.text-info,
+.text-info-all *,
+.text-info-all *:before,
+.text-info-all *:after {
+    color: #3abaf4 !important;
+}
+//-------------- ENDS OFSECTION CSS CART FORM -----------------//
+
+//------------ MODAL CSS CART FORM ---------------------------//
+/* 3.8 Modal */
+.modal-header,
+.modal-body,
+.modal-footer {
+    padding: 25px;
+}
+
+.modal-body {
+    padding-top: 15px;
+}
+
+.modal-footer {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.modal-header {
+    border-bottom: none;
+    padding-bottom: 5px;
+}
+.modal-header h5 {
+    font-size: 18px;
+}
+
+.modal-footer {
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+}
+
+.modal-content {
+    max-width: 100%;
+    border: none;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.modal.show .modal-content {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-progress .modal-content {
+    position: relative;
+}
+.modal-part {
+    display: none;
+}
+
+/* 3.14 Breadcrumb */
+.breadcrumb {
+    background-color: #f9f9f9;
+}
+.breadcrumb .breadcrumb-item {
+    line-height: 1;
+}
+.breadcrumb .breadcrumb-item i {
+    margin-right: 5px;
+}
+
+//------------ ENDS MODAL CSS CART FORM ---------------------//
 
 .accordion-button {
     position: relative;

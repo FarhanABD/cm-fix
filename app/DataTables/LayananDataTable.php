@@ -25,21 +25,18 @@ class LayananDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query) {
                 $editBtnAdmin = '';
-                $deleteBtnAdmin = '';
                 $editBtnSuperAdmin = '';
                 $deleteBtnSuperAdmin = '';
                 
-    
                 // Check if the user has the required role for editing
                 if (Auth::user()->role == 'admin') { 
                     $editBtnAdmin = "<a href='".route('admin.layanan.edit',$query->id)."' class='btn btn-primary mb-2'><i class='fa-solid fa-pen-to-square'></i></a>";
-                    // $deleteBtnAdmin = "<a href='".route('admin.layanan.destroy',$query->id)."' class='btn btn-danger delete-item mb-2'><i class='fa-solid fa-trash'></i></a>";
                 }
     
                 // Check if the user has the required role for deleting
                 if (Auth::user()->role === 'super-admin') { 
-                    $deleteBtnSuperAdmin = "<a href='".route('super-admin.layanan.destroy',$query->id)."' class='btn btn-danger delete-item mb-2'><i class='fa-solid fa-trash'></i></a>";
-                    $editBtnSuperAdmin = "<a href='".route('super-admin.layanan.edit',$query->id)."' class='btn btn-primary mb-2'>
+                    $deleteBtnSuperAdmin = "<a href='".route('super-admin.layanan.destroy',$query->id)."' class='btn btn-warning delete-item mb-2'><i class='fa-solid fa-trash'></i></a>";
+                    $editBtnSuperAdmin = "<a href='".route('super-admin.layanan.editSuperAdmin',$query->id)."' class='btn btn-primary mb-2'>
                     <i class='fa-solid fa-pen-to-square'></i></a>";
                 }
     
@@ -66,7 +63,7 @@ class LayananDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0, "asc")
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -84,16 +81,14 @@ class LayananDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('id')->width(10),
+            Column::make('id_layanan'),
             Column::make('jenis_layanan'),
-            Column::make('jenis_paket'),
-            Column::make('harga'),
-            Column::make('kuota'),
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
             ->width(60)
             ->addClass('text-center'),
-          
         ];
     }
 

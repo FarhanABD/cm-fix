@@ -36,8 +36,8 @@ class AuthenticatedSessionController extends Controller
         elseif($request->user()->role == 'super-admin'){
             return redirect()->intended('/super-admin/dashboard');
         }
-
         return redirect()->intended(RouteServiceProvider::HOME);
+        // return redirect()->route('error');
     }
 
     /**
