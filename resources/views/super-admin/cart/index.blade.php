@@ -9,7 +9,7 @@
                     <div class="cart shadow">
                         <div class="card-header bg-white">
                             <h4 class="position-absolute" style="margin-bottom: 12px;">
-                                <a href="{{ route('super-admin.order.indexSuperAdmin') }}">
+                                <a href="{{ route('admin.order.index') }}">
                                     <i class="fas fa-arrow-left" style="padding-right: 12px"></i>
                                 </a>
                                 Halaman Order Paket
@@ -21,7 +21,6 @@
                             </div>         
                         </div>
                         <div class="cart-body p-2">
-                          
                                 <div class="row" style="padding-top: 20px; margin-left: 24px">
                                     <div class="col-md-2" style="margin-left: 4px">
                                         <div class="form-input-group">
@@ -30,7 +29,6 @@
                                                 name="id_order" readonly>
                                         </div>
                                     </div>
-
                                     <div class="col-md-2">
                                         <div class="form-group" style="margin-left: 424%; padding-top: 12px">
                                             <label class="text-info" for="Total Belanja">Subtotal</label>
@@ -42,8 +40,6 @@
                                         </div>
                                     </div>
                             </div>
-                           
-                            
                             <div class="rounded" style="overflow-y: scroll; height: 300px;">
                                 <table class="table table-bordered" id="table-transaksi">
                                     <thead>
@@ -91,7 +87,6 @@
                                     </tbody>
                                 </table>
                               </div>
-                           
                               <div class="cart-footer">
                                 <div class="d-flex justify-content-start align-items-center">
                                     <button type="button" id="bayar-modal" class="btn m-1 btn-outline-primary" data-bs-toggle="modal" data-bs-target="#form-bayar">Simpan</button>
@@ -105,11 +100,10 @@
     </div>
 </section>
 @include('super-admin.cart.data_paket')
-@include('super-admin.cart.formBayar')  
+@include('super-admin.cart.formBayar')
 @endsection
 
 @push('scripts')
-
 <script>
         var total = document.querySelectorAll('#table-transaksi tbody td.total');
         var label_total = document.getElementById('label-total');
@@ -132,13 +126,11 @@
         } else {
             bayarButton.removeAttribute('disabled');
         }
-        
         // Tampilkan hasilnya di label_total dengan format mata uang Rupiah
         label_total.innerHTML = grandTotal.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
         sub_total.value = grandTotal;
         label_total_bayar.innerHTML = grandTotal.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
         sub_total_bayar.value = grandTotal
-
 </script>
 
 <script>
@@ -156,8 +148,10 @@
     document.getElementById('label-total-bayar').textContent = total.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
     document.getElementById('label-total').textContent = total.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
 
-    // Update hidden input value so it's submitted correctly
-    document.getElementById('total-bayar').value = total;
+    // Update hidden input value for total and ppn
+    document.getElementById('total-bayar').value = total; // Total termasuk PPN
+    document.getElementById('total_amount').value = subtotal; // Total tidak termasuk PPN
+    document.getElementById('ppn').value = checkbox.checked ? ppn : 0; // Hanya kirim PPN jika checkbox dicentang
 }
 
 </script>
@@ -181,10 +175,9 @@
                 document.getElementById("alamatPICSelect").value = element.alamat
                 document.getElementById("namaCustomerSelect").value = element.nama_perusahaan
                 document.getElementById("idPerusahaanSelect").value = element.id_perusahaan
-                document.getElementById("statusSelect").value = 0 
+                document.getElementById("statusSelect").value = 'unpaid' 
             }
         });
     })
 </script>
-
 @endpush

@@ -31,7 +31,7 @@ class LayananController extends Controller
     {
         // Konfigurasi
         $idPrefix = 'LYN-';
-        $idLength = 4;
+        $idLength = 2;
 
         // Ambil nomor urut terakhir dari database (lebih efisien dengan query builder)
         $lastNumber = DB::table('layanans')
@@ -51,7 +51,7 @@ class LayananController extends Controller
     {
         // Konfigurasi
         $idPrefix = 'LYN-';
-        $idLength = 4;
+        $idLength = 2;
 
         // Ambil nomor urut terakhir dari database (lebih efisien dengan query builder)
         $lastNumber = DB::table('layanans')
@@ -75,15 +75,18 @@ class LayananController extends Controller
         $request->validate([
             'id_layanan' => 'required|unique:layanans,id_layanan',
             'jenis_layanan' => 'required',
+            'deskripsi_layanan' => 'required',
         ], 
         [
             'jenis_layanan.required' => 'Jenis Layanan wajib diisi.',
+            'deskripsi_layanan.required' => 'Deskripsi Layanan wajib diisi.',
         ]
     
     );
     
         $layanan = new Layanan();
         $layanan->id_layanan = $request->id_layanan;
+        $layanan->deskripsi_layanan= $request->deskripsi_layanan;
         $layanan->jenis_layanan = $request->jenis_layanan;
         $layanan->save();
     
@@ -100,6 +103,7 @@ class LayananController extends Controller
     
         $layanan = new Layanan();
         $layanan->id_layanan = $request->id_layanan;
+        $layanan->deskripsi_layanan = $request->deskripsi_layanan;
         $layanan->jenis_layanan = $request->jenis_layanan;
         $layanan->save();
     
@@ -134,13 +138,14 @@ class LayananController extends Controller
     public function update(Request $request, string $id)
     {
         $request ->validate([
-            'id_layanan' => ['required'],
-            'jenis_layanan' => ['required'],
+            
+            'jenis_layanan' => ['nullable'],
+            'deskripsi_layanan' => ['nullable'],
          ]);
 
          $layanans = Layanan::findOrFail($id);
-         $layanans->id_layanan = $request->id_layanan;
          $layanans->jenis_layanan = $request->jenis_layanan;
+         $layanans->deksripsi_layanan = $request->deskripsi_layanan;
          $layanans->save();
          
          toastr('Updated Successfully','success');
@@ -149,13 +154,14 @@ class LayananController extends Controller
     public function updateSuperAdmin(Request $request, string $id)
     {
         $request ->validate([
-            'id_layanan' => ['required'],
-            'jenis_layanan' => ['required'],
+            
+            'jenis_layanan' => ['nullable'],
+            'jenis_layanan' => ['nullable'],
          ]);
 
          $layanans = Layanan::findOrFail($id);
-         $layanans->id_layanan = $request->id_layanan;
          $layanans->jenis_layanan = $request->jenis_layanan;
+         $layanans->deskripsi_layanan = $request->deskripsi_layanan;
          $layanans->save();
          
          toastr('Updated Successfully','success');

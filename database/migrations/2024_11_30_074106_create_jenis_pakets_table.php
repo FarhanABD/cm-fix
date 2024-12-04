@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('invoices', function (Blueprint $table) {
-            $table->decimal('total_amount', 15, 2)->nullable();  // Sesuaikan tipe data sesuai kebutuhan Anda
+        Schema::create('jenis_pakets', function (Blueprint $table) {
+            $table->id();
+            $table->string('jenis_paket');
+            $table->string('deskripsi_paket');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('invoices', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('jenis_pakets');
     }
 };

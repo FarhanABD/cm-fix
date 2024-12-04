@@ -23,21 +23,6 @@
 
     <div class="card">
         <div class="card-header">
-            {{-- <form method="GET" action="{{ route('admin.reportcustomer.diagram') }}">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="dari" style="margin-bottom: 8px">Dari</label>
-                        <input type="date" name="dari" value="{{ $dari }}" class="form-control">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="sampai" style="margin-bottom: 8px">Sampai</label>
-                        <input type="date" name="sampai" value="{{ $sampai }}" class="form-control">
-                    </div>
-                    <div class="col-md-3 d-flex align-items-end">
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                    </div>
-                </div>
-            </form> --}}
         </div>
         <div class="card-body">
             <div class="row">

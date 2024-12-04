@@ -67,15 +67,10 @@
 
         <!-- Layout container -->
         <div class="layout-page">
-          
           <!-- Navbar -->
           @include('super-admin.layouts.navbar')
           <!-- / Navbar -->
-
           @yield('content')
-
-            
-
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->
@@ -130,7 +125,9 @@
     </script>
 
 <script>
-  $(document).ready(function(){
+   $(document).ready(function(){
+      // Pastikan hanya berjalan jika bukan di halaman order
+      if (window.location.pathname !== '/super-admin/order') {
           // Csrf token
           $.ajaxSetup({
               headers: {
@@ -179,8 +176,9 @@
                       })
                   }
               })
-          })
-      })
+          });
+      }
+  });
 </script>
    
     @stack('scripts')

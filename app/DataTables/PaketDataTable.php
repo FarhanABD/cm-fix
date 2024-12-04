@@ -39,7 +39,7 @@ class PaketDataTable extends DataTable
                 <i class='fa-solid fa-pen-to-square'></i></a>";
             }
 
-            return $editBtnAdmin.$deleteBtnSuperAdmin.$editBtnSuperAdmin;
+            return "<div class='d-flex gap-2'>".$editBtnAdmin.$deleteBtnSuperAdmin.$editBtnSuperAdmin."</div>";
         })
         ->editColumn('harga', function ($query) {
             // Menggunakan formatRupiah dari trait

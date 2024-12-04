@@ -42,6 +42,7 @@
             </table>
             <div class="card-footer bg-white">
                 <a href="{{ route('super-admin.maintenance.index') }}" class="btn btn-sm btn-outline-warning"><i class="fas fa-caret-left"></i> Kembali</a>
+                <a href="#" class="btn btn-sm btn-outline-warning"><i class="fa-solid fa-envelope"></i> Reminder</a> </ul> 
             </div>
         </div>
     </div>

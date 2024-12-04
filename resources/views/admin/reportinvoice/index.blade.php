@@ -52,8 +52,8 @@
                     <td>{{ $item->nama_perusahaan }}</td>
                     <td>
                       <a href="{{ route('admin.reportinvoice.show', urlencode($item->id_invoice)) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i> Detail</a>
-                      {{-- <a href="{{ route('admin.reportinvoice.cetak', urlencode($item->id_invoice)) }}" target="_blank" class="btn btn-outline-danger btn-sm">
-                        <i class="fa-solid fa-print"></i> --}}
+                      <a href="{{ route('admin.reportinvoice.cetak', urlencode($item->id_invoice)) }}" target="_blank" class="btn btn-outline-danger btn-sm">
+                        <i class="fa-solid fa-print"></i> Print Invoice
                       </a>
                   </td>
                   </tr>

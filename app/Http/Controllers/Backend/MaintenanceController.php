@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Backend;
 use App\Models\Order;
 use App\Models\Invoice;
+use App\Mail\ReminderEmail;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
+use App\Mail\NotificationMail;
 use App\Models\TransaksiDetail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MaintenanceReminderMail;
 use App\DataTables\MaintenanceDataTable;
+
 
 class MaintenanceController extends Controller
 {
@@ -20,6 +26,33 @@ class MaintenanceController extends Controller
         $hasOrdersNearExpiry = $orders->isNotEmpty(); // Cek jika tidak kosong
         return view('admin.maintenance.index', compact('orders', 'hasOrdersNearExpiry'));
     }
+
+    // public function index()
+    // {
+    //     // Ambil semua orders yang mendekati H-30
+    //     $orders = Order::where('tanggal_habis', '<', DB::raw('DATE_ADD(NOW(), INTERVAL 30 DAY)'))->get();
+    //     // Periksa apakah ada order yang mendekati H-30
+
+    //     $hasOrdersNearExpiry = $orders->isNotEmpty(); // Cek jika tidak kosong
+    //     if ($hasOrdersNearExpiry) {
+    //         foreach ($orders as $order) {
+    //             // Ambil detail transaksi berdasarkan ID order
+    //             $orderDetails = TransaksiDetail::where('id_order', $order->id)->get();
+    //             foreach ($orderDetails as $detail) {
+    //                 try {
+    //                     // Kirim email ke PIC
+    //                     Mail::to($detail->pic_email)->send(new NotificationMail($order));
+    //                     // Log atau lakukan tindakan lain jika berhasil
+    //                     Log::info('Email berhasil dikirim ke: ' . $detail->pic_email);
+    //                 } catch (\Exception $e) {
+    //                     // Log kesalahan jika pengiriman gagal
+    //                     Log::error('Email gagal dikirim ke: ' . $detail->pic_email . ' Error: ' . $e->getMessage());
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return view('admin.maintenance.index', compact('orders', 'hasOrdersNearExpiry'));
+    // }
     
     public function indexSuperAdmin(MaintenanceDataTable $dataTable)
     {
@@ -112,6 +145,7 @@ class MaintenanceController extends Controller
         $invoice->item_desc = $request->item_desc;
         $invoice->qty = $request->qty;
         $invoice->ppn = $request->ppn;
+        $invoice->total_amount = $request->total_amount;
         $invoice->price = $request->price;
         $invoice->total = $total;
         $invoice->save();
@@ -126,6 +160,7 @@ class MaintenanceController extends Controller
             $maintenanace->tanggal_habis = $request->tanggal_habis;
             $maintenanace->total = $total;
             $maintenanace->ppn = $request->ppn;
+            $maintenanace->total_amount = $request->total_amount;
             $maintenanace->save();
             toastr('Data Berhasil Diperpanjang', 'success');
         } catch (\Exception $e) {
@@ -267,9 +302,28 @@ class MaintenanceController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    public function sendReminder(Request $request, $id_order)
+    {
+        $order = Order::findOrFail($id_order);
+        // Validate request data (optional)
+        $request->validate([
+            'reminder_message' => 'nullable|string',
+        ]);
+
+        $email = $order->invoice->pic_email; // Assuming "pic_email" exists in the Invoice model
+        $message = $request->get('reminder_message');
+
+        try {
+            Mail::to($email)->send(new MaintenanceReminderMail($order, $message));
+            flash('success', 'Reminder email sent successfully!');
+        } catch (\Exception $e) {
+            report($e);
+            flash('error', 'Failed to send reminder email!');
+        }
+
+        return back();
+    }
+    
     public function update(Request $request, string $id)
     {
         //

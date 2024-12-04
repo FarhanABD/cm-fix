@@ -20,6 +20,8 @@ return new class extends Migration
             $table->date('tanggal_langganan');
             $table->date('tanggal_habis');
             $table->double('total');
+            $table->double('total_amount');
+            $table->double('ppn');
             $table->timestamps();
         });
     }

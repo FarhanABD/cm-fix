@@ -13,9 +13,6 @@ Route::get('/', function(){
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-// Route::get('/error', function () {
-//     return view('admin.error');
-// })->middleware(['auth', 'verified'])->name('error');
 
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 

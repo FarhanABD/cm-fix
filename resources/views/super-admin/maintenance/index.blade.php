@@ -10,21 +10,6 @@
       <div class="card-body">
              <!-- Filter Tanggal -->
              <form id="filterForm" method="GET" action="{{ route('super-admin.invoice.indexSuperAdmin') }}" class="mb-4 row">
-              <div class="col-md-3">
-                  <div class="form-group d-flex align-items-center">
-                      <label style="margin-right: 8px" for="tanggalDari">Dari</label>
-                      <input type="date" class="form-control" name="dari" id="tanggalDari" max="{{ date('Y-m-d') }}" value="{{ request('dari') }}">
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="form-group d-flex align-items-center">
-                      <label style="margin-right: 8px" for="tanggalSampai">Sampai</label>
-                      <input type="date" class="form-control" name="sampai" id="tanggalSampai" max="{{ date('Y-m-d') }}" value="{{ request('sampai') }}">
-                  </div>
-              </div>
-              <div class="col-md-3 d-flex align-items-center">
-                  <button type="submit" class="btn btn-primary">Filter</button>
-              </div>
           </form>
             <div class="table-responsive text-nowrap">
               <table class="table">

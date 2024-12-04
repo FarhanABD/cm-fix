@@ -25,7 +25,9 @@ return new class extends Migration
             $table->string('jenis_paket');
             $table->double('harga');
             $table->integer('jumlah');
+            $table->double('ppn');
             $table->double('total');
+            $table->double('total_amount');
             $table->date('tanggal_langganan');
             $table->date('tanggal_habis');
             $table->timestamps();

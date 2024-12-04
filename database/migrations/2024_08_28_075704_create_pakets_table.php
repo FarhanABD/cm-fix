@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('id_paket');
             $table->string('jenis_layanan');
             $table->string('jenis_paket');
+            $table->string('deskripsi_paket');
             $table->string('kuota');
             $table->double('harga');
             $table->timestamps();

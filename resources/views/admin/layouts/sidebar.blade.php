@@ -85,7 +85,12 @@
         </li>
         <li class="menu-item">
           <a href="{{ route('admin.layanan.index') }}" class="menu-link">
-            <div data-i18n="Without navbar">Master layanan</div>
+            <div data-i18n="Without navbar">Master Layanan</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="{{ route('admin.jenis-paket.index') }}" class="menu-link">
+            <div data-i18n="Without navbar">Master Jenis Paket</div>
           </a>
         </li>
         <li class="menu-item">
@@ -114,7 +119,7 @@
         <i class="menu-icon">
           <i class="menu-icon"><img src="{{ asset('storage/img/maintanance.png') }}" alt="Logo" width="20px"></i>
         </i>
-        <div data-i18n="Basic">Maintanance</div>
+        <div data-i18n="Basic">Maintenance</div>
       </a>
     </li>
     <!-- Invoice -->
@@ -157,10 +162,10 @@
     </li>
 
     <!-- Setting & Profile -->
-    <li class="menu-header small text-uppercase"><span class="menu-header-text">Setting & Profile</span></li>
+    {{-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Setting & Profile</span></li> --}}
 
     {{-- Setting --}}
-    <li class="menu-item">
+    {{-- <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon"><i class="menu-icon"><img src="{{ asset('storage/img/settings.png') }}" alt="Logo" width="20px"></i></i>
         <div data-i18n="Layouts">Setting</div>
@@ -184,7 +189,7 @@
         </li>
 
       </ul>
-    </li>
+    </li> --}}
 {{-- Logout --}}
 
   <li class="menu-item">

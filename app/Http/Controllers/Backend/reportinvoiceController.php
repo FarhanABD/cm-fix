@@ -29,9 +29,15 @@ class reportinvoiceController extends Controller
         return view('admin.reportinvoice.index', compact('details'));
     }
 
-    public function indexSuperAdmin(reportinvoiceDataTable $datatable)
+    public function indexSuperAdmin(Request $request)
     {
-        $details = Invoice::orderBy('created_at', 'asc')->get();
+        $details = Invoice::query();
+        // $details = Maintenance::orderBy('created_at', 'asc')->get();
+        // Filter berdasarkan tanggal dari dan sampai
+        if ($request->dari && $request->sampai) {
+            $details->whereBetween('tanggal_langganan', [$request->dari, $request->sampai]);
+        }
+        $details = $details->get(); // Atau gunakan paginate jika diperlukan
         return view('super-admin.reportinvoice.index', compact('details'));
     }
 
@@ -203,12 +209,6 @@ class reportinvoiceController extends Controller
     
     public function exportPDF(Request $request)
     {
-        // Ambil data dari database
-        // $details = Invoice::all();
-    
-        // // Kirim data ke view yang akan dirender menjadi PDF
-        // $pdf = FacadePdf::loadView('admin.reportinvoice.exportpdf', compact('details'))->setPaper('A4', 'landscape');
-    
         $details = Invoice::query();
 
         // Filter berdasarkan tanggal dari dan sampai
@@ -218,6 +218,21 @@ class reportinvoiceController extends Controller
         $details = $details->get();
         // Buat PDF dengan data order yang difilter
         $pdf = FacadePdf::loadView('admin.reportinvoice.exportpdf', compact('details'));
+        // Download PDF
+        return $pdf->download('report_invoice.pdf');
+    }
+
+    public function exportPDFSuperAdmin(Request $request)
+    {
+        $details = Invoice::query();
+
+        // Filter berdasarkan tanggal dari dan sampai
+        if ($request->dari && $request->sampai) {
+            $details->whereBetween('tanggal_langganan', [$request->dari, $request->sampai]);
+        }
+        $details = $details->get();
+        // Buat PDF dengan data order yang difilter
+        $pdf = FacadePdf::loadView('super-admin.reportinvoice.exportpdf', compact('details'));
         // Download PDF
         return $pdf->download('report_invoice.pdf');
     }

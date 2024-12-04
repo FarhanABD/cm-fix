@@ -8,13 +8,13 @@
     <div class="card">
       <h4 class="card-header">Tabel Report Order
         <a href="{{ route('admin.reportorder.export_excel', ['dari' => request('dari'), 'sampai' => request('sampai')]) }}" class="btn btn-success float-end" style="margin-left: 20px">
-          <i class="fa-solid fa-file-excel"></i>
+          <i class="fa-solid fa-file-excel" style="font-size: 1.2rem;"></i>
         </a>
         <a href="{{ route('admin.reportorder.export_pdf', ['dari' => request('dari'), 'sampai' => request('sampai')]) }}" class="btn btn-danger float-end" style="margin-left: 20px">
-          <i class="fa-solid fa-file-pdf"></i>
+          <i class="fa-solid fa-file-pdf" style="font-size: 1.2rem;"></i>
         </a>
         <a href="{{ route('admin.reportorder.diagram') }}" class="btn btn-info float-end" style="margin-left: 20px">
-          <i class="fa-solid fa-chart-simple"></i>
+          <i class="fa-solid fa-chart-simple" style="font-size: 1.2rem;"></i>
         </a>  
       </h4> 
       <div class="card-body">
@@ -23,20 +23,16 @@
              <!-- Filter Tanggal -->
             <form id="filterForm" method="GET" action="{{ route('admin.reportorder.index') }}" class="mb-4 row">
     <div class="col-md-3">
-        <div class="form-group d-flex align-items-center">
-            <label style="margin-right: 8px" for="tanggalDari">Dari</label>
-            <input type="date" class="form-control" name="dari" id="tanggalDari" value="{{ request('dari') }}">
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="form-group d-flex align-items-center">
-            <label style="margin-right: 8px" for="tanggalSampai">Sampai</label>
-            <input type="date" class="form-control" name="sampai" id="tanggalSampai" value="{{ request('sampai') }}">
-        </div>
-    </div>
-    <div class="col-md-3 d-flex align-items-center">
-        <button type="submit" class="btn btn-primary">Filter</button>
-    </div>
+              <label for="tanggalDari" class="form-label">Dari</label>
+              <input type="date" class="form-control" name="dari" id="tanggalDari" value="">
+            </div>
+            <div class="col-md-3">
+              <label for="tanggalSampai" class="form-label">Sampai</label>
+              <input type="date" class="form-control" name="sampai" id="tanggalSampai" value="">
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+              <button type="submit" class="btn btn-primary w-100">Filter</button>
+            </div>
 </form>
  
           <!-- Responsive Table -->

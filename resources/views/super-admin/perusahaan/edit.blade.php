@@ -62,21 +62,47 @@
                                         <label class="form-label" for="idLayananInput" >ID Customer</label>
                                         <input type="text" class="form-control" id="idLayananInput" name="id_perusahaan" value="{{ $perusahaans->id_perusahaan }}" readonly />
                                       </div>
+
                                       <div class="mb-3">
-                                        <label class="form-label" for="basic-default-company">Nama Perusahaan</label>
+                                        <label class="form-label" for="basic-default-company">Nama Customer</label>
                                         <input type="text" class="form-control" id="basic-default-company" name="nama_perusahaan" value="{{ $perusahaans->nama_perusahaan }}" />
                                     </div>
+
                                     <div class="mb-3">
-                                        <label class="form-label" for="basic-default-email">Email</label>
+                                        <label class="form-label" for="basic-default-email">Email Customer</label>
                                         <div class="input-group input-group-merge">
                                             <input type="text" id="basic-default-email" class="form-control" name="email" value="{{ $perusahaans->email }}"  aria-describedby="basic-default-email2" />
                                         </div>
                                         <div class="form-text">Anda dapat menggunakan huruf, angka, dan titik</div>
                                     </div>
+
                                     <div class="mb-3">
-                                      <label class="form-label" for="basic-default-company">Alamat</label>
-                                      <input  type="text" name="alamat" class="form-control" id="basic-default-company" value="{{ $perusahaans->alamat }}" />
+                                      <label class="form-label" for="basic-default-company">Nama Website</label>
+                                      <input type="text" name="nama_website" class="form-control" id="basic-default-company" value="{{ $perusahaans->nama_website }}" />
                                     </div>
+
+                                    <div class="row">
+                                      <div class="col-md-4">
+                                          <label class="form-label" for="basic-default-company1">Kota</label>
+                                          <div class="input-group input-group-merge required">
+                                            <input type="text" name="kota" class="form-control" id="basic-default-company1" value="{{ $perusahaans->kota }}" " />
+                                          </div>
+                                        
+                                      </div>
+                                      <div class="col-md-4">
+                                          <label class="form-label" for="basic-default-company2">Provinsi</label>
+                                          <div class="input-group input-group-merge required">
+                                            <input type="text" name="provinsi" class="form-control" id="basic-default-company1" value="{{ $perusahaans->provinsi }}" />
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <label class="form-label" for="basic-default-company3">Negara</label>
+                                        <div class="input-group input-group-merge required">
+                                            <input type="text" name="negara" class="form-control" id="basic-default-company1" value="{{ $perusahaans->negara }}" />
+                                        </div>
+                                    </div>
+                                  </div>
+
                                     <div class="mb-3">
                                       <label class="form-label" for="basic-default-phone">No telepon</label>
                                       <input
@@ -91,10 +117,9 @@
                                       <label class="form-label" for="basic-default-company">Keterangan</label>
                                       <input type="text" name="keterangan" class="form-control" id="basic-default-company" value="{{ $perusahaans->keterangan }}" />
                                     </div>
-                                    <div class="mb-3">
-                                      <label class="form-label" for="basic-default-company">Nama Website</label>
-                                      <input type="text" name="nama_website" class="form-control" id="basic-default-company" value="{{ $perusahaans->nama_website }}" />
-                                    </div>
+
+                                 
+
                                     <div class="row justify-content-start">
                                       <div class="col-sm-10">
                                         <button type="button" id="send-company-form" class="btn btn-primary">Next  <i class="fa-solid fa-arrow-right" style="padding-left: 4px"></i></button>
@@ -167,7 +192,8 @@
                                   <div class="col-sm-10">
                                     <div class="input-group input-group-merge">
                                       <span id="basic-icon-default-message2" class="input-group-text"
-                                        ><i class="bx bx-comment"></i></span>
+                                        ><i class="bx bx-comment"></i
+                                      ></span>
                                       <textarea
                                         name="keterangan_pic"
                                         id="basic-icon-default-message"
@@ -234,6 +260,9 @@
       });
   @endif
 </script>
+
+
+
 <!-- Script Bootstrap, pastikan sudah include -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

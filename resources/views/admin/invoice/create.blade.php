@@ -1,7 +1,6 @@
 @extends('admin.layouts.master')
 
 @section('content')
-
     <div class="container-xxl flex-grow-1 container-p-y">
       <h4 class="fw-bold py-3 mb-4">
         <a href="{{ route('admin.invoice.index') }}" class="text-muted me-2">
@@ -119,6 +118,9 @@
                     <input type="text" class="form-control" id="ppn-paketSelect" placeholder="Masukkan ppn keseluruhan" name="ppn" hidden/>
                   </div>
                   <div class="mb-3">
+                    <input type="text" class="form-control" id="totalamount-paketSelect" placeholder="Masukkan Total Amount" name="total_amount" hidden/>
+                  </div>
+                  <div class="mb-3">
                     <label class="form-label" for="basic-default-company">Total</label>
                     <input type="text" class="form-control" id="totalSelect" placeholder="Masukkan total keseluruhan" name="total"/>
                   </div>
@@ -152,8 +154,10 @@
         console.log(selectedOrder);
         let formattedTotal = selectedOrder.formatted_total;
         let formattedppn = selectedOrder.ppn;
+        let formattedTotalAmount = selectedOrder.total_amount;
         $('#totalSelect').val(formattedTotal);
         $('#ppn-paketSelect').val(formattedppn);
+        $('#totalamount-paketSelect').val(formattedTotalAmount);
         $('#tanggal_langganan_datepicker').val(selectedOrder.tanggal_langganan);
         $('#tanggal_habis_datepicker').val(selectedOrder.tanggal_habis);
 

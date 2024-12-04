@@ -61,39 +61,70 @@
                                         <label class="form-label" for="idLayananInput" >ID Customer</label>
                                         <input type="text" class="form-control" id="idLayananInput" name="id_perusahaan" value="{{ $newIdPerusahaan }}" readonly />
                                       </div>
+
                                       <div class="mb-3">
-                                        <label class="form-label" for="basic-default-company">Nama Perusahaan</label>
-                                        <input type="text" class="form-control" id="basic-default-company" name="nama_perusahaan" placeholder="Masukkan nama perusahaan" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="basic-default-email">Email</label>
-                                        <div class="input-group input-group-merge">
-                                            <input type="text" id="basic-default-email" class="form-control" name="email" placeholder="Masukkan Email" aria-describedby="basic-default-email2" />
+                                        <label class="form-label" for="basic-default-company">Nama Customer<span class="text-danger"> *</span></label>
+                                        <div class="input-group input-group-merge required">
+                                          <input type="text" class="form-control" id="basic-default-company" name="nama_perusahaan" placeholder="* Nama customer Wajib Diisi" aria-describedby="basic-default-email2" required />
                                         </div>
-                                        <div class="form-text">Anda dapat menggunakan huruf, angka, dan titik</div>
                                     </div>
+                                    
                                     <div class="mb-3">
-                                      <label class="form-label" for="basic-default-company">Alamat</label>
-                                      <input  type="text" name="alamat" class="form-control" id="basic-default-company" placeholder="Masukkan alamat perusahaan" />
+                                      <label class="form-label" for="basic-default-email">Email Customer<span class="text-danger"> *</span></label>
+                                      <div class="input-group input-group-merge required">
+                                          <input type="text" id="basic-default-email" class="form-control" name="email" placeholder="* Email Wajib Diisi" aria-describedby="basic-default-email2" required />
+                                      </div>
+                                      <div class="form-text">Anda dapat menggunakan huruf, angka, dan titik</div>
+                                  </div>
+                                  
+
+                                    <div class="mb-3">
+                                      <label class="form-label" for="basic-default-company">Nama Website</label>
+                                      <div class="input-group input-group-merge">
+                                        <input type="text" name="nama_website" class="form-control" id="basic-default-company" placeholder="Masukkan nama website" />
+                                      </div>
                                     </div>
-                                    <div class="mb-3">
-                                      <label class="form-label" for="basic-default-phone">No telepon</label>
-                                      <input
+
+                                    <div class="row">
+                                      <div class="col-md-4">
+                                          <label class="form-label" for="basic-default-company1">Kota<span class="text-danger"> *</span></label>
+                                          <div class="input-group input-group-merge required">
+                                            <input type="text" name="kota" class="form-control" id="basic-default-company1" placeholder="* Masukkan alamat perusahaan 1" />
+                                          </div>
+                                        
+                                      </div>
+                                      <div class="col-md-4">
+                                          <label class="form-label" for="basic-default-company2">Provinsi<span class="text-danger"> *</span></label>
+                                          <div class="input-group input-group-merge required">
+                                            <input type="text" name="provinsi" class="form-control" id="basic-default-company1" placeholder="* Masukkan alamat perusahaan 2" />
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <label class="form-label" for="basic-default-company3">Negara<span class="text-danger"> *</span></label>
+                                        <div class="input-group input-group-merge required">
+                                            <input type="text" name="negara" class="form-control" id="basic-default-company1" placeholder="* Masukkan alamat perusahaan 3" value="Indonesia" />
+                                        </div>
+                                    </div>
+                                  </div>
+                                  
+                                    <div class="mb-3" style="margin-top: 8px">
+                                      <label class="form-label" for="basic-default-phone">No telepon<span class="text-danger"> *</span></label>
+                                      <div class="input-group input-group-merge required">
+                                        <input
                                         type="text"
                                         name="phone"
                                         id="basic-default-phone"
                                         class="form-control phone-mask"
-                                        placeholder="Masukkan nomer telepon"
+                                        placeholder="* Masukkan nomer telepon"
                                       />
+                                      </div>
                                     </div>
+
                                     <div class="mb-3">
                                       <label class="form-label" for="basic-default-company">Keterangan</label>
-                                      <input type="text" name="keterangan" class="form-control" id="basic-default-company" placeholder="Masukkan keterangan perusahaan" />
+                                      <input type="text" name="keterangan" class="form-control" id="basic-default-company" />
                                     </div>
-                                    <div class="mb-3">
-                                      <label class="form-label" for="basic-default-company">Nama Website</label>
-                                      <input type="text" name="nama_website" class="form-control" id="basic-default-company" placeholder="Masukkan nama website" />
-                                    </div>
+                                 
                                     <div class="row justify-content-start">
                                       <div class="col-sm-10">
                                         <button type="button" id="send-company-form" class="btn btn-primary">Next  <i class="fa-solid fa-arrow-right" style="padding-left: 4px"></i></button>
@@ -115,18 +146,18 @@
                             <div class="card-body">
                                 <!-- Form Data PIC -->
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Nama PIC</label>
+                                    <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Nama PIC<span class="text-danger"> *</span></label>
                                     <div class="col-sm-10">
-                                        <div class="input-group input-group-merge">
+                                      <div class="input-group input-group-merge required">
                                             <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
-                                            <input name="nama_pic" type="text" class="form-control" id="basic-icon-default-fullname" placeholder="Masukkan nama PIC" aria-label="Masukkan nama PIC" aria-describedby="basic-icon-default-fullname2" />
+                                            <input name="nama_pic" type="text" class="form-control" id="basic-icon-default-fullname" placeholder="* Masukkan nama PIC" aria-label="Masukkan nama PIC" aria-describedby="basic-icon-default-fullname2" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                  <label class="col-sm-2 form-label" for="basic-icon-default-phone">No telfon</label>
+                                  <label class="col-sm-2 form-label" for="basic-icon-default-phone">No telepon PIC<span class="text-danger"> *</span></label>
                                   <div class="col-sm-10">
-                                    <div class="input-group input-group-merge">
+                                    <div class="input-group input-group-merge required">
                                       <span id="basic-icon-default-phone2" class="input-group-text"
                                         ><i class="bx bx-phone"></i
                                       ></span>
@@ -135,15 +166,15 @@
                                         type="text"
                                         id="basic-icon-default-phone"
                                         class="form-control phone-mask"
-                                        placeholder="Masukkan nomer telfon"
-                                        aria-label="Masukkan nomer telfon"
+                                        placeholder="* Masukkan nomer telepon"
+                                        aria-label="Masukkan nomer telepon"
                                         aria-describedby="basic-icon-default-phone2"
                                       />
                                     </div>
                                   </div>
                                 </div>
                                 <div class="row mb-3">
-                                  <label class="col-sm-2 col-form-label" for="basic-icon-default-email">Email</label>
+                                  <label class="col-sm-2 col-form-label" for="basic-icon-default-email">Email PIC</label>
                                   <div class="col-sm-10">
                                     <div class="input-group input-group-merge">
                                       <span class="input-group-text"><i class="bx bx-envelope"></i></span>
@@ -161,6 +192,7 @@
                                     <div class="form-text">Anda dapat menggunakan huruf, angka, dan titik</div>
                                   </div>
                                 </div>
+                                
                                 <div class="row mb-3">
                                   <label class="col-sm-2 form-label" for="basic-icon-default-message">Keterangan</label>
                                   <div class="col-sm-10">
@@ -233,10 +265,6 @@
       });
   @endif
 </script>
-
-
-
-<!-- Script Bootstrap, pastikan sudah include -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 @endsection

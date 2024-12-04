@@ -172,6 +172,74 @@ class CartController extends Controller
                 $order->id_order = $request->id_order;
                 $order->total = $request->total; // Total termasuk PPN
                 $order->ppn = $request->ppn; // Simpan nilai PPN
+                $order->total_amount = $request->total_amount; // Simpan nilai total amount
+                $order->status = false;
+                $order->tanggal_langganan = $request->tanggal_langganan;
+                $order->tanggal_habis = $request->tanggal_habis;
+                $order->save();
+    
+                // Simpan Data detail transaksi
+                foreach ($cart as $data) {
+                    $pakets = Paket::find($data->no_paket);
+                    $perusahaan = Perusahaan::find($request->no_perusahaan);
+
+                    $details = new TransaksiDetail();
+                    $totalPerItem = $data->harga * $data->jumlah + $request->ppn;
+                    $details->id_order = $data->id_order;
+                    $details->no_perusahaan = $request->no_perusahaan;
+                    $details->id_perusahaan = $perusahaan->id_perusahaan;
+                    $details->nama_perusahaan = $perusahaan->nama_perusahaan;
+                    $details->nama_pic = $perusahaan->nama_pic;
+                    $details->phone_pic = $perusahaan->phone_pic;
+                    $details->email_pic = $perusahaan->email_pic;
+                    $details->alamat = $perusahaan->kota;
+                    $details->jenis_layanan = $pakets->jenis_layanan;
+                    $details->jenis_paket = $pakets->jenis_paket;
+                    $details->harga = $data->harga;
+                    $details->jumlah = $data->jumlah;
+                    $details->ppn = $request->ppn;
+                    $details->total_amount = $request->total_amount;
+                    $details->total = $totalPerItem; // Total termasuk PPN
+                    $details->tanggal_langganan = $request->tanggal_langganan;
+                    $details->tanggal_habis = $request->tanggal_habis;
+                    $details->save();
+                }
+                // Kosongkan cart
+                Cart::truncate();
+    
+            } catch (\Exception $e) {
+                // Jika ada error, tangani
+                dd($e->getMessage());
+            }
+            toastr('Berhasil', 'success');
+            return redirect()->route('admin.invoice.index');
+        }
+    }
+
+    public function bayarSuperAdmin(Request $request)
+    {
+        $cart = Cart::all();
+        if($cart->isEmpty())
+        {
+            return redirect()->route('admin.cart.index')->with('gagal', 'Transaksi Gagal');
+        }
+        else
+        {
+            try{
+                $request->validate([
+                    'id_order' => 'required',
+                    'total' => 'required',
+                    'ppn' => 'required', // Pastikan field ppn tervalidasi
+                    'tanggal_langganan' => 'required',
+                    'tanggal_habis' => 'required',
+                ]);
+    
+                // Simpan order ke dalam tabel Order
+                $order = new Order();
+                $order->id_order = $request->id_order;
+                $order->total = $request->total; // Total termasuk PPN
+                $order->ppn = $request->ppn; // Simpan nilai PPN
+                $order->total_amount = $request->total_amount; // Simpan nilai total amount
                 $order->status = false;
                 $order->tanggal_langganan = $request->tanggal_langganan;
                 $order->tanggal_habis = $request->tanggal_habis;
@@ -198,6 +266,7 @@ class CartController extends Controller
                     $details->harga = $data->harga;
                     $details->jumlah = $data->jumlah;
                     $details->ppn = $request->ppn;
+                    $details->total_amount = $request->total_amount;
                     $details->total = $totalPerItem; // Total termasuk PPN
                     $details->tanggal_langganan = $request->tanggal_langganan;
                     $details->tanggal_habis = $request->tanggal_habis;
@@ -211,77 +280,6 @@ class CartController extends Controller
                 dd($e->getMessage());
             }
             toastr('Berhasil', 'success');
-            return redirect()->route('admin.invoice.index');
-        }
-    }
-    
-
-    public function bayarSuperAdmin(Request $request)
-    {
-        $cart = Cart::all();
-        if($cart->isEmpty())
-        {
-            return redirect()->route('admin.cart.index')->with('gagal', 'Transaksi Gagal');
-        }
-        else
-        {
-            try{
-                $request->validate([
-                    'id_order' => 'required',
-                    'total' => 'required',
-                    'tanggal_langganan' => 'required',
-                    'tanggal_habis' => 'required',
-                ]);
-
-                $order = new Order();
-                $order->id_order = $request->id_order;
-                $order->total = $request->total;
-                $order->tanggal_langganan = $request->tanggal_langganan;
-                $order->tanggal_habis = $request->tanggal_habis;
-                $order->save();
-
-                foreach ($cart as $data) {
-                    $pakets = Paket::find($data->no_paket);
-                    // $perusahaan = Perusahaan::find($request->no_perusahaan);
-                    $perusahaan = Perusahaan::find($request->no_perusahaan);
-                    $noPerusahaan = $request->no_perusahaan;
-                    $langgananOrder = $request->tanggal_langganan;
-                    $habisOrder = $request->tanggal_habis;
-
-                    $request->validate([
-                        'id_order' => 'required',
-                        'total' => 'required',
-                        'no_perusahaan' => 'required',
-                        'id_perusahaan' => 'required',
-                    ]);
-
-                    $details = new TransaksiDetail();
-                    $details->id_order = $data->id_order;
-                    $details->no_perusahaan = $noPerusahaan;
-                    $details->id_perusahaan = $perusahaan->id_perusahaan;
-                    $details->nama_perusahaan = $perusahaan->nama_perusahaan;
-                    $details->nama_pic = $perusahaan->nama_pic;
-                    $details->phone_pic = $perusahaan->phone_pic; 
-                    $details->email_pic = $perusahaan->email_pic; 
-                    $details->alamat = $perusahaan->alamat; 
-                    $details->jenis_layanan = $pakets->jenis_layanan; 
-                    $details->jenis_paket = $pakets->jenis_paket; 
-                    $details->harga = $data->harga; 
-                    $details->jumlah = $data->jumlah; 
-                    $details->total = $request->total;
-                    $details->tanggal_langganan = $langgananOrder;
-                    $details->tanggal_habis = $habisOrder;
-                    $details->save(); 
-
-                    Cart::truncate();
-                }
-            }
-            catch(\Exception $e){
-                dd($e->getMessage());
-                // toastr('Gagal', 'warning');
-                // return redirect()->route('admin.cart.index');
-            }
-            toastr('Berhasil','success');
             return redirect()->route('super-admin.invoice.indexSuperAdmin');
         }
     }

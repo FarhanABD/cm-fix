@@ -1,4 +1,3 @@
-
 @extends('super-admin.layouts.master')
 
 @section('content')
@@ -10,7 +9,6 @@
                 </a>
                 <span class="text-muted fw-light">Form Update/</span> Data Paket
               </h4>
-
               <!-- Basic Layout -->
               <div class="row">
                 <div class="col-xl">
@@ -54,7 +52,7 @@
                             <label class="form-label" for="basic-default-company">Harga</label>
                             <input value="{{ $pakets->harga }}" type="text" class="form-control" id="basic-default-company" name="harga" />
                           </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                       </form>
                     </div>
                   </div>

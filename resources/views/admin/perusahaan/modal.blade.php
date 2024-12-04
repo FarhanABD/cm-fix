@@ -9,7 +9,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{ route('admin.importcustomer') }}" method="post" enctype="multipart/form-data">
+        {{-- <form action="{{ route('admin.perusahaan.import_proses') }}" method="post" enctype="multipart/form-data"> --}}
           @csrf
           {{ csrf_field()}}
         <div class="modal-body">
@@ -18,7 +18,6 @@
                     <input type="file" name="file" required="required">
                 </div>
             </div>
-          ...
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Selesai</button>

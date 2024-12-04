@@ -12,16 +12,13 @@
                             @csrf
                             <!---------- FIELD ID_ORDER ----------->
                             <input type="text" id="kode-transaksi" class="form-control" value="{{$nomor}}"
-                                name="id_order" readonly hidden>
-
-                            <input type="text" id="alamatPICSelect" class="form-control" name="alamat" readonly hidden>
-
+                            name="id_order" readonly hidden>
+                            <input type="text" id="kotaPICSelect" class="form-control" name="kota" readonly hidden>
+                            <input type="text" id="provinsiPICSelect" class="form-control" name="provinsi" readonly hidden>
+                            <input type="text" id="negaraPICSelect" class="form-control" name="negara" readonly hidden>
                             <input type="text" id="statusSelect" class="form-control" name="status" readonly hidden>
-
                             <input type="text" id="namaCustomerSelect" class="form-control" name="nama_perusahaan" readonly hidden>
-
                             <input type="text" id="idPerusahaanSelect" class="form-control" name="id_perusahaan" readonly hidden>
-                                
                                   <!---------- FIELD ID_CUSTOMER ----------->
                                   <div class="form-group"  style="margin-top: 8px">
                                         <label for="paketSelect" class="form-label">Nama Customer</label>
@@ -35,13 +32,13 @@
                                     <!---------- FIELD NAMA_PIC ----------->
                                     <div class="form-group" style="margin-top: 8px">
                                         <div class="form-group">
-                                            <label for="namaPicSelect" class="form-label">Nama PIC</label>
-                                            <input type="text" id="namaPicSelect" class="form-control" name="nama_pic">
+                                            {{-- <label type="hidden" for="namaPicSelect" class="form-label">Nama PIC</label> --}}
+                                            <input type="hidden" id="namaPicSelect" class="form-control" name="nama_pic">
                                         </div>
                                     </div>
                                         <div class="form-group" style="margin-top: 8px">
-                                            <label for="emailPICSelect" class="form-label">Email PIC</label>
-                                            <input type="text" id="emailPICSelect" class="form-control" name="email_pic">
+                                            {{-- <label for="emailPICSelect" class="form-label">Email PIC</label> --}}
+                                            <input type="hidden" id="emailPICSelect" class="form-control" name="email_pic">
                                         </div>
                                         <div class="form-group" style="margin-top: 8px">
                                             <label for="phonePICSelect" class="form-label">Phone PIC</label>
@@ -56,18 +53,18 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="TanggalHabis" class="form-label">Tanggal Habis</label>
-                                                    <input type="date"  id="datepicker" class="form-control" name="tanggal_habis">
+                                                    <label for="TanggalHabis" class="form-label">Due Date PO</label>
+                                                    <input type="date" id="datepicker" class="form-control" name="tanggal_habis">
                                                 </div>
                                             </div>
                                         </div>
-                                    
                                  <!---------- FIELD SUBTOTAL ----------->
                                 <div class="form-group" style="margin-top: 28px">
-                                    <label for="Total Belanja" style="font-size: 16px">Subtotal</label>
+                                    <label for="Total Belanja" style="font-size: 16px; margin-bottom: 8px">Subtotal</label>
                                     <div class="input-group-prepend">
-                                        <h2 class="text-info mr-2" style="font-size: 20px">Rp<br></h2>
+                                        {{-- <h2 class="text-info mr-2" style="font-size: 20px">Rp<br></h2> --}}
                                         <input type="hidden" id="total-bayar" name="total" value="0">
+                                        <input type="hidden" id="total_amount" name="total_amount" value="0">
                                         <input type="hidden" id="ppn" name="ppn" value="0">
                                         <h3 class="text-info" id="label-total-bayar" style="font-size: 20px">0</h3>
                                     </div>

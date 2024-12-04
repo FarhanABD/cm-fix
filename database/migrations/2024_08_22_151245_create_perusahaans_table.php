@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('nama_perusahaan');
             $table->text('phone');
-            $table->text('alamat');
+            $table->text('kota');
+            $table->text('provinsi');
+            $table->text('negara');
             $table->text('keterangan')->nullable();
             $table->text('nama_website');
             $table->string('nama_pic');

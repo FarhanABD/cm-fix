@@ -13,6 +13,7 @@ return new class extends Migration
             $table->id();
             $table->string('id_order');
             $table->double('total');
+            $table->double('total_amount');
             $table->double('ppn');
             $table->boolean('status')->default(false); // Menambahkan default value
             $table->date('tanggal_langganan');

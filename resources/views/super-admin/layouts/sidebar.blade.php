@@ -110,7 +110,7 @@
         <i class="menu-icon">
           <i class="menu-icon"><img src="{{ asset('storage/img/maintanance.png') }}" alt="Logo" width="20px"></i>
         </i>
-        <div data-i18n="Basic">Maintanance</div>
+        <div data-i18n="Basic">Maintenance</div>
       </a>
     </li>
     <!-- Invoice -->
@@ -130,22 +130,22 @@
 
     <ul class="menu-sub">
       <li class="menu-item">
-        <a href="#" class="menu-link">
+        <a href="{{ route('super-admin.reportcustomer.indexSuperAdmin') }}" class="menu-link">
           <div data-i18n="Without menu">Report Customer</div>
         </a>
       </li>
       <li class="menu-item">
-        <a href="{{ route('admin.reportorder.index') }}" class="menu-link">
+        <a href="{{ route('super-admin.reportorder.indexSuperAdmin') }}" class="menu-link">
           <div data-i18n="Without navbar">Report Order</div>
         </a>
       </li>
       <li class="menu-item">
-        <a href="#" class="menu-link">
+        <a href="{{ route('super-admin.reportmaintenance.indexSuperAdmin') }}" class="menu-link">
           <div data-i18n="Without navbar">Report Maintenance</div>
         </a>
       </li>
      <li class="menu-item">
-        <a href="{{ route('super-admin.reportinvoice.index') }}" class="menu-link">
+        <a href="{{ route('super-admin.reportinvoice.indexSuperAdmin') }}" class="menu-link">
           <div data-i18n="Without navbar">Report Invoice</div>
         </a>
       </li>
@@ -153,10 +153,10 @@
   </li>
 
     <!-- Setting & Profile -->
-    <li class="menu-header small text-uppercase"><span class="menu-header-text">Setting & Profile</span></li>
+    {{-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Setting & Profile</span></li> --}}
 
     {{-- Setting --}}
-    <li class="menu-item">
+    {{-- <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon"><i class="menu-icon"><img src="{{ asset('storage/img/settings.png') }}" alt="Logo" width="20px"></i></i>
         <div data-i18n="Layouts">Setting</div>
@@ -180,7 +180,7 @@
         </li>
        
       </ul>
-    </li>
+    </li> --}}
 {{-- Logout --}}
 
   <li class="menu-item">

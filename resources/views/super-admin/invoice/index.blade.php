@@ -57,17 +57,17 @@
                     <td class="text-wrap">{{ $item->jenis_paket }}</td>
                     <td class="col-md-1">{{ $item->formatRupiah('total') }}</td>
                     <td class="col-md-2">
-                      <div class="d-flex flex-column">
-                        <a href="{{ route('super-admin.invoice.showSuperAdmin', urlencode($item->id_invoice)) }}" class="btn btn-outline-info btn-sm mb-2">
-                          <i class="fa-solid fa-eye"></i>
+                      <div class="d-flex justify-content-between gap-2">
+                        <a href="{{ route('super-admin.invoice.showSuperAdmin', urlencode($item->id_invoice)) }}" class="btn btn-outline-info btn-sm">
+                            <i class="fa-solid fa-eye"></i> Detail
                         </a>
-                        <a href="{{ route('super-admin.invoice.editSuperAdmin', $item->id) }}" class="btn btn-outline-success btn-sm mb-2">
-                          <i class="fa-solid fa-edit"></i>
+                        <a href="{{ route('super-admin.invoice.editSuperAdmin', $item->id) }}" class="btn btn-outline-success btn-sm">
+                            <i class="fa-solid fa-edit"></i> Edit
                         </a>
-                        <a href="{{ route('super-admin.invoice.cetakSuperAdmin', $item->id_invoice) }}" target="_blank" class="btn btn-outline-danger btn-sm mb-2">
-                          <i class="fa-solid fa-print"></i>
+                        <a href="{{ route('super-admin.invoice.cetakSuperAdmin', urlencode($item->id_invoice)) }}" target="_blank" class="btn btn-outline-danger btn-sm">
+                            <i class="fa-solid fa-print"></i> Print PDF
                         </a>
-                      </div>
+                    </div>
                     </td>
                   </tr>
                   @endforeach

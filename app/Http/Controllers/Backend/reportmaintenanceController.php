@@ -27,15 +27,36 @@ class ReportMaintenanceController extends Controller
         return view('admin.reportmaintenance.index', compact('details'));
     }
 
-    public function show($id_maintenance)
+    public function indexSuperAdmin(Request $request)
     {
-        // Pastikan menggunakan model 'Invoice' dengan huruf besar
-        $data = Maintenance::where('id_maintenance', $id_maintenance)->get(); // Mengambil satu data dengan first()
-        $id_maintenance = urldecode($id_maintenance);
+        $details = Maintenance::query();
+        // $details = Maintenance::orderBy('created_at', 'asc')->get();
 
-        // Menampilkan view yang sesuai untuk invoice
-         return view('admin.reportmaintenance.view', compact('data','id_maintenance'));// Ganti ke 'reportinvoice.view'
+        // Filter berdasarkan tanggal dari dan sampai
+        if ($request->dari && $request->sampai) {
+            $details->whereBetween('tanggal_langganan', [$request->dari, $request->sampai]);
+        }
+
+        $details = $details->get(); // Atau gunakan paginate jika diperlukan
+        
+
+        return view('admin.reportmaintenance.index', compact('details'));
     }
+
+    public function show($id)
+    {
+        $data = Maintenance::where('id', $id)->get(); // Mengambil satu data dengan first()
+        $id = urldecode($id);
+        return view('admin.reportmaintenance.view', compact('data','id'));// Ganti ke 'reportinvoice.view'
+    }
+
+    public function showSuperAdmin($id)
+    {
+        $data = Maintenance::where('id', $id)->get();
+        $id = urldecode($id);
+         return view('super-admin.reportmaintenance.view', compact('data','id'));
+    }
+
 
     public function showDiagram()
     {
@@ -54,6 +75,25 @@ class ReportMaintenanceController extends Controller
 
         // dd($dailyMaintenance, $monthlyMaintenance, $yearlyMaintenance);
         return view('admin.reportmaintenance.diagram', compact('dailyMaintenance', 'monthlyMaintenance', 'yearlyMaintenance'));
+    }
+
+    public function showDiagramSuperAdmin()
+    {
+        // Data untuk diagram harian, bulanan, dan tahunan (tanpa filter tanggal)
+        $dailyMaintenance = Maintenance::selectRaw('DATE(created_at) as date, COUNT(*) as total')
+            ->groupBy('date')
+            ->get();
+
+        $monthlyMaintenance = Maintenance::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+            ->groupBy('month')
+            ->get();
+
+        $yearlyMaintenance = Maintenance::selectRaw('YEAR(created_at) as year, COUNT(*) as total')
+            ->groupBy('year')
+            ->get();
+
+        // dd($dailyMaintenance, $monthlyMaintenance, $yearlyMaintenance);
+        return view('super-admin.reportmaintenance.diagram', compact('dailyMaintenance', 'monthlyMaintenance', 'yearlyMaintenance'));
     }
 
     public function printDiagram()
@@ -76,6 +116,26 @@ class ReportMaintenanceController extends Controller
         return $pdf->download('diagram_maintenance_report.pdf');
     }
 
+    public function printDiagramSuperAdmin()
+    {
+        // Data harian, bulanan, tahunan untuk PDF
+        $dailyMaintenance = Maintenance::selectRaw('DATE(created_at) as date, COUNT(*) as total')
+            ->groupBy('date')
+            ->get();
+
+        $monthlyMaintenance = Maintenance::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+            ->groupBy('month')
+            ->get();
+
+        $yearlyMaintenance = Maintenance::selectRaw('YEAR(created_at) as year, COUNT(*) as total')
+            ->groupBy('year')
+            ->get();
+
+        // Generate PDF
+        $pdf = FacadePdf::loadView('super-admin.reportmaintenance.diagram_maintenance_report', compact('dailyMaintenance', 'monthlyMaintenance', 'yearlyMaintenance'));
+        return $pdf->download('diagram_maintenance_report.pdf');
+    }
+
     public function exportPdf(Request $request)
     {
     $details = Maintenance::query();
@@ -89,6 +149,22 @@ class ReportMaintenanceController extends Controller
 
     // Buat PDF dengan data order yang difilter
     $pdf = FacadePdf::loadView('admin.reportmaintenance.export_pdf', compact('details'));
+
+    // Download PDF
+    return $pdf->download('report_maintenance.pdf');
+    }
+
+    public function exportPdfSuperAdmin(Request $request)
+    {
+    $details = Maintenance::query();
+
+    // Filter berdasarkan tanggal dari dan sampai
+    if ($request->dari && $request->sampai) {
+        $details->whereBetween('tanggal_langganan', [$request->dari, $request->sampai]);
+    }
+    $details = $details->get();
+    // Buat PDF dengan data order yang difilter
+    $pdf = FacadePdf::loadView('super-admin.reportmaintenance.export_pdf', compact('details'));
 
     // Download PDF
     return $pdf->download('report_maintenance.pdf');

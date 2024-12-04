@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\SuperAdminController;
 use App\Http\Controllers\Backend\reportorderController;
 use App\Http\Controllers\Backend\reportinvoiceController;
 use App\Http\Controllers\Backend\ProfileSuperAdminController;
+use App\Http\Controllers\Backend\reportmaintenanceController;
 
 Route::get('dashboard', [SuperAdminController::class, 'dashboard'])->name('dashboard');
 
@@ -46,16 +47,18 @@ Route::delete('layanan/destroy/{id}', 'App\Http\Controllers\Backend\LayananContr
 
 //--------------- CART ROUTES ---------------//
 Route::get('cart','App\Http\Controllers\Backend\CartController@indexSuperAdmin')->name('cart.indexSuperAdmin');
-Route::post('cart/storeSuperAdmin','App\Http\Controllers\Backend\CartController@storeSuperAdmin')->name('cart.storeSuperAdmin');
-Route::post('cart/bayarSuperAdmin','App\Http\Controllers\Backend\CartController@bayarSuperAdmin')->name('cart.bayarSuperAdmin');
+Route::post('cart/store','App\Http\Controllers\Backend\CartController@storeSuperAdmin')->name('cart.storeSuperAdmin');
+Route::post('cart/bayar', 'App\Http\Controllers\Backend\CartController@bayarSuperAdmin')->name('cart.bayarSuperAdmin');
+
 Route::get('/cart/{id}', [CartController::class, 'destroy']);
 Route::get('/cart/hapus/semua', [CartController::class, 'hapusSemua']);
-// ================= ENDS OF CART ROUTES ================ //
+//-------------- ENDS OF CART ROUTES ------------------//
 
 // ----------- ORDER ROUTES ------------------ //
 Route::get('order', 'App\Http\Controllers\Backend\OrderController@indexSuperAdmin')->name('order.indexSuperAdmin');
 Route::get('order/{id_order}', 'App\Http\Controllers\Backend\OrderController@showSuperAdmin')->where('id_order', '.*')->name('order.showSuperAdmin');
 Route::put('order/change-status', 'App\Http\Controllers\Backend\OrderController@changeStatusSuperAdmin')->name('order.changeStatusSuperAdmin');
+Route::put('order/update-status', 'App\Http\Controllers\Backend\OrderController@updateStatusSuperAdmin')->name('order.updateStatusSuperAdmin');
 Route::delete('order/destroy/{id}', 'App\Http\Controllers\Backend\OrderController@destroy')->name('order.destroy');
 // ================= ENDS OF ORDER ROUTES ================== //
 
@@ -79,13 +82,13 @@ Route::get('reportorder/{id_order}', 'App\Http\Controllers\Backend\reportorderCo
 //================== ENDS OF REPORTORDER ROUTES ===================//
 
 //--------- REPORT INVOICE ROUTE -----------------//
-Route::get('reportinvoice', 'App\Http\Controllers\Backend\reportinvoiceController@indexSuperAdmin')->name('reportinvoice.index');
-Route::get('reportinvoice/cetak/{id_invoice}', 'App\Http\Controllers\Backend\reportinvoiceController@cetakSuperAdmin')->name('reportinvoice.cetak');
-Route::get('reportinvoice/export-excel', 'App\Http\Controllers\Backend\reportinvoiceController@exportExcel')->name('reportinvoice.export_excel');
-Route::get('/reportinvoice/export-pdf', [reportinvoiceController::class, 'exportPdf'])->name('reportinvoice.export_pdf');
-Route::get('reportinvoice/diagram', 'App\Http\Controllers\Backend\reportinvoiceController@showDiagramSuperAdmin' )->name('reportinvoice.diagram');
-Route::get('reportinvoice/diagram/print', [reportinvoiceController::class, 'printDiagramSuperAdmin'])->name('reportinvoice.diagram_print');
-Route::get('reportinvoice/{id_invoice}', 'App\Http\Controllers\Backend\reportInvoiceController@showSuperAdmin')->where('id_order', '.*')->name('reportinvoice.show');
+Route::get('reportinvoice', 'App\Http\Controllers\Backend\reportinvoiceController@indexSuperAdmin')->name('reportinvoice.indexSuperAdmin');
+Route::get('reportinvoice/cetak/{id_invoice}', 'App\Http\Controllers\Backend\reportinvoiceController@cetakSuperAdmin')->name('reportinvoice.cetakSuperAdmin');
+Route::get('reportinvoice/export-excel', 'App\Http\Controllers\Backend\reportinvoiceController@exportExcel')->name('reportinvoice.export_excelSuperAdmin');
+Route::get('/reportinvoice/export-pdf', [reportinvoiceController::class, 'exportPDFSuperAdmin'])->name('reportinvoice.exportPDFSuperAdmin');
+Route::get('reportinvoice/diagram', 'App\Http\Controllers\Backend\reportinvoiceController@showDiagramSuperAdmin' )->name('reportinvoice.diagramSuperAdmin');
+Route::get('reportinvoice/diagram/print', [reportinvoiceController::class, 'printDiagramSuperAdmin'])->name('reportinvoice.diagram_printSuperAdmin');
+Route::get('reportinvoice/{id_invoice}', 'App\Http\Controllers\Backend\reportInvoiceController@showSuperAdmin')->where('id_order', '.*')->name('reportinvoice.showSuperAdmin');
 //================== ENDS OF REPORT INVOICE ROUTE ====================//
 
 //--------------- MAINTENANCE ROUTES -----------//
@@ -94,6 +97,23 @@ Route::post('maintenance/store', 'App\Http\Controllers\Backend\MaintenanceContro
 Route::get('maintenance/{id_order}', 'App\Http\Controllers\Backend\MaintenanceController@showSuperAdmin')->where('id_order', '.*')->name('maintenance.showSuperAdmin');
 Route::get('maintenance', 'App\Http\Controllers\Backend\MaintenanceController@indexSuperAdmin')->name('maintenance.indexSuperAdmin');
 //--------------- ENDS MAINTENANCE ROUTES -----------//
+
+// ----------REPORT MAINTENANCE ROUTE -----------------//
+Route::get('reportmaintenance', 'App\Http\Controllers\Backend\reportmaintenanceController@indexSuperAdmin')->name('reportmaintenance.indexSuperAdmin');
+Route::get('reportmaintenance/diagram', [reportmaintenanceController::class, 'showDiagramSuperAdmin'] )->name('reportmaintenance.diagramSuperAdmin');
+Route::get('reportmaintenance/export-excel', 'App\Http\Controllers\Backend\reportmaintenanceController@exportExcel')->name('reportmaintenance.export_excel');
+Route::get('/reportmaintenance/export_pdf', [ReportmaintenanceController::class, 'exportPdfSuperAdmin'])->name('reportmaintenance.export_pdfSuperAdmin');
+Route::get('reportmaintenance/{id_maintenance}', 'App\Http\Controllers\Backend\reportmaintenanceController@showSuperAdmin')->where('id_maintenance', '.*')->name('reportmaintenance.showSuperAdmin');
+// Route::get('reportmaintenance/diagram/export-pdf','App\Http\Controllers\Backend\reportmaintenanceController@exportPdf')->name('reportmaintenance.export_pdf');
+Route::get('reportmaintenance/diagram/print', [reportmaintenanceController::class, 'printDiagramSuperAdmin'])->name('reportmaintenance.diagram_printSuperAdmin');
+//==================================================//
+
+//--------------- REPORT CUSTOMER ROUTE ------------------//
+Route::get('reportcustomer', 'App\Http\Controllers\Backend\reportcustomerController@indexSuperAdmin')->name('reportcustomer.indexSuperAdmin');
+Route::get('reportcustomer/diagram', 'App\Http\Controllers\Backend\reportcustomerController@showDiagramSuperAdmin' )->name('reportcustomer.diagramSuperAdmin');
+Route::get('reportcustomer/exportpdf', 'App\Http\Controllers\Backend\reportcustomerController@exportPDFSuperAdmin')->name('reportcustomer.exportpdfSuperAdmin');
+Route::get('reportcustomer/exporexcel', 'App\Http\Controllers\Backend\reportcustomerController@exportExcel')->name('reportcustomer.exportexcel');
+//================= ENDS REPORT CUSTOMER ROUTE =================//
 
 // Route::group(['middleware' => ['superadmin']], function () {
 //     Route::get('/superadmin/dashboard', [SuperAdminController::class, 'index'])->name('superadmin.dashboard');

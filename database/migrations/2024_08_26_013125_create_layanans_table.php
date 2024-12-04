@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('id_layanan');
             $table->string('jenis_layanan');
+            $table->string('deskripsi_layanan');
             $table->timestamps();
         });
     }

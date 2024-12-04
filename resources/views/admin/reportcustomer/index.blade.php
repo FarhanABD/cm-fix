@@ -1,74 +1,79 @@
 @extends('admin.layouts.master')
 @section('content')
- <!-- Content wrapper -->
- <div class="content-wrapper">
-  <!-- Content -->
+<div class="content-wrapper">
   <div class="container-xxl flex-grow-1 container-p-y">
-    <!-- Basic Bootstrap Table -->
     <div class="card">
-      <h4 class="card-header">Tabel Report Customer
-      <a href="{{ route('admin.reportcustomer.exportexcel') }}" class="btn btn-success float-end" style="margin-left: 20px"><i class="fa-solid fa-file-excel"></i></a>
-        <a href="{{ route('admin.reportcustomer.exportpdf') }}" class="btn btn-danger float-end" style="margin-left: 20px"><i class="fa-solid fa-file-pdf"></i></a>
-        <a href="{{ route('admin.reportcustomer.diagram') }}" class="btn btn-info float-end" style="margin-left: 20px"><i class="fa-solid fa-chart-simple"></i></a>
-        </h4>
+      <h4 class="card-header d-flex align-items-center justify-content-between">
+        Tabel Report Customer
+        <div class="flex-wrap gap-2 d-flex">
+        <a href="{{ route('admin.reportcustomer.diagram') }}" class="btn btn-info">
+    <i class="fa-solid fa-chart-simple"></i>
+    </a>
+    <a href="{{ route('admin.reportcustomer.exportpdf') }}" class="btn btn-danger">
+        <i class="fa-solid fa-file-pdf"></i>
+    </a>
+    <a href="{{ route('admin.reportcustomer.exportexcel') }}" class="btn btn-success">
+        <i class="fa-solid fa-file-excel"></i>
+    </a>
+
+          {{-- <a href="{{ route('admin.reportcustomer.diagram') }}" class="btn btn-info btn-sm">
+            <i class="fa-solid fa-chart-simple"></i>
+          </a>
+          <a href="{{ route('admin.reportcustomer.exportpdf') }}" class="btn btn-danger btn-sm">
+            <i class="fa-solid fa-file-pdf"></i>
+          </a>
+          <a href="{{ route('admin.reportcustomer.exportexcel') }}" class="btn btn-success btn-sm">
+            <i class="fa-solid fa-file-excel"></i>
+          </a> --}}
+        </div>
+      </h4>
       <div class="card-body">
-           <div class="card">
-            <h5 class="cart-header">Filter Report Customer</h5>
-             <!-- Filter Tanggal -->
-             <form id="filterForm" method="GET" action="" class="mb-4 row">
-              <div class="col-md-3">
-                  <div class="form-group d-flex align-items-center">
-                      <label style="margin-right: 8px" for="tanggalDari">Dari</label>
-                      <input type="date" class="form-control" name="dari" id="tanggalDari" value="">
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="form-group d-flex align-items-center">
-                      <label style="margin-right: 8px" for="tanggalSampai">Sampai</label>
-                      <input type="date" class="form-control" name="sampai" id="tanggalSampai" value="">
-                  </div>
-              </div>
-              <div class="col-md-3 d-flex align-items-center">
-                  <button type="submit" class="btn btn-primary">Filter</button>
-              </div>
-          </form>
-            <div class="table-responsive text-nowrap">
-              <table class="table" id="table">
-                <thead>
-                  <tr class="text-nowrap">
-                    <th>id</th>
-                    <th>id_perusahaan</th>
-                    <th>email</th>
-                    <th>nama_perusahaan</th>
-                    <th>phone</th>
-                    <th>alamat</th>
-                    <th>nama_pic</th>
-                    <th>aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($details as $item )
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->id_perusahaan }}</td>
-                    <td>{{ $item->email }}</td>
-                    <td>{{ $item->nama_perusahaan }}</td>
-                    <td>{{ $item->phone }}</td>
-                    <td>{{ $item->alamat }}</td>
-                    <td>{{ $item->nama_pic }}</td>
-                    <td>
-                      <a href="{{(urlencode($item->id_perusahaan)) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i> Detail</a>
-                      <a href="/{{auth()->user()->level}}/laporan/{{$item->id_perusahaan}}/print" target="_blank" class="btn btn-sm btn-outline-danger"><i class="fa fa-print"></i> Print</a>
-                  </td>
-                  </tr>
-                  @endforeach
-                </tbody>
+        <div class="card">
+          <h5 class="card-header">Filter Report Customer</h5>
+          <form id="filterForm" method="GET" action="" class="mb-4 row g-3">
+            <div class="col-md-3">
+              <label for="tanggalDari" class="form-label">Dari</label>
+              <input type="date" class="form-control" name="dari" id="tanggalDari" value="">
             </div>
-          </div>
-          <!--/ Responsive Table -->
+            <div class="col-md-3">
+              <label for="tanggalSampai" class="form-label">Sampai</label>
+              <input type="date" class="form-control" name="sampai" id="tanggalSampai" value="">
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+              <button type="submit" class="btn btn-primary w-100">Filter</button>
+            </div>
+          </form>
+        </div>
+        <div class="table-responsive text-nowrap">
+          <table class="table" id="table">
+            <thead>
+              <tr class="text-nowrap">
+                <th>ID</th>
+                <th>ID Perusahaan</th>
+                <th>Email</th>
+                <th>Nama Perusahaan</th>
+                <th>Phone</th>
+                <th>Alamat</th>
+                <th>Nama PIC</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($details as $item)
+              <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $item->id_perusahaan }}</td>
+                <td>{{ $item->email }}</td>
+                <td>{{ $item->nama_perusahaan }}</td>
+                <td>{{ $item->phone }}</td>
+                <td>{{ $item->alamat }}</td>
+                <td>{{ $item->nama_pic }}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
+    </div>
   </div>
-    <!--/ Basic Bootstrap Table -->
-  <div class="content-backdrop fade"></div>
 </div>
 @endsection

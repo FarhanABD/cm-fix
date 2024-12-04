@@ -41,7 +41,8 @@
                 </tbody>
             </table>
             <div class="card-footer bg-white">
-                <a href="{{ route('admin.maintenance.index') }}" class="btn btn-sm btn-outline-warning"><i class="fas fa-caret-left"></i> Kembali</a>
+                <a href="{{ route('admin.maintenance.index') }}" class="btn btn-sm btn-outline-danger"><i class="fas fa-caret-left"></i> Kembali</a>
+                <a href="#" class="btn btn-sm btn-outline-warning"><i class="fa-solid fa-envelope"></i> Reminder</a> </ul> 
             </div>
         </div>
     </div>

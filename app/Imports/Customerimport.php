@@ -2,30 +2,32 @@
 
 namespace App\Imports;
 
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
-namespace App\Imports;
-
+use App\Models\NamaModel;
 use App\Models\Perusahaan;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-
-class Customerimport implements ToModel
+class Customerimport implements ToModel, WithStartRow
 {
-    /**
-    * @param array $row
-    */
+    public function startRow(): int{
+        return 2;
+    }
     public function model(array $row)
     {
-        // Define how to create a model from the Excel row data
+    // dd($row);
         return new Perusahaan([
-            'id_perusahaan' => $row[0],
-            'nama_perusahaan' => $row[1],
-            'alamat' => $row[2],
-            'phone' => $row[1],
-            'email' => $row[1],
-            'nama_website' => $row[1],
-            // Add more columns as needed
+            'id_perusahaan'    => $row[1],
+            'email'            => $row[2],
+            'nama_perusahaan'  => $row[3],
+            'phone'            => $row[4],
+            'alamat'           => $row[5],
+            'keterangan'       => $row[6],
+            'nama_website'     => $row[7],
+            'nama_pic'         => $row[8],
+            'phone_pic'        => $row[9],
+            'email_pic'        => $row[10],
+            'keterangan'       => $row[11],
+            // Sesuaikan dengan kolom dalam file Excel Anda
         ]);
     }
 }

@@ -57,6 +57,18 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <style>
+      .required input::placeholder {
+            color: red;
+            font-weight: bold;
+        }
+
+        .required input:required {
+            border: 2px solid red;
+        }
+
+    </style>
   </head>
 
   <body>
@@ -146,6 +158,8 @@
 
 <script>
   $(document).ready(function(){
+      // Pastikan hanya berjalan jika bukan di halaman order
+      if (window.location.pathname !== '/admin/order') {
           // Csrf token
           $.ajaxSetup({
               headers: {
@@ -194,9 +208,11 @@
                       })
                   }
               })
-          })
-      })
+          });
+      }
+  });
 </script>
+
    
     @stack('scripts')
    

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Paket;
 use App\Models\Layanan;
+use App\Models\JenisPaket;
 use Illuminate\Http\Request;
 use App\DataTables\PaketDataTable;
 use Illuminate\Support\Facades\DB;
@@ -31,8 +32,9 @@ class PaketController extends Controller
 
         // Konfigurasi
         $idPrefix = 'PKT-';
-        $idLength = 4;
+        $idLength = 2;
         $layanans = Layanan::all();
+        $JenisPaket = JenisPaket::all();
         // Ambil nomor urut terakhir dari database (lebih efisien dengan query builder)
         $lastNumber = DB::table('pakets')
         ->latest('id')
@@ -44,7 +46,7 @@ class PaketController extends Controller
         }
 
         $newIdPaket = $idPrefix . str_pad($lastNumber + 1, $idLength, '0', STR_PAD_LEFT);
-        return view('admin.paket.create', compact('newIdPaket','layanans'));
+        return view('admin.paket.create', compact('newIdPaket','layanans','JenisPaket'));
     }
 
     public function createSuperAdmin()
@@ -52,8 +54,9 @@ class PaketController extends Controller
 
         // Konfigurasi
         $idPrefix = 'PKT-';
-        $idLength = 4;
+        $idLength = 2;
         $layanans = Layanan::all();
+        $JenisPaket = JenisPaket::all();
         // Ambil nomor urut terakhir dari database (lebih efisien dengan query builder)
         $lastNumber = DB::table('pakets')
         ->latest('created_at')
@@ -65,34 +68,35 @@ class PaketController extends Controller
         }
 
         $newIdPaket = $idPrefix . str_pad($lastNumber + 1, $idLength, '0', STR_PAD_LEFT);
-        return view('super-admin.paket.create', compact('newIdPaket','layanans'));
+        return view('super-admin.paket.create', compact('newIdPaket','layanans','JenisPaket'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         request()->validate([
             'id_paket' => ['required'],
             'jenis_layanan' => ['required', 'max:200',],
             'jenis_paket' => ['required'],
-            'kuota' => ['required'],
+            'deskripsi_paket' => ['required'],
+            'deskripsi_layanan' => ['required'],
+            'kuota' => ['nullable'],
             'harga' => ['required'],
         ],
         [
             'jenis_layanan.required' => 'Pilih Jenis Layanan',
             'jenis_paket.required' => 'Pilih Jenis Paket',
-            'kuota.required' => 'Masukkan Kuota Custom',
+            'deskripsi_paket.required' => 'Masukkan Deskripsi Paket',
+            'deskripsi_layanan.required' => 'Masukkan Deskripsi Layanan',
+            'kuota.nullable' => 'Masukkan Kuota Jika Ada',
             'harga.required' => 'Masukkan harga paket',
         ]
-    
     );
 
         $pakets = new Paket();
         $pakets->id_paket = $request->id_paket; 
         $pakets->jenis_layanan = $request->jenis_layanan;
         $pakets->jenis_paket = $request->jenis_paket;
+        $pakets->deskripsi_paket = $request->deskripsi_paket;
+        $pakets->deskripsi_layanan = $request->deskripsi_layanan;
         $pakets->kuota = $request->kuota;
         $pakets->harga = $request->harga;
         $pakets->save();
@@ -106,14 +110,18 @@ class PaketController extends Controller
             'id_paket' => ['required'],
             'jenis_layanan' => ['required', 'max:200',],
             'jenis_paket' => ['required'],
-            'kuota' => ['required'],
+            'deskripsi_paket' => ['required'],
+            'deskripsi_layanan' => ['required'],
+            'kuota' => ['nullable'],
             'harga' => ['required'],
         ],
 
         [
             'jenis_layanan.required' => 'Pilih Jenis Layanan',
             'jenis_paket.required' => 'Pilih Jenis Paket',
-            'kuota.required' => 'Masukkan Kuota Custom',
+            'deskripsi_paket.required' => 'Pilih Deskripsi Paket',
+            'deskripsi_layanan.required' => 'Pilih Deskripsi Layanan',
+            'kuota.nullable' => 'Masukkan Kuota Custom',
             'harga.required' => 'Masukkan harga paket',
         ]
     );
@@ -122,6 +130,8 @@ class PaketController extends Controller
         $pakets->id_paket = $request->id_paket; 
         $pakets->jenis_layanan = $request->jenis_layanan;
         $pakets->jenis_paket = $request->jenis_paket;
+        $pakets->deskripsi_paket = $request->deskripsi_paket;
+        $pakets->deskripsi_layanan = $request->deskripsi_layanan;
         $pakets->kuota = $request->kuota;
         $pakets->harga = $request->harga;
         $pakets->save();
@@ -130,39 +140,36 @@ class PaketController extends Controller
         return redirect()->route('super-admin.paket.indexSuperAdmin');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        $pakets = Paket::findOrFail($id);
-        $layanans = Layanan::all();
-        return view('admin.paket.edit',compact('pakets','layanans'));
-    }
-    public function editSuperAdmin(string $id)
-    {
-        $pakets = Paket::findOrFail($id);
-        $layanans = Layanan::all();
-        return view('super-admin.paket.edit',compact('pakets','layanans'));
+        $paket = Paket::findOrFail($id); // Data paket yang sedang di-edit
+        $layanans = Layanan::all(); // Semua layanan untuk dropdown
+        $jenisPaket = JenisPaket::all(); // Semua jenis paket untuk dropdown
+        return view('admin.paket.edit', compact('paket', 'layanans', 'jenisPaket'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    public function editSuperAdmin(string $id)
+    {
+        $paket = Paket::findOrFail($id); // Data paket yang sedang di-edit
+        $layanans = Layanan::all(); // Semua layanan untuk dropdown
+        $jenisPaket = JenisPaket::all(); // Semua jenis paket untuk dropdown
+        return view('super-admin.paket.edit', compact('paket', 'layanans', 'jenisPaket'));
+    }
+    
+
     public function update(Request $request, string $id)
     {
         $request ->validate([
             'id_paket' => ['max:200'],
             'jenis_layanan' => ['nullable'],
             'jenis_paket' => ['nullable'],
+            'deskripsi_paket' => ['nullable'],
+            'deskripsi_layanan' => ['nullable'],
             'kuota' => ['nullable'],
             'harga' => ['nullable'],    
          ]);
@@ -171,6 +178,8 @@ class PaketController extends Controller
          $pakets->id_paket = $request->id_paket;
          $pakets->jenis_layanan = $request->jenis_layanan;
          $pakets->jenis_paket = $request->jenis_paket;
+         $pakets->deskripsi_paket = $request->deskripsi_paket;
+         $pakets->deskripsi_layanan = $request->deskripsi_layanan;
          $pakets->kuota = $request->kuota;
          $pakets->harga = $request->harga;
          $pakets->save();
@@ -184,6 +193,8 @@ class PaketController extends Controller
             'id_paket' => ['max:200'],
             'jenis_layanan' => ['nullable'],
             'jenis_paket' => ['nullable'],
+            'deskripsi_paket' => ['nullable'],
+            'deskripsi_layanan' => ['nullable'],
             'kuota' => ['nullable'],
             'harga' => ['nullable'],    
          ]);
@@ -192,6 +203,8 @@ class PaketController extends Controller
          $pakets->id_paket = $request->id_paket;
          $pakets->jenis_layanan = $request->jenis_layanan;
          $pakets->jenis_paket = $request->jenis_paket;
+         $pakets->deskripsi_paket = $request->deskripsi_paket;
+         $pakets->deskripsi_layanan = $request->deskripsi_layanan;
          $pakets->kuota = $request->kuota;
          $pakets->harga = $request->harga;
          $pakets->save();

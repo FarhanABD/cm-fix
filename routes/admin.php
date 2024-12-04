@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\FileImportController;
+use App\Http\Controllers\JenisPaketController;
 use App\Http\Controllers\Backend\CartController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\OrderController;
@@ -33,8 +35,10 @@ Route::post('profile/update/password',[ProfileController::class, 'updatePassword
 
 //--------- ADMIN PERUSAHAAN ROUTES -------------//
 // Route untuk export Excel
+Route::post('admin/perusahaan/importexcel', [FileImportController::class, 'import'])->name('perusahaan.importexcel');
 Route::get('perusahaan/download-file', [PerusahaanController::class, 'downloadFile'])->name('perusahaan.downloadFile');
 Route::get('perusahaan/export-excel', [PerusahaanController::class, 'export_excel'])->name('perusahaan.export_excel');
+// Route::post('perusahaan/import_proses', [PerusahaanController::class, 'import_proses'])->name('perusahaan.import_proses');
 Route::resource('perusahaan', PerusahaanController::class);
 
 //------------ LAYANAN ROUTES ----------//
@@ -58,8 +62,8 @@ Route::get('invoice/{id}/edit', 'App\Http\Controllers\Backend\InvoiceController@
 Route::put('invoice/update/{id}', 'App\Http\Controllers\Backend\InvoiceController@update')->name('invoice.update');
 Route::get('invoice/create', 'App\Http\Controllers\Backend\InvoiceController@create')->name('invoice.create');
 Route::post('invoice/store', 'App\Http\Controllers\Backend\InvoiceController@store')->name('invoice.store');
-// Route::get('invoice/cetak/{id_invoice}', 'App\Http\Controllers\Backend\InvoiceController@cetak')->name('invoice.cetak');
-Route::get('invoice/cetak/{id}', 'App\Http\Controllers\Backend\InvoiceController@cetak')->name('invoice.cetak');
+Route::get('invoice/cetak/{id_invoice}', 'App\Http\Controllers\Backend\InvoiceController@cetak')->name('invoice.cetak');
+// Route::get('invoice/cetak/{id}', 'App\Http\Controllers\Backend\InvoiceController@cetak')->name('invoice.cetak');
 Route::get('invoice/cari', 'App\Http\Controllers\Backend\InvoiceController@cari')->name('invoice.cari');
 Route::get('invoice/{id_invoice}', 'App\Http\Controllers\Backend\InvoiceController@show')->where('id_order', '.*')->name('invoice.show');
 Route::get('invoice', 'App\Http\Controllers\Backend\InvoiceController@index')->name('invoice.index');
@@ -75,14 +79,21 @@ Route::get('/download-file', [FiledownloadController::class, 'downloadFile']);
 // ----------- ORDER ROUTES ------------------ //
 Route::get('order/{id_order}', 'App\Http\Controllers\Backend\OrderController@show')->where('id_order', '.*')->name('order.show');
 Route::put('order/change-status', [OrderController::class, 'changeStatus'])->name('order.changeStatus');
+Route::post('order/update-status', [OrderController::class, 'updateStatus'])->name('order.updateStatus');
+
 Route::resource('order', OrderController::class);
 
 //--------- PAKET ROUTES -----------------//
+Route::post('get-deskripsi-paket', [PaketController::class, 'getDeskripsiPaket'])->name('get.deskripsi.paket');
 Route::resource('paket',PaketController::class);
+
+// ----------- JENIS PAKET ROUTES ------------------ //
+Route::resource('jenis-paket', JenisPaketController::class);
 
 //--------------- MAINTENANCE ROUTES -----------//
 Route::get('maintenance/create/{id_order}', 'App\Http\Controllers\Backend\MaintenanceController@create')->name('maintenance.perpanjang');
 Route::post('maintenance/store', 'App\Http\Controllers\Backend\MaintenanceController@store')->name('maintenance.store');
+Route::post('maintenance/email/{id_order}', 'App\Http\Controllers\Backend\MaintenanceController@sendReminder')->name('maintenance.send-email');
 Route::get('maintenance/{id_order}', 'App\Http\Controllers\Backend\MaintenanceController@show')->where('id_order', '.*')->name('maintenance.show');
 Route::get('maintenance', 'App\Http\Controllers\Backend\MaintenanceController@index')->name('maintenance.index');
 //--------------- ENDS MAINTENANCE ROUTES -----------//
@@ -120,11 +131,10 @@ Route::get('reportmaintenance', 'App\Http\Controllers\Backend\reportmaintenanceC
 Route::get('reportmaintenance/diagram', [reportmaintenanceController::class, 'showDiagram'] )->name('reportmaintenance.diagram');
 Route::get('reportmaintenance/export-excel', 'App\Http\Controllers\Backend\reportmaintenanceController@exportExcel')->name('reportmaintenance.export_excel');
 Route::get('/reportmaintenance/export_pdf', [ReportmaintenanceController::class, 'exportPdf'])->name('reportmaintenance.export_pdf');
-Route::get('reportmaintenance/{id_maintenance}', 'App\Http\Controllers\Backend\reportmaintenanceController@show')->where('id_maintenance', '.*')->name('reportmaintenance.show');
+Route::get('reportmaintenance/{id}', 'App\Http\Controllers\Backend\reportmaintenanceController@show')->where('id', '.*')->name('reportmaintenance.show');
 // Route::get('reportmaintenance/diagram/export-pdf','App\Http\Controllers\Backend\reportmaintenanceController@exportPdf')->name('reportmaintenance.export_pdf');
 Route::get('reportmaintenance/diagram/print', [reportmaintenanceController::class, 'printDiagram'])->name('reportmaintenance.diagram_print');
-Route::get('reportmaintenance/{id_maintenance}', 'App\Http\Controllers\Backend\reportmaintenanceController@show')->where('id_maintenance', '.*')->name('reportmaintenance.show');
-//==================================================//
+//==================================================/?
 
 // Route::group(['middleware' => ['admin']], function () {
 //     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');

@@ -113,13 +113,18 @@
                           </div>
                           </div>
                           <div class="mb-3">
-                            <textarea type="text" class="form-control" id="price-paketSelect" placeholder="Masukkan total keseluruhan" name="price"> </textarea>
+                            <textarea type="text" class="form-control" id="price-paketSelect" placeholder="Masukkan total keseluruhan" name="price">{{ $invoice->price }}</textarea>
                           </div>
                           <div class="mb-3">
-                            <input type="text" class="form-control" id="ppn-paketSelect" placeholder="Masukkan ppn keseluruhan" name="ppn"/>
+                            <label class="form-label" for="basic-default-company">Sub Total</label>
+                            <input type="text" class="form-control" id="totalamount-paketSelect" placeholder="Masukkan Total Amount" name="total_amount" value="{{ $invoice->total_amount }}"/>
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label" for="basic-default-company">PPN</label>
+                            <input type="text" class="form-control" id="ppn-paketSelect" placeholder="Masukkan ppn keseluruhan" name="ppn" value="{{ $invoice->ppn }}"/>
                           </div>
                   <div class="mb-3">
-                    <label class="form-label" for="basic-default-company">Total</label>
+                    <label class="form-label" for="basic-default-company">Grand Total</label>
                     <input type="text" class="form-control" id="totalSelect" value="{{ $invoice->total }}" name="total"/>
                   </div>
                 <button type="submit" class="btn btn-primary">Update</button>
@@ -148,7 +153,11 @@
 
         console.log(selectedOrder);
         let formattedTotal = selectedOrder.formatted_total; // Nilai ini sudah dalam format 'Rp x.xxx.xxx'
+        let formattedppn = selectedOrder.ppn;
+        let formattedTotalAmount = selectedOrder.total_amount;
         $('#totalSelect').val(formattedTotal);
+        $('#ppn-paketSelect').val(formattedppn);
+        $('#totalamount-paketSelect').val(formattedTotalAmount);
         $('#tanggal_langganan_datepicker').val(selectedOrder.tanggal_langganan);
         $('#tanggal_habis_datepicker').val(selectedOrder.tanggal_habis);
 

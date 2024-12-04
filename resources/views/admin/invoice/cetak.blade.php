@@ -1,32 +1,14 @@
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
-<body>
+<body onload="generatePDF()">
     <style>
-
-    @media print {
-        body {
-            background-color: white;
-            font-size: 12px; /* Ukuran font yang lebih kecil untuk menyesuaikan */
-        }
-
-        .invoice-container {
-            width: 100%; /* Gunakan seluruh lebar halaman */
-            margin: 0;
-            padding: 0;
-        }
-
-        .invoice-header, .invoice-table, .invoice-footer, .signature-section, .bank-info {
-            page-break-inside: avoid; /* Mencegah elemen penting terpotong di tengah */
-        }
-    }
-
        body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -199,6 +181,7 @@
                 <p style="margin-top: 8px"><strong>Invoice No :</strong> {{ $item->id_invoice }}</p>
                 <p style="margin-top: 8px"><strong>Tanggal Langganan :</strong> {{ $item->tanggal_langganan }}</p>
                 <p style="margin-top: 8px"><strong>Tanggal Habis :</strong> {{ $item->tanggal_habis }}</p>
+                <p style="margin-top: 64px"><strong>Tanggal Invoice :</strong>{{ \Carbon\Carbon::now()->format('d M Y') }}</p>
             </div>
         </header>
 
@@ -241,6 +224,10 @@
             </tbody>
             <tfoot>
                 <tr>
+                    <td colspan="4">TOTAL</td>
+                    <td colspan="2">{{ $item->formatRupiah('total_amount') }}</td>
+                </tr>
+                <tr>
                     <td colspan="4">PPN 11%</td>
                     <td colspan="2">{{ $item->formatRupiah('ppn') }}</td>
                 </tr>
@@ -250,18 +237,18 @@
                 </tr>
             </tfoot>
         </table>
-
         <section class="notes">
             <p><strong>Additional Notes:</strong> Pembayaran baru dianggap sah setelah menyerahkan bukti transfer.</p>
         </section>
         <div class="signature-section">
             <div class="signature">
-                <p>Signature</p>
+                <p>Admin Finance</p>
+                <p> {{ \Carbon\Carbon::now()->format('d M Y') }}</p>
                 <div class="signature-line"></div>
             </div>
-    
             <div class="date">
-                <p>Date: Rabu, 03 Jul 2024</p>
+                <p>{{ $item->nama_pic }}</p>
+                <p> {{ \Carbon\Carbon::now()->format('d M Y') }}</p>
                 <div class="date-line"></div>
             </div>
         </div>
@@ -288,7 +275,41 @@
             </div>
         </div>
     </div>
+    <button onclick="generatePDF('{{ $item->id_invoice }}')">Download PDF</button>
     @endforeach
 
+    <script>
+            async function generatePDF(invoiceId) {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+            const invoiceElements = document.querySelectorAll('.invoice-container');
+            for (let i = 0; i < invoiceElements.length; i++) {
+
+                const canvas = await html2canvas(invoiceElements[i]);
+                const imgData = canvas.toDataURL('image/png');
+                const imgWidth = 190; // Width of the image in mm
+                const pageHeight = pdf.internal.pageSize.height;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                let heightLeft = imgHeight;
+
+                let position = 0;
+                pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                // If image height is greater than page height, add new page
+
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+            }
+            // Save PDF dengan format id_invoice
+            pdf.save(`invoice_{{ $item->id_invoice }}.pdf`)
+        }
+    </script>
+        
 </body>
+
 </html> 

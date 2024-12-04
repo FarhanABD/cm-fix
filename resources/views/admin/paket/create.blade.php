@@ -28,24 +28,39 @@
                           </div>
                         <div class="mb-3">
                             <label for="exampleFormControlSelect1" class="form-label">Jenis Layanan</label>
-                            <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="jenis_layanan">
-                              <option selected>Silahkan pilih jenis layanan yang diinginkan</option>
-                              @foreach ($layanans as $layanan )
-                              <option value="{{ $layanan->jenis_layanan }}">{{ $layanan->jenis_layanan }}</option>
+                            <select class="form-select" id="layananSelect" name="jenis_layanan">
+                              <option selected value="" data-deskripsi="">Silahkan pilih jenis layanan yang diinginkan</option>
+                              @foreach ($layanans as $layanan)
+                              <option value="{{ $layanan->jenis_layanan }}" data-deskripsi="{{ $layanan->deskripsi_layanan }}">
+                                {{ $layanan->jenis_layanan }}
+                              </option>
                               @endforeach
                             </select>
                           </div>
+                          
                           <div class="mb-3">
-                            <label for="paketSelect" class="form-label">Jenis Paket</label>
-                            <select class="form-select" id="paketSelect" aria-label="Default select example" name="jenis_paket">
-                              <option selected>Pilih jenis paket</option>
-                              <option value="silver">Silver-500MB</option>
-                              <option value="gold">Gold-1GB</option>
-                              <option value="platinum">Platinum-2,5GB</option>
-                              <option value="custom">Custom</option>
-                              <option value="branding">Branding</option>  </select>
-                            </select>
+                            <label class="form-label" for="harga">Deskripsi Layanan</label>
+                            <textarea name="deskripsi_layanan" id="deskripsiLayanan" class="form-control" placeholder="Berikan Deskripsi Layanan"></textarea>
                           </div>
+
+                            <div class="mb-3">
+                              <label for="paketSelect" class="form-label">Jenis Paket</label>
+                              <select class="form-select" id="paketSelect" name="jenis_paket">
+                                <option selected value="" data-deskripsi="">Pilih jenis paket</option>
+                                @foreach ($JenisPaket as $jenispakets)
+                                <option value="{{ $jenispakets->jenis_paket }}" data-deskripsi="{{ $jenispakets->deskripsi_paket }}">
+                                  {{ $jenispakets->jenis_paket }}
+                                </option>
+                                @endforeach
+                              </select>
+                              
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label" for="harga">Deskripsi Paket</label>
+                            <textarea name="deskripsi_paket" id="deskripsiPaket" class="form-control" placeholder="Berikan Deskripsi Paket"></textarea>
+                          </div>
+                        
+
                           <div class="mb-3" id="kuotaCustomField" style="display: block;">
                             <label class="form-label" for="kuotaInput">Kuota</label>
                             <input type="text" class="form-control" id="kuotaInput" placeholder="Masukkan kuota custom" name="kuota" value="">
@@ -61,41 +76,9 @@
                 </div>
               </div>
             </div>
-            <script>
-              document.getElementById('paketSelect').addEventListener('change', function() {
-                  var kuotaCustomField = document.getElementById('kuotaCustomField');
-                  var kuotaInput = document.getElementById('kuotaInput');
-                  var hargaInput = document.getElementById('harga')
-              
-                  if (this.value === 'custom') {
-                      kuotaCustomField.style.display = 'block';
-                      kuotaInput.value = ''; // Kosongkan nilai kuota jika custom
-                  } else {
-                      kuotaCustomField.style.display = 'block';
-                      switch (this.value) {
-                          case 'silver':
-                              kuotaInput.value = '500MB';
-                              hargaInput.value = '500000';
-                              break;
-                          case 'gold':
-                              kuotaInput.value = '1GB';
-                              hargaInput.value = '1000000';
-                              break;
-                          case 'platinum':
-                              kuotaInput.value = '2,5GB';
-                              hargaInput.value = '1500000';
-                              break;
-                          case 'branding':  // Handle the new "branding" option
-                              kuotaInput.value = '-';  
-                              hargaInput.value = '1000000';  break;    
-                      }
-                  }
-              });
-              </script>
             <div class="content-backdrop fade"></div>
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
-
       <!-- SweetAlert Script -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -123,4 +106,23 @@
         });
     @endif
 </script>
-@endsection   
+@endsection
+
+@push('scripts')
+<script>
+  document.getElementById('layananSelect').addEventListener('change', function () {
+    const selectedOption = this.options[this.selectedIndex];
+    const deskripsi = selectedOption.getAttribute('data-deskripsi');
+    document.getElementById('deskripsiLayanan').value = deskripsi || '';
+});
+
+document.getElementById('paketSelect').addEventListener('change', function () {
+    const selectedOption = this.options[this.selectedIndex];
+    const deskripsi = selectedOption.getAttribute('data-deskripsi');
+    document.getElementById('deskripsiPaket').value = deskripsi || '';
+});
+
+
+</script>
+
+@endpush

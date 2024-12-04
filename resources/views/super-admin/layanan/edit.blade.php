@@ -1,8 +1,6 @@
 @extends('admin.layouts.master')
 
 @section('content')
-
-          <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -13,7 +11,6 @@
                     <span class="text-muted fw-light">Form Update/</span> Data Layanan
                   </h4>
               <!-- Basic Layout -->
-               
               <div class="row">
                 <div class="col-xl">
                     <div class="card mb-4">
@@ -32,6 +29,10 @@
                             <label class="form-label" >Jenis Layanan</label>
                             <input type="text" class="form-control" name="jenis_layanan" value="{{ $layanans->jenis_layanan }}"/>
                           </div>
+                          <div class="mb-3">
+                            <label class="form-label" for="harga">Deskripsi Layanan</label>
+                            <textarea name="deskripsi_layanan" id="basic-icon-default-message" class="form-control" placeholder="Berikan Deskripsi Layanan" aria-describedby="basic-icon-default-message2">{{ $layanans->deskripsi_layanan }}</textarea>
+                          </div>
                           <button type="submit" class="btn btn-primary">Edit   <i class="fa-solid fa-pen-to-square"></i></button>
                         </form>
                       </div>
@@ -39,8 +40,6 @@
                   </div>
             <div class="content-backdrop fade"></div>
           </div>
-          <!-- Content wrapper -->
-        
       </div>
     </div>
 @endsection

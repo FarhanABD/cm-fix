@@ -13,6 +13,11 @@ class Layanan extends Model
         return $this->hasMany(Paket::class);
     }
 
+    /**
+     * Get all of the carts for the Layanan.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function cart(){
         return $this->hasMany(Cart::class);
     }

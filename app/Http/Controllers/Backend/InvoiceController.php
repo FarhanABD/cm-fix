@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
-
-use DOMPDF;
+use Dompdf\Dompdf;
 use App\Models\Order;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\TransaksiDetail;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Support\Facades\DB;
 use App\DataTables\InvoiceDataTable;
 use App\Http\Controllers\Controller;
@@ -113,6 +113,7 @@ class InvoiceController extends Controller
         $invoice->item_desc = $request->item_desc;
         $invoice->qty = $request->qty;
         $invoice->price = $request->price;
+        $invoice->total_amount = $request->total_amount;
         $invoice->ppn = $ppn;
         $invoice->total = $total;
         $invoice->save();
@@ -127,88 +128,90 @@ class InvoiceController extends Controller
 
     return redirect()->route('admin.invoice.index');
     }
-
-    // private function formatRupiah($value)
-    // {
-    //     // Hapus format Rp, titik, dan koma
-    //     return str_replace(['Rp.', '.', ','], '', $value);
-    // }
-
     //-------------------- METHOD STORE SUPERADMIN ------------------//
     public function storeSuperAdmin(Request $request)
     {
-    $request->validate([
-        'id_invoice' => ['required'],
-        'id_order' => ['required'],
-        'tanggal_langganan' => ['required'],
-        'tanggal_habis' => ['required'],
-        'nama_perusahaan' => ['required'],
-        'alamat' => ['required'],
-        'kota' => ['required'],
-        'provinsi' => ['required'],
-        'country' => ['required'],
-        'phone_pic' => ['required'],
-        'nama_pic' => ['required'],
-        'email_pic' => ['required'],
-        'qty' => ['required'],
-        'item_desc' => ['nullable'],
-        'jenis_layanan' => ['required'],
-        'jenis_paket' => ['required'],
-        'price' => ['required'],
-        'total' => ['required'],
-    ],
-
-    [
-        'id_invoice.required' => 'Masukkan ID Invoice',
-        'id_order.required' => 'Masukkan ID Order',
-        'tanggal_langganan.required' => 'Masukkan Tanggal Langganan',
-        'tanggal_habis.required' => 'Masukkan Tanggal Habis',
-        'nama_perusahaan.required' => 'Masukkan Nama Customer',
-        'alamat.required' => 'Masukkan alamat',
-        'kota.required' => 'Masukkan kota',
-        'provinsi.required' => 'Masukkan Provinsi',
-        'country.required' => 'Masukkan Negara',
-        'phone_pic.required' => 'Masukkan no telepon PIC',
-        'nama_pic.required' => 'Masukkan Nama PIC',
-        'email_pic.required' => 'Masukkan email PIC',
-        'qty.required' => 'Masukkan email PIC',
-        'item_desc.required' => 'Masukkan item description',
-        'jenis_layanan.required' => 'Masukkan Jenis Layanan',
-        'jenis_paket.required' => 'Masukkan Jenis Paket',
-        'price.required' => 'Masukkan Harga',
-        'total.required' => 'Masukkan total',
-    ]
-);
-
-    $total = str_replace(['Rp.', '.', ','], '', $request->total);
-    // Create a new invoice
-    $invoice = new Invoice();
-    $invoice->id_invoice = $request->id_invoice;
-    $invoice->id_order = $request->id_order;
-    $invoice->nama_perusahaan = $request->nama_perusahaan;
-    $invoice->jenis_layanan = $request->jenis_layanan;
-    $invoice->jenis_paket = $request->jenis_paket;
-    $invoice->tanggal_langganan = $request->tanggal_langganan;
-    $invoice->tanggal_habis = $request->tanggal_habis;
-    $invoice->alamat = $request->alamat;
-    $invoice->kota = $request->kota;
-    $invoice->provinsi = $request->provinsi;
-    $invoice->country = $request->country;
-    $invoice->phone_pic = $request->phone_pic;
-    $invoice->nama_pic = $request->nama_pic;
-    $invoice->email_pic = $request->email_pic;
-    $invoice->item_desc = $request->item_desc;
-    $invoice->qty = $request->qty;
-    $invoice->price = $request->price;
-    $invoice->total = $total;
-    $invoice->save();
+        $request->validate([
+            'id_invoice' => ['required'],
+            'id_order' => ['required'],
+            'tanggal_langganan' => ['required'],
+            'tanggal_habis' => ['required'],
+            'nama_perusahaan' => ['required'],
+            'alamat' => ['required'],
+            'kota' => ['required'],
+            'provinsi' => ['required'],
+            'country' => ['required'],
+            'phone_pic' => ['required'],
+            'nama_pic' => ['required'],
+            'email_pic' => ['required'],
+            'qty' => ['required'],
+            'price' => ['required'],
+            'ppn' => ['required'],
+            'item_desc' => ['nullable'],
+            'jenis_layanan' => ['required'],
+            'jenis_paket' => ['required'],
+            'total' => ['required'],
+        ],
     
-    try {
-        toastr('Created Successfully', 'success');
-    } catch (\Exception $e) {
-        return redirect()->back()->withErrors(['msg' => 'Failed to create invoice: ' . $e->getMessage()]);
-    }
+        [
+            'id_invoice.required' => 'Masukkan ID Invoice',
+            'id_order.required' => 'Masukkan ID Order',
+            'tanggal_langganan.required' => 'Masukkan Tanggal Langganan',
+            'tanggal_habis.required' => 'Masukkan Tanggal Habis',
+            'nama_perusahaan.required' => 'Masukkan Nama Customer',
+            'alamat.required' => 'Masukkan alamat',
+            'kota.required' => 'Masukkan kota',
+            'provinsi.required' => 'Masukkan Provinsi',
+            'country.required' => 'Masukkan Negara',
+            'phone_pic.required' => 'Masukkan no telepon PIC',
+            'nama_pic.required' => 'Masukkan Nama PIC',
+            'email_pic.required' => 'Masukkan email PIC',
+            'qty.required' => 'Masukkan email PIC',
+            'price.required' => 'Masukkan email PIC',
+            'ppn.required' => 'Masukkan email PPN',
+            'item_desc.required' => 'Masukkan item description',
+            'jenis_layanan.required' => 'Masukkan Jenis Layanan',
+            'jenis_paket.required' => 'Masukkan Jenis Paket',
+            'total.required' => 'Masukkan total',
+        ]
+    );
+    
+        $total = str_replace(['Rp.', '.', ','], '', $request->total);
+        $ppn = str_replace(['Rp.', '.', ','], '', $request->ppn);
+        // $ppn = $this->formatRupiah($request->ppn);
+       
+        // Create a new invoice
+        $invoice = new Invoice();
 
+        $invoice->id_invoice = $request->id_invoice;
+        $invoice->id_order = $request->id_order;
+        $invoice->nama_perusahaan = $request->nama_perusahaan;
+        $invoice->jenis_layanan = $request->jenis_layanan;
+        $invoice->jenis_paket = $request->jenis_paket;
+        $invoice->tanggal_langganan = $request->tanggal_langganan;
+        $invoice->tanggal_habis = $request->tanggal_habis;
+        $invoice->alamat = $request->alamat;
+        $invoice->kota = $request->kota;
+        $invoice->provinsi = $request->provinsi;
+        $invoice->country = $request->country;
+        $invoice->phone_pic = $request->phone_pic;
+        $invoice->nama_pic = $request->nama_pic;
+        $invoice->email_pic = $request->email_pic;
+        $invoice->item_desc = $request->item_desc;
+        $invoice->qty = $request->qty;
+        $invoice->price = $request->price;
+        $invoice->total_amount = $request->total_amount;
+        $invoice->ppn = $ppn;
+        $invoice->total = $total;
+        $invoice->save();
+        
+        try {
+            // Save the invoice
+            toastr('Created Successfully', 'success');
+        } catch (\Exception $e) {
+            // Handle the error and flash the error message
+            return redirect()->back()->withErrors(['msg' => 'Failed to create invoice: ' . $e->getMessage()]);
+        }
     return redirect()->route('super-admin.invoice.indexSuperAdmin');
     }
 
@@ -304,6 +307,8 @@ class InvoiceController extends Controller
         $invoice->email_pic = $request->email_pic;
         $invoice->item_desc = $request->item_desc;
         $invoice->total = $request->total;
+        $invoice->ppn = $request->ppn;
+        $invoice->total_amount = $request->total_amount;
         $invoice->price = $request->price;
         $invoice->qty = $request->qty;
         $invoice->save();
@@ -329,9 +334,9 @@ class InvoiceController extends Controller
             'item_desc' => ['nullable'],
             'jenis_layanan' => ['nullable'],
             'jenis_paket' => ['nullable'],
+            'price' => ['nullable'],
             'total' => ['nullable'],
             'qty' => ['nullable'],
-            'price' => ['nullable'],
         ]);
 
         $invoice = Invoice::findOrFail($id);
@@ -351,6 +356,8 @@ class InvoiceController extends Controller
         $invoice->email_pic = $request->email_pic;
         $invoice->item_desc = $request->item_desc;
         $invoice->total = $request->total;
+        $invoice->ppn = $request->ppn;
+        $invoice->total_amount = $request->total_amount;
         $invoice->price = $request->price;
         $invoice->qty = $request->qty;
         $invoice->save();
@@ -366,26 +373,24 @@ class InvoiceController extends Controller
         return view('super-admin.invoice.cetak', compact('data','id_invoice'));
     }
 
-    public function cetak(string $id)
-    {
-        $invoice = Invoice::with('items')->findOrFail($id);
-    
-        // Load view dan generate PDF
-        $pdf = Pdf::loadView('invoices.invoice', compact('invoice'));
-    
-        // Unduh atau tampilkan PDF
-        return $pdf->download('invoice_' . $invoice->id . '.pdf');
-    }
-
-
     // public function cetak(string $id_invoice)
     // {
     //     $data = Invoice::where('id_invoice', $id_invoice)->get();
     //     $id_invoice = urldecode($id_invoice);
-    //     return view('admin.invoice.cetak', compact('data','id_invoice'));
-    // }
-    
 
+    //     $dompdf = new Dompdf();
+    //     $dompdf->loadHtml(view('admin.invoice.cetak', compact('data', 'id_invoice'))->render());
+    //     $dompdf->setPaper('A4', 'portrait');  // Optional: Set paper size and orientation
+
+    //     return $dompdf->stream('invoice.pdf', ['Attachment' => true]);
+    // }
+    public function cetak(string $id_invoice)
+    {
+        $data = Invoice::where('id_invoice', $id_invoice)->get();
+        $id_invoice = urldecode($id_invoice);
+        return view('admin.invoice.cetak', compact('data','id_invoice'));
+    }
+    
     public function destroy(string $id)
     {
         //

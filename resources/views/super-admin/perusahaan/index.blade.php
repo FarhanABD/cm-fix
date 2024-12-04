@@ -6,9 +6,9 @@
 
         <div class="card">
             <h5 class="card-header">Data Customer
-                <a href="{{ route('admin.perusahaan.create') }}" class="btn btn-danger float-end" style="margin-left: 20px">Create</a>
+                <a href="{{ route('super-admin.perusahaan.createSuperAdmin') }}" class="btn btn-danger float-end" style="margin-left: 20px">Create</a>
                 <a href="{{ route('admin.perusahaan.export_excel') }}" class="btn btn-success float-end" style="margin-left: 20px"><i class="fa-solid fa-file-excel"></i></a>
-                <a href="{{ route('admin.perusahaan.downloadFile') }}" class="btn btn-success float-end" style="margin-left: 20px"><i class="fa-solid fa-download"></i></a>
+                {{-- <a href="{{ route('admin.perusahaan.downloadFile') }}" class="btn btn-success float-end" style="margin-left: 20px"><i class="fa-solid fa-download"></i></a> --}}
                 <a href="{{ route('admin.importcustomer') }}" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target ="#exampleModal"><i class="fa-solid fa-file-import"></i></a>
             </h5>
             <div class="tab-content">

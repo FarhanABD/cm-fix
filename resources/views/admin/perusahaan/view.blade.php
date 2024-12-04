@@ -41,7 +41,13 @@
                         Customer Phone : {{ $perusahaans->phone }}
                       </div>
                       <div class="divider text-start" style="font-size: 18px">
-                        Alamat : {{ $perusahaans->alamat }}
+                        Kota : {{ $perusahaans->kota }}
+                      </div>
+                      <div class="divider text-start" style="font-size: 18px">
+                        Provinsi : {{ $perusahaans->provinsi }}
+                      </div>
+                      <div class="divider text-start" style="font-size: 18px">
+                        Negara : {{ $perusahaans->negara }}
                       </div>
                       <div class="divider text-start" style="font-size: 18px">
                         Email : {{ $perusahaans->email }}

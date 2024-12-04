@@ -31,6 +31,10 @@
                             <label class="form-label" >Jenis Layanan</label>
                             <input type="text" class="form-control" name="jenis_layanan" placeholder="Masukkan jenis layanan anda"/>
                           </div>
+                          <div class="mb-3">
+                            <label class="form-label" for="harga">Deskripsi Layanan</label>
+                            <textarea name="deskripsi_layanan" id="basic-icon-default-message" class="form-control" placeholder="Berikan Deskripsi Layanan" aria-describedby="basic-icon-default-message2"></textarea>
+                          </div>
                           <button type="submit" class="btn btn-success">Simpan   <i class="fa-solid fa-floppy-disk" style="padding-left: 4px"></i></button>
                         </form>
                       </div>

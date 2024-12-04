@@ -8,24 +8,6 @@
       <h4 class="card-header">Tabel Maintenace
       </h4> 
       <div class="card-body">
-             <!-- Filter Tanggal -->
-             <form id="filterForm" method="GET" action="{{ route('admin.invoice.index') }}" class="mb-4 row">
-              <div class="col-md-3">
-                  <div class="form-group d-flex align-items-center">
-                      <label style="margin-right: 8px" for="tanggalDari">Dari</label>
-                      <input type="date" class="form-control" name="dari" id="tanggalDari" max="{{ date('Y-m-d') }}" value="{{ request('dari') }}">
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="form-group d-flex align-items-center">
-                      <label style="margin-right: 8px" for="tanggalSampai">Sampai</label>
-                      <input type="date" class="form-control" name="sampai" id="tanggalSampai" max="{{ date('Y-m-d') }}" value="{{ request('sampai') }}">
-                  </div>
-              </div>
-              <div class="col-md-3 d-flex align-items-center">
-                  <button type="submit" class="btn btn-primary">Filter</button>
-              </div>
-          </form>
             <div class="table-responsive text-nowrap">
               <table class="table">
                 <thead>
@@ -45,12 +27,11 @@
                     <td> {{ $item->formatRupiah('total') }}</td>
                     <td>{{ $item->tanggal_langganan }}</td>
                     <td>{{ $item->tanggal_habis }}</td>
-                    <td>
-                          <a href="{{ route('admin.maintenance.perpanjang',$item->id) }}"
-                            class="btn btn-sm btn-outline-success"><i class="fa-solid fa-rotate-right"></i> Perpanjang</a>
-                          <a href="{{ route('admin.maintenance.show', $item->id_order) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i>Detail</a>
-                   </ul>
-                  </td>
+                    <td> 
+                      <a href="{{ route('admin.maintenance.perpanjang',$item->id) }}" class="btn btn-sm btn-outline-success"><i class="fa-solid fa-rotate-right"></i> Perpanjang</a> 
+                      <a style="margin: 8px" href="{{ route('admin.maintenance.show', $item->id_order) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i> Detail</a> 
+                      <a style="margin: 8px" href="{{ route('admin.maintenance.send-email', $item->id_order) }}" class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i> Reminder</a> 
+                    </td> 
                   </tr>
                   @endforeach         
                   @if(isset($maintenances))

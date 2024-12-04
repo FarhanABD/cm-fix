@@ -22,22 +22,20 @@
                         </div>
                         <div class="cart-body p-2">
                                 <div class="row" style="padding-top: 20px; margin-left: 24px">
-                                    <div class="col-md-2" style="margin-left: 4px">
+                                    <div class="col-md-3" style="margin-left: 2px; margin-right: 24px">
                                         <div class="form-input-group">
                                             <label for="kode" class="form-label">ID Order</label>
                                             <input type="text" id="id_order" class="form-control" value="{{$nomor}}"
-                                                name="id_order" readonly>
+                                                name="id_order">
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group" style="margin-left: 424%; padding-top: 12px">
+                                    <div class="col-md-3" style="float: right; margin-left: 200px">
                                             <label class="text-info" for="Total Belanja">Subtotal</label>
                                             <div class="input-group-prepend">
                                                 <h3 class="text-info mr-2" style="font-size: 18px">Rp<br></h3>
                                                 <input class="d-none" type="text" id="total" value="0" name="total">
                                                 <h3 class="text-info" style="font-size: 22px" id="label-total">0</h3>
                                             </div>
-                                        </div>
                                     </div>
                             </div>
                             <div class="rounded" style="overflow-y: scroll; height: 300px;">
@@ -61,9 +59,7 @@
                                                 <td style="width: 8%">{{ $loop->iteration }}</td>
                                                 <td style="width: 12%">{{ $item->paket->jenis_layanan ?? 'N/A' }}</td>
                                                 <td style="width: 12%">{{ $item->paket->jenis_paket ?? 'N/A' }}</td>
-
                                                 <td style="width: 12%">{{ $item->id_paket ?? 'N/A' }}</td>
-
                                                 <td style="width: 12%" class="harga" value="{{$item->harga}}">
                                                     {{ $item->formatRupiah('harga') }}
                                                     <input type="text" value="{{$item->harga}}" name="harga" hidden>
@@ -75,7 +71,6 @@
                                                 <td class="total" style="width: 14%" value="{{$item->total}}"> {{ $item->formatRupiah('total') }}</td>
                                                 <td style="width: 10%">
                                                     <div class="aksi d-flex" style="width: 10%">
-                                                        {{-- <button type="submit" class="btn btn-sm btn-warning mr-2"><i class="fa fa-edit"></i></button> --}}
                                                         <form action="/{{auth()->user()->role}}/cart/{{$item->id}}" id= "delete-form">
                                                             @csrf
                                                             @method('post') 
@@ -105,6 +100,7 @@
 @endsection
 
 @push('scripts')
+{{-- Perhitungan Subtotal --}}
 <script>
         var total = document.querySelectorAll('#table-transaksi tbody td.total');
         var label_total = document.getElementById('label-total');
@@ -134,6 +130,7 @@
         sub_total_bayar.value = grandTotal
 </script>
 
+{{-- Penghitungan PPN --}}
 <script>
    function calculateSubtotalWithPPN() {
     const checkbox = document.getElementById('flexCheckDefault');
@@ -151,11 +148,12 @@
 
     // Update hidden input value for total and ppn
     document.getElementById('total-bayar').value = total; // Total termasuk PPN
+    document.getElementById('total_amount').value = subtotal; // Total tidak termasuk PPN
     document.getElementById('ppn').value = checkbox.checked ? ppn : 0; // Hanya kirim PPN jika checkbox dicentang
 }
-
 </script>
 
+{{-- Function Simpan --}}
 <script>
     function simpan() {
         event.preventDefault()
@@ -164,6 +162,7 @@
     }
 </script>
 
+{{-- Dropdown Logic Customer  --}}
 <script>
     $('#paketSelect').change(function() {
         @json($perusahaans).
@@ -172,7 +171,9 @@
                 document.getElementById("namaPicSelect").value = element.nama_pic
                 document.getElementById("emailPICSelect").value = element.email_pic
                 document.getElementById("phonePICSelect").value = element.phone_pic
-                document.getElementById("alamatPICSelect").value = element.alamat
+                document.getElementById("kotaPICSelect").value = element.kota
+                document.getElementById("provinsiPICSelect").value = element.provinsi
+                document.getElementById("negaraPICSelect").value = element.negara
                 document.getElementById("namaCustomerSelect").value = element.nama_perusahaan
                 document.getElementById("idPerusahaanSelect").value = element.id_perusahaan
                 document.getElementById("statusSelect").value = 'unpaid' 

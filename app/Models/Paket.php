@@ -15,6 +15,10 @@ class Paket extends Model
         return $this->belongsTo(Layanan::class);
     }
 
+    public function jenisPaket(){
+        return $this->belongsTo(JenisPaket::class);   
+    }
+
     public function cart(){
         return $this->hasMany(Cart::class);
     }

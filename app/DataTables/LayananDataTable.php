@@ -40,7 +40,7 @@ class LayananDataTable extends DataTable
                     <i class='fa-solid fa-pen-to-square'></i></a>";
                 }
     
-                return $editBtnAdmin.$deleteBtnSuperAdmin.$editBtnSuperAdmin;
+                return "<div class='d-flex gap-2'>".$editBtnAdmin.$deleteBtnSuperAdmin.$editBtnSuperAdmin."</div>";
             })
             ->setRowId('id');
     }
@@ -84,6 +84,7 @@ class LayananDataTable extends DataTable
             Column::make('id')->width(10),
             Column::make('id_layanan'),
             Column::make('jenis_layanan'),
+            Column::make('deskripsi_layanan'),
             Column::computed('action')
             ->exportable(false)
             ->printable(false)

@@ -31,7 +31,6 @@
                                                 <option value="{{ $perusahaan->id }}">{{ $perusahaan->nama_perusahaan }}</option>
                                             @endforeach
                                         </select>
-                                        
                                     </div>
                                     <!---------- FIELD NAMA_PIC ----------->
                                     <div class="form-group" style="margin-top: 8px">
@@ -52,23 +51,25 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="TanggalLangganan" class="form-label">Tanggal Langganan</label>
-                                                    <input type="date" id="datepicker" class="form-control" name="tanggal_langganan" min="<?php echo date('Y-m-d'); ?>">
+                                                    <input type="date" id="datepicker" class="form-control" name="tanggal_langganan">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="TanggalHabis" class="form-label">Tanggal Habis</label>
-                                                    <input type="date"  id="datepicker" class="form-control" name="tanggal_habis" min="<?php echo date('Y-m-d'); ?>">
+                                                    <input type="date"  id="datepicker" class="form-control" name="tanggal_habis">
                                                 </div>
                                             </div>
                                         </div>
                                     
                                  <!---------- FIELD SUBTOTAL ----------->
                                 <div class="form-group" style="margin-top: 28px">
-                                    <label for="Total Belanja" style="font-size: 16px">Subtotal</label>
+                                    <label for="Total Belanja" style="font-size: 16px; margin-bottom: 8px">Subtotal</label>
                                     <div class="input-group-prepend">
-                                        <h2 class="text-info mr-2" style="font-size: 20px">Rp<br></h2>
+                                        {{-- <h2 class="text-info mr-2" style="font-size: 20px">Rp<br></h2> --}}
                                         <input type="hidden" id="total-bayar" name="total" value="0">
+                                        <input type="hidden" id="total_amount" name="total_amount" value="0">
+                                        <input type="hidden" id="ppn" name="ppn" value="0">
                                         <h3 class="text-info" id="label-total-bayar" style="font-size: 20px">0</h3>
                                     </div>
                                 </div>

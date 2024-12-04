@@ -31,6 +31,8 @@ return new class extends Migration
             $table->string('qty');
             $table->string('price');
             $table->double('total');
+            $table->double('total_amount');
+            $table->double('ppn');
             $table->timestamps();
         });
     }

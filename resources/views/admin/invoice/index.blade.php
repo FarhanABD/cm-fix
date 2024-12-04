@@ -13,62 +13,58 @@
            <div class="card">
             <h5 class="cart-header">Filter Invoice Order</h5>
              <!-- Filter Tanggal -->
-             <form id="filterForm" method="GET" action="{{ route('admin.invoice.cari') }}" class="row mb-4">
+             <form id="filterForm" method="GET" action="{{ route('admin.invoice.cari') }}" class="mb-4 row" style="display: flex; flex-wrap: wrap; gap: 8px;">
               <div class="col-md-3">
-                  <div class="form-group d-flex align-items-center">
-                      <label style="margin-right: 8px" for="tanggalDari">Dari</label>
-                      <input type="date" class="form-control" name="dari" id="tanggalDari" value="">
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="form-group d-flex align-items-center">
-                      <label style="margin-right: 8px" for="tanggalSampai">Sampai</label>
-                      <input type="date" class="form-control" name="sampai" id="tanggalSampai" value="">
-                  </div>
-              </div>
-              <div class="col-md-3 d-flex align-items-center">
-                  <button type="submit" class="btn btn-primary">Filter</button>
-              </div>
-          </form>  
+              <label for="tanggalDari" class="form-label">Dari</label>
+              <input type="date" class="form-control" name="dari" id="tanggalDari" value="">
+            </div>
+            <div class="col-md-3">
+              <label for="tanggalSampai" class="form-label">Sampai</label>
+              <input type="date" class="form-control" name="sampai" id="tanggalSampai" value="">
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+              <button type="submit" class="btn btn-primary w-100">Filter</button>
+            </div>
+          </form> 
             <div class="table-responsive text-nowrap">
               <table class="table" id="table">
                 <thead>
                   <tr class="text-nowrap">
-                    <th class="col-md-1">No</th>
-                    <th class="col-md-2">id_invoice</th>
-                    <th class="col-md-2">id_order</th>
-                    <th class="col-md-2">nama customer</th>
-                    <th class="col-md-2">layanan</th>
-                    <th class="col-md-2">paket</th>
-                    <th class="col-md-1">deskripsi</th>
-                    <th class="col-md-1">total</th>
-                    <th class="col-md-2">Aksi</th>
+                    <th >No</th>
+                    <th >id_invoice</th>
+                    <th >id_order</th>
+                    <th >nama customer</th>
+                    <th >layanan</th>
+                    <th >paket</th>
+                    <th >deskripsi</th>
+                    <th >total</th>
+                    <th class="text-nowrap Aksi">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach ($invoices as $item )
                   <tr>
-                    <td class="col-md-1">{{ $loop->iteration }}</td>
-                    <td class="col-md-2">{{ $item->id_invoice }}</td>
-                    <td class="col-md-2">{{ $item->id_order }}</td>
-                    <td class="col-md-2">{{ $item->nama_perusahaan }}</td>
-                    <td class="text-wrap">{{ $item->jenis_layanan }}</td>
-                    <td class="text-wrap">{{ $item->jenis_paket }}</td>
-                    <td class="text-wrap">{{ $item->item_desc }}</td>
-                    <td class="col-md-1">{{ $item->formatRupiah('total') }}</td>
-                    <td class="col-md-2">
-                      <div class="d-flex flex-column">
-                        <a href="{{ route('admin.invoice.show', urlencode($item->id_invoice)) }}" class="btn btn-outline-info btn-sm mb-2">
-                          <i class="fa-solid fa-eye"></i> Detail
-                        </a>
-                        <a href="{{ route('admin.invoice.edit', $item->id) }}" class="btn btn-outline-success btn-sm mb-2">
-                          <i class="fa-solid fa-edit"></i> Edit
-                        </a>
-                        <a href="{{ route('admin.invoice.cetak', urlencode($item->id_invoice)) }}" target="_blank" class="btn btn-outline-danger btn-sm mb-2">
-                          <i class="fa-solid fa-print"></i> Print PDF
-                      </a>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item->id_invoice }}</td>
+                    <td>{{ $item->id_order }}</td>
+                    <td>{{ $item->nama_perusahaan }}</td>
+                    <td>{{ $item->jenis_layanan }}</td>
+                    <td>{{ $item->jenis_paket }}</td>
+                    <td>{{ $item->item_desc }}</td>
+                    <td>{{ $item->formatRupiah('total') }}</td>
+                    <td>
+                      <div class="gap-2 d-flex justify-content-between">
+                          <a href="{{ route('admin.invoice.show', urlencode($item->id_invoice)) }}" class="btn btn-outline-info btn-sm">
+                              <i class="fa-solid fa-eye"></i> Detail
+                          </a>
+                          <a href="{{ route('admin.invoice.edit', $item->id) }}" class="btn btn-outline-success btn-sm">
+                              <i class="fa-solid fa-edit"></i> Edit
+                          </a>
+                          <a href="{{ route('admin.invoice.cetak', urlencode($item->id_invoice)) }}" target="_blank" class="btn btn-outline-danger btn-sm">
+                              <i class="fa-solid fa-print"></i> Print PDF
+                          </a>
                       </div>
-                    </td>
+                  </td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -80,6 +76,16 @@
     <!--/ Basic Bootstrap Table -->
   <div class="content-backdrop fade"></div>
 </div>
+<style>
+  .Aksi .btn {
+      display: inline-block;
+      margin: 8px; /* Adjust margin as needed */
+  }
+
+  .Aksi .btn:first-child {
+      margin: 0; /* Remove margin from the first button */
+  }
+</style>
 @endsection
 
 @push('scripts')
@@ -107,4 +113,5 @@
   tanggal_dari.value = formattedDate;
   tanggal_sampai.value = formattedDate;
 </script>
+
 @endpush

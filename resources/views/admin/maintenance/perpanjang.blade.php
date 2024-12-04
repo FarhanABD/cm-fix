@@ -120,6 +120,9 @@
                     <input type="text" class="form-control" id="price-paketSelect" placeholder="Masukkan total keseluruhan" name="price" hidden/>
                   </div>
                   <div class="mb-3">
+                    <input type="text" class="form-control" id="totalamount-paketSelect" placeholder="Masukkan Total Amount" name="total_amount" hidden/>
+                  </div>
+                  <div class="mb-3">
                     <label class="form-label" for="basic-default-company">Total</label>
                     <input type="text" class="form-control" id="totalSelect" placeholder="Masukkan total keseluruhan" name="total"/>
                   </div>
@@ -153,8 +156,10 @@
         console.log(selectedOrder);
         let formattedTotal = selectedOrder.formatted_total;
         let formattedppn = selectedOrder.ppn; // Nilai ini sudah dalam format 'Rp x.xxx.xxx'
+        let formattedTotalAmount = selectedOrder.total_amount;
         $('#totalSelect').val(formattedTotal);
         $('#ppn-paketSelect').val(formattedppn);
+        $('#totalamount-paketSelect').val(formattedTotalAmount);
         $('#tanggal_langganan_datepicker').val(selectedOrder.tanggal_langganan);
         $('#tanggal_habis_datepicker').val(selectedOrder.tanggal_habis);
 

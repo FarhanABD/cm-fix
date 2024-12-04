@@ -19,13 +19,14 @@ class OrderController extends Controller
 {
     public function index(OrderDataTable $dataTable)
     {
-        
-        return $dataTable->render('admin.order.index');
+        $orders = Order::orderBy('created_at', 'asc')->get();
+        return view('admin.order.index', compact('orders'));
+        // return $dataTable->render('admin.order.index');
     }
     public function indexSuperAdmin(OrderDataTable $dataTable)
     {
-        
-        return $dataTable->render('super-admin.order.index');
+        $orders = Order::orderBy('created_at', 'asc')->get();
+        return view('super-admin.order.index', compact('orders'));
     }
    
     public function create(Request $request)
@@ -74,6 +75,29 @@ class OrderController extends Controller
         Log::error('General error: ' . $e->getMessage());
         return response(['message' => 'An unexpected error occurred'], 500);
     }}
+
+    public function updateStatus(Request $request)
+    {
+        $order = Order::find($request->id);
+        if ($order) {
+            $order->status = $request->status;
+            $order->save();
+            return response()->json(['success' => true, 'message' => 'Status berhasil diperbarui.']);
+        }
+        return response()->json(['success' => false, 'message' => 'Order tidak ditemukan.'], 404);
+    }
+
+    public function updateStatusSuperAdmin(Request $request)
+    {
+        $order = Order::find($request->id);
+        if ($order) {
+            $order->status = $request->status;
+            $order->save();
+            return response()->json(['success' => true, 'message' => 'Status berhasil diperbarui.']);
+        }
+        return response()->json(['success' => false, 'message' => 'Order tidak ditemukan.'], 404);
+    }
+
 
     public function changeStatusSuperAdmin(Request $request)
     {

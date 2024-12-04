@@ -14,7 +14,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>No Paket</th>
+                                        <th hidden>No Paket</th>
                                         <th>Jenis Layanan</th>
                                         <th>Jenis Paket</th>
                                         <th>id_paket</th>
@@ -30,22 +30,21 @@
                                         <form action="{{ route('super-admin.cart.storeSuperAdmin') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <td>{{ $loop->iteration }}<input class="form-control" type="text" value="{{ $nomor }}" name="id_order" hidden></td>
-                                            <td>{{ $item->id }}<input class="form-control" type="text" value="{{ $item->id }}" name="no_paket" hidden></td>
+                                            <td hidden>{{ $item->id }}<input class="form-control" type="text" value="{{ $item->id }}" name="no_paket" hidden></td>
                                             <td>{{ $item->jenis_layanan }}<input class="form-control" type="text" value="{{ $item->id_paket }}" name="id_paket" hidden></td>
                                             <td>{{ $item->jenis_paket }}</td>
                                             <td>{{ $item->id_paket }}</td>
                                             <td>{{ $item->formatRupiah('harga') }}<input class="form-control" type="text" value="{{ $item->harga }}" name="harga" hidden></td>
                                             <td>{{ $item->kuota }}<input class="form-control" type="text" value="{{ $item->kuota }}" name="kuota" hidden></td>
                                             <td style="width: 15%"><input class="form-control jumlah" type="number" name="jumlah" id="jumlah" value="1" min="1"></td>
-                                            <td><button type="submit" id="tambah" class="btn btn-sm btn-success"><i
-                                                        class="fa fa-plus"></i></button></td>
+                                            <td><button type="submit" id="tambah" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button></td>
                                         </form>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                             <div style="margin-right: 50px; padding-top: 24px; padding-bottom: 12px" class="float-end">
-                                <span>Ingin menambah Paket Custom ?<a href="{{ route('admin.paket.create') }}"> Klik Disini</a></span>
+                                <span>Ingin menambah Paket Custom ?<a href="{{ route('super-admin.paket.createSuperAdmin') }}"> Klik Disini</a></span>
                             </div>
                         </div>
                     </div>
